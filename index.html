@@ -3,84 +3,218 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Painel de Gestão da Base</title>
+  <title>Centro de Controle - Time Eddy</title>
   <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
   <header>
-    <h1>Painel de Gestão da Base SAS</h1>
-    <p>Acompanhamento executivo de carteira, risco, engajamento e próximos passos.</p>
+    <h1>Centro de Controle - Time Eddy</h1>
+    <p>Painel executivo de acompanhamento da carteira, renovação, risco e operação.</p>
   </header>
 
   <main>
     <section class="cards">
       <div class="card">
-        <span>Escolas na Base</span>
-        <strong>128</strong>
+        <span>ACV Base</span>
+        <strong>R$ 91,2M</strong>
       </div>
+
       <div class="card">
-        <span>Renovação</span>
-        <strong>87%</strong>
+        <span>ACV Renovado</span>
+        <strong>R$ 1,5M</strong>
       </div>
+
       <div class="card">
-        <span>Engajamento Pedagógico</span>
-        <strong>72%</strong>
+        <span>% Renovação</span>
+        <strong>1,65%</strong>
       </div>
+
+      <div class="card">
+        <span>Escolas</span>
+        <strong>81</strong>
+      </div>
+    </section>
+
+    <section class="cards">
       <div class="card risco">
-        <span>Escolas em Risco</span>
-        <strong>14</strong>
+        <span>Alto Risco</span>
+        <strong>17</strong>
+      </div>
+
+      <div class="card atencao">
+        <span>Médio Risco</span>
+        <strong>17</strong>
+      </div>
+
+      <div class="card saudavel">
+        <span>Baixo Risco</span>
+        <strong>46</strong>
+      </div>
+
+      <div class="card">
+        <span>Carteira em Atenção</span>
+        <strong>34</strong>
       </div>
     </section>
 
     <section class="painel">
-      <h2>Indicadores Estratégicos</h2>
+      <h2>Resumo Executivo</h2>
 
       <div class="linha">
-        <p>Planos de Voo validados</p>
-        <div class="barra"><div style="width: 75%;">75%</div></div>
+        <p>Renovação realizada</p>
+        <div class="barra">
+          <div style="width: 1.65%;">1,65%</div>
+        </div>
       </div>
 
       <div class="linha">
-        <p>Diagnóstica aplicada</p>
-        <div class="barra"><div style="width: 60%;">60%</div></div>
-      </div>
-
-      <div class="linha">
-        <p>Implantação concluída</p>
-        <div class="barra"><div style="width: 95%;">95%</div></div>
+        <p>Carteira em alto ou médio risco</p>
+        <div class="barra">
+          <div style="width: 42%;">42%</div>
+        </div>
       </div>
     </section>
 
     <section class="tabela">
-      <h2>Escolas Prioritárias</h2>
+      <h2>Visão por CSP</h2>
 
       <table>
         <thead>
           <tr>
-            <th>Escola</th>
-            <th>Status</th>
-            <th>Risco</th>
-            <th>Próxima Ação</th>
+            <th>CSP</th>
+            <th>Escolas</th>
+            <th>ACV Base</th>
+            <th>ACV Renovado</th>
+            <th>% Renovação</th>
+            <th>Alto Risco</th>
+            <th>Médio Risco</th>
+            <th>Baixo Risco</th>
           </tr>
         </thead>
+
         <tbody>
           <tr>
-            <td>Colégio Eximius</td>
-            <td>Em acompanhamento</td>
-            <td>Alto</td>
-            <td>Reunião com mantenedor</td>
+            <td>Yanna Cavalcante</td>
+            <td>14</td>
+            <td>R$ 13.720.444,80</td>
+            <td>R$ 1.506.692,98</td>
+            <td>10,98%</td>
+            <td>1</td>
+            <td>3</td>
+            <td>10</td>
           </tr>
+
           <tr>
-            <td>Santa Luzia</td>
-            <td>Reversão em andamento</td>
-            <td>Médio</td>
-            <td>Plano pedagógico</td>
+            <td>Flávio Silva</td>
+            <td>11</td>
+            <td>R$ 22.491.750,09</td>
+            <td>R$ 0,00</td>
+            <td>0,00%</td>
+            <td>3</td>
+            <td>0</td>
+            <td>8</td>
           </tr>
+
           <tr>
-            <td>CFI</td>
-            <td>Monitoramento</td>
-            <td>Médio</td>
-            <td>Validação do plano</td>
+            <td>Juliana Barbosa</td>
+            <td>9</td>
+            <td>R$ 10.170.634,79</td>
+            <td>R$ 0,00</td>
+            <td>0,00%</td>
+            <td>1</td>
+            <td>1</td>
+            <td>7</td>
+          </tr>
+
+          <tr>
+            <td>José Demétrio</td>
+            <td>7</td>
+            <td>R$ 5.070.783,17</td>
+            <td>R$ 0,00</td>
+            <td>0,00%</td>
+            <td>2</td>
+            <td>2</td>
+            <td>3</td>
+          </tr>
+
+          <tr>
+            <td>Sabrina Garcia</td>
+            <td>11</td>
+            <td>R$ 9.267.556,87</td>
+            <td>R$ 0,00</td>
+            <td>0,00%</td>
+            <td>4</td>
+            <td>3</td>
+            <td>4</td>
+          </tr>
+
+          <tr>
+            <td>Carla Costa</td>
+            <td>6</td>
+            <td>R$ 4.969.374,82</td>
+            <td>R$ 0,00</td>
+            <td>0,00%</td>
+            <td>0</td>
+            <td>3</td>
+            <td>3</td>
+          </tr>
+
+          <tr>
+            <td>Gabriella Barreto</td>
+            <td>17</td>
+            <td>R$ 15.271.598,74</td>
+            <td>R$ 0,00</td>
+            <td>0,00%</td>
+            <td>4</td>
+            <td>2</td>
+            <td>11</td>
+          </tr>
+
+          <tr>
+            <td>Marcelo Anjos</td>
+            <td>6</td>
+            <td>R$ 10.255.705,23</td>
+            <td>R$ 0,00</td>
+            <td>0,00%</td>
+            <td>2</td>
+            <td>3</td>
+            <td>1</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="tabela">
+      <h2>Leituras Gerenciais</h2>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Dimensão</th>
+            <th>Leitura</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <td>Renovação</td>
+            <td>A carteira possui R$ 91,2M de ACV Base, com R$ 1,5M renovado até o momento.</td>
+          </tr>
+
+          <tr>
+            <td>Risco</td>
+            <td>34 escolas estão em alto ou médio risco, representando atenção gerencial prioritária.</td>
+          </tr>
+
+          <tr>
+            <td>CSP</td>
+            <td>Yanna concentra o avanço de renovação registrado até agora, com 10,98% de renovação sobre sua carteira.</td>
+          </tr>
+
+          <tr>
+            <td>Próximo foco</td>
+            <td>Avançar na conversão das etapas de proposta, negociação e assinatura de contrato.</td>
           </tr>
         </tbody>
       </table>
