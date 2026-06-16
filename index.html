@@ -763,7 +763,15 @@ const totalOportunidades = dados.painel_executivo.reduce((soma, item) => {
 }, 0);
 
 preencher("oportunidades-quentes", moeda(totalOportunidades));
-preencher("alertas-executivos", dados.alertas_executivos);    
+const alertasFormatados = dados.alertas_executivos
+  .replace("⚠️", "<br><br>⚠️")
+  .replace("🟡", "<br><br>🟡")
+  .replace("🟢", "<br><br>🟢");
+
+const alertaElemento = document.getElementById("alertas-executivos");
+if (alertaElemento) {
+  alertaElemento.innerHTML = alertasFormatados;
+}   
   } catch (erro) {
     console.error("Erro ao carregar dados:", erro);
   }
