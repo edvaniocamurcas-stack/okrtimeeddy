@@ -750,34 +750,17 @@ async function carregarDados() {
     }
 
     const dados = await resposta.json();
+const resumo = dados.resumo;
 
-   const resumo = dados.resumo;
-
-preencher("acv-base", resumo.ACV_Base);
-preencher("acv-renovado", resumo.ACV_Renovado);
-preencher("percentual-renovacao", resumo.Percentual_Renovacao);
+preencher("acv-base", moeda(resumo.ACV_Base));
+preencher("acv-renovado", moeda(resumo.ACV_Renovado));
+preencher("percentual-renovacao", percentual(resumo.Percentual_Renovacao));
 preencher("escolas", resumo.Escolas);
 
-preencher(
-  "alto-risco",
-  resumo.Alto_Risco_Qtd + " (" + resumo.Alto_Risco_ACV + ")"
-);
-
-preencher(
-  "medio-risco",
-  resumo.Medio_Risco_Qtd + " (" + resumo.Medio_Risco_ACV + ")"
-);
-
-preencher(
-  "baixo-risco",
-  resumo.Baixo_Risco_Qtd + " (" + resumo.Baixo_Risco_ACV + ")"
-);
-
-preencher(
-  "carteira-atencao",
-  resumo.Carteira_Atencao_Qtd + " (" + resumo.Carteira_Atencao_ACV + ")"
-);
-
+preencher("alto-risco", `${resumo.Alto_Risco_Qtd} escolas | ${moeda(resumo.Alto_Risco_ACV)}`);
+preencher("medio-risco", `${resumo.Medio_Risco_Qtd} escolas | ${moeda(resumo.Medio_Risco_ACV)}`);
+preencher("baixo-risco", `${resumo.Baixo_Risco_Qtd} escolas | ${moeda(resumo.Baixo_Risco_ACV)}`);
+preencher("carteira-atencao", `${resumo.Carteira_Atencao_Qtd} escolas | ${moeda(resumo.Carteira_Atencao_ACV)}`);
   } catch (erro) {
     console.error("Erro ao carregar dados:", erro);
   }
