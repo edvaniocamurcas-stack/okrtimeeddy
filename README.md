@@ -1,8 +1,8 @@
-# Centro de Controle - Time Eddy
+# Gestão de Base - Time Eddy
 
 ## Objetivo
 
-Centralizar os indicadores estratégicos da carteira SAS.
+Centralizar os indicadores estratégicos.
 
 ## Indicadores
 
