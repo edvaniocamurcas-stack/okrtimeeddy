@@ -761,7 +761,7 @@ document.addEventListener("DOMContentLoaded", carregarDados);
 
 async function carregarDados() {
   try {
-    const resposta = await fetch("/okrtimeeddy/dados.json?v=" + Date.now());
+    const resposta = await fetch("/okrtimeeeddy/dados.json?v=" + Date.now());
 
     if (!resposta.ok) {
       throw new Error("Não foi possível carregar dados.json");
