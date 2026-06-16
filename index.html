@@ -757,9 +757,16 @@
 <script>
 
 <script>
+document.addEventListener("DOMContentLoaded", carregarDados);
+
 async function carregarDados() {
   try {
-    const resposta = await fetch("dados.json");
+    const resposta = await fetch("/okrtimeeeddy/dados.json?v=" + Date.now());
+
+    if (!resposta.ok) {
+      throw new Error("Não foi possível carregar dados.json");
+    }
+
     const dados = await resposta.json();
 
     preencher("acv-base", dados.ACV_Base);
@@ -770,7 +777,7 @@ async function carregarDados() {
     preencher("medio-risco", dados.Medio_Risco);
     preencher("baixo-risco", dados.Baixo_Risco);
     preencher("carteira-atencao", dados.Carteira_Atencao);
-    
+
   } catch (erro) {
     console.error("Erro ao carregar dados:", erro);
   }
@@ -782,8 +789,6 @@ function preencher(id, valor) {
     elemento.innerText = valor;
   }
 }
-
-carregarDados();
 </script>
 
 </main>
