@@ -1,11 +1,53 @@
 {
-  "ACV_Base": "R$ 91,2M",
-  "ACV_Renovado": "R$ 1,5M",
-  "Percentual_Renovacao": "1,65%",
-  "Escolas": "81",
-  "Alto_Risco": "17",
-  "Medio_Risco": "17",
-  "Baixo_Risco": "46",
-  "Carteira_Atencao": "34",
-  "Percentual_Risco": "42%"
+  "resumo": {
+    "ACV_Base": "R$ 91,2M",
+    "ACV_Renovado": "R$ 1,5M",
+    "Percentual_Renovacao": "1,65%",
+    "Escolas": "81",
+    "Alto_Risco": "17",
+    "Medio_Risco": "17",
+    "Baixo_Risco": "46",
+    "Carteira_Atencao": "34",
+    "Percentual_Risco": "42%"
+  },
+  "top10_acv": [
+    {
+      "escola": "APMC",
+      "csp": "Flávio Silva",
+      "acv": "R$ 11.661.934,80",
+      "risco": "Alto",
+      "etapa": "Diagnóstico",
+      "fup": "-",
+      "acao1": "-",
+      "acao2": "-",
+      "acao3": "-"
+    }
+  ],
+  "funil": [
+    {
+      "etapa": "Diagnóstico",
+      "escolas": "31",
+      "acv": "R$ 39.587.383,61"
+    }
+  ],
+  "csp": [
+    {
+      "nome": "Yanna Cavalcante",
+      "escolas": "14",
+      "acv_base": "R$ 13.720.444,80",
+      "acv_renovado": "R$ 1.506.692,98",
+      "percentual": "10,98%",
+      "alto": "1",
+      "medio": "3",
+      "baixo": "10"
+    }
+  ],
+  "alto_risco": [
+    {
+      "escola": "Santa Luzia Infantil",
+      "csp": "Sabrina Garcia",
+      "risco": "Alto",
+      "etapa": "Negociação"
+    }
+  ]
 }
