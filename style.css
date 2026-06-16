@@ -122,5 +122,18 @@ th {
   line-height: 1.7;
   font-weight: 500;
 }
+
+    .resumo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+  line-height: 1.5;
+}
+
+.resumo-grid div {
+  background: #f8fafc;
+  border-radius: 12px;
+  padding: 16px;
+}
   }
 }
