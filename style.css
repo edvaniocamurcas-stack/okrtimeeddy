@@ -116,5 +116,11 @@ th {
   line-height: 1.7;
   font-weight: 500;
 }
+    
+#resumo-lideranca {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  font-weight: 500;
+}
   }
 }
