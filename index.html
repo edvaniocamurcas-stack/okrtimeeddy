@@ -761,11 +761,13 @@ document.addEventListener("DOMContentLoaded", carregarDados);
 
 async function carregarDados() {
   try {
-    const resposta = await fetch("/okrtimeeeddy/dados.json?v=" + Date.now());
+    const url = new URL("dados.json?v=" + Date.now(), window.location.href);
+    const resposta = await fetch(url);
 
     if (!resposta.ok) {
-      throw new Error("Não foi possível carregar dados.json");
+      throw new Error("Erro ao buscar dados.json");
     }
+
     const dados = await resposta.json();
 
     preencher("acv-base", dados.ACV_Base);
