@@ -776,7 +776,10 @@ const alertasFormatados = dados.alertas_executivos
 const alertaElemento = document.getElementById("alertas-executivos");
 if (alertaElemento) {
   alertaElemento.innerHTML = alertasFormatados;
-}   
+}  
+    
+    preencher("resumo-lideranca", dados.resumo_lideranca);
+    
   } catch (erro) {
     console.error("Erro ao carregar dados:", erro);
   }
