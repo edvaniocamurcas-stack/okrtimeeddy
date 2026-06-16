@@ -772,6 +772,27 @@ function preencher(id, valor) {
     elemento.innerText = valor;
   }
 }
+  function numero(valor) {
+  if (!valor) return 0;
+  return Number(String(valor).replace(/\./g, "").replace(",", ".").replace("%", ""));
+}
+
+function moeda(valor) {
+  const n = numero(valor);
+  if (n >= 1000000) {
+    return "R$ " + (n / 1000000).toFixed(1).replace(".", ",") + "M";
+  }
+  return n.toLocaleString("pt-BR", {
+    style: "currency",
+    currency: "BRL",
+    maximumFractionDigits: 0
+  });
+}
+
+function percentual(valor) {
+  const n = numero(valor);
+  return n.toFixed(2).replace(".", ",") + "%";
+}
 </script>
 
 </body>
