@@ -762,7 +762,8 @@ const totalOportunidades = dados.painel_executivo.reduce((soma, item) => {
   return soma + numero(item.oportunidades_quentes_acv);
 }, 0);
 
-preencher("oportunidades-quentes", moeda(totalOportunidades));  
+preencher("oportunidades-quentes", moeda(totalOportunidades));
+preencher("alertas-executivos", dados.alertas_executivos);    
   } catch (erro) {
     console.error("Erro ao carregar dados:", erro);
   }
