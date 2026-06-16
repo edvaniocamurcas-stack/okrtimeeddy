@@ -778,7 +778,17 @@ if (alertaElemento) {
   alertaElemento.innerHTML = alertasFormatados;
 }  
     
-    preencher("resumo-lideranca", dados.resumo_lideranca);
+const resumoHTML = `
+<div style="line-height:1.8">
+  <p><strong>💰 Carteira Total:</strong> ${moeda(resumo.ACV_Base)}</p>
+  <p><strong>✅ Renovado:</strong> ${moeda(resumo.ACV_Renovado)} (${percentual(resumo.Percentual_Renovacao)})</p>
+  <p><strong>⚠️ Carteira em Atenção:</strong> ${resumo.Carteira_Atencao_Qtd} escolas | ${moeda(resumo.Carteira_Atencao_ACV)}</p>
+  <p><strong>🔴 Principal Risco:</strong> Flávio Silva | ${moeda("12882432,89")}</p>
+  <p><strong>🟢 Oportunidades Quentes:</strong> ${moeda(totalOportunidades)}</p>
+</div>
+`;
+
+document.getElementById("resumo-lideranca").innerHTML = resumoHTML;
     
   } catch (erro) {
     console.error("Erro ao carregar dados:", erro);
