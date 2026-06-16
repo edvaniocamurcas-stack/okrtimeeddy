@@ -755,40 +755,51 @@
       return result;
     }
 
-   <script>
-async function carregarDados() {
-  try {
-    const resposta = await fetch("dados.json");
-    const dados = await resposta.json();
+ <script>
+  carregarDados();
 
-    document.getElementById("acv-base").innerText = dados.ACV_Base;
-    document.getElementById("acv-renovado").innerText = dados.ACV_Renovado;
-    document.getElementById("percentual-renovacao").innerText = dados.Percentual_Renovacao;
-    document.getElementById("escolas").innerText = dados.Escolas;
-    document.getElementById("alto-risco").innerText = dados.Alto_Risco;
-    document.getElementById("medio-risco").innerText = dados.Medio_Risco;
-    document.getElementById("baixo-risco").innerText = dados.Baixo_Risco;
+  async function carregarDados() {
+    try {
+      const resposta = await fetch("./dados.json");
+      const dados = await resposta.json();
 
-    const alto = Number(dados.Alto_Risco);
-    const medio = Number(dados.Medio_Risco);
-    const escolas = Number(dados.Escolas);
-    const carteiraAtencao = alto + medio;
-    const percentualRisco = Math.round((carteiraAtencao / escolas) * 100);
+      preencher("acv-base", dados.ACV_Base);
+      preencher("acv-renovado", dados.ACV_Renovado);
+      preencher("percentual-renovacao", dados.Percentual_Renovacao);
+      preencher("escolas", dados.Escolas);
+      preencher("alto-risco", dados.Alto_Risco);
+      preencher("medio-risco", dados.Medio_Risco);
+      preencher("baixo-risco", dados.Baixo_Risco);
 
-    document.getElementById("carteira-atencao").innerText = carteiraAtencao;
-    document.getElementById("barra-risco").style.width = percentualRisco + "%";
-    document.getElementById("barra-risco").innerText = percentualRisco + "%";
+      const alto = Number(dados.Alto_Risco);
+      const medio = Number(dados.Medio_Risco);
+      const escolas = Number(dados.Escolas);
+      const atencao = alto + medio;
+      const percentualRisco = Math.round((atencao / escolas) * 100);
 
-    const renovacao = parseFloat(dados.Percentual_Renovacao.replace("%", "").replace(",", "."));
-    document.getElementById("barra-renovacao").style.width = Math.max(renovacao, 1.5) + "%";
-    document.getElementById("barra-renovacao").innerText = dados.Percentual_Renovacao;
+      preencher("carteira-atencao", atencao);
+      preencher("barra-risco", percentualRisco + "%");
+      document.getElementById("barra-risco").style.width = percentualRisco + "%";
 
-  } catch (erro) {
-    console.error("Erro ao carregar dados:", erro);
+      const renovacaoNumero = parseFloat(
+        dados.Percentual_Renovacao.replace("%", "").replace(",", ".")
+      );
+
+      preencher("barra-renovacao", dados.Percentual_Renovacao);
+      document.getElementById("barra-renovacao").style.width =
+        Math.max(renovacaoNumero, 1.5) + "%";
+
+    } catch (erro) {
+      console.error("Erro ao carregar dados:", erro);
+    }
   }
-}
 
-carregarDados();
+  function preencher(id, valor) {
+    const elemento = document.getElementById(id);
+    if (elemento) {
+      elemento.innerText = valor;
+    }
+  }
 </script>
 </body>
 </html>
