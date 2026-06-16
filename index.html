@@ -18,44 +18,44 @@
     <section class="cards">
       <div class="card">
         <span>ACV Base</span>
-        <strong id="acv-base">Carregando...</strong>
+       <strong>R$ 91,2M</strong>
       </div>
 
       <div class="card">
         <span>ACV Renovado</span>
-        <strong id="acv-renovado">Carregando...</strong>
+      <strong>R$ 1,5M</strong>
       </div>
 
       <div class="card">
         <span>% Renovação</span>
-        <strong id="percentual-renovacao">Carregando...</strong>
+       <strong>1,65%</strong>
       </div>
 
       <div class="card">
         <span>Escolas</span>
-        <strong id="escolas">Carregando...</strong>
+         <strong>81</strong>
       </div>
     </section>
 
     <section class="cards">
       <div class="card risco">
         <span>Alto Risco</span>
-        <strong id="alto-risco">Carregando...</strong>
+         <strong>17</strong>
       </div>
 
       <div class="card">
         <span>Médio Risco</span>
-        <strong id="medio-risco">Carregando...</strong>
+        <strong>17</strong>
       </div>
 
       <div class="card">
         <span>Baixo Risco</span>
-        <strong id="baixo-risco">Carregando...</strong>
+        <strong>46</strong>
       </div>
 
       <div class="card">
         <span>Carteira em Atenção</span>
-        <strong id="carteira-atencao">Carregando...</strong>
+        <strong>34</strong>
       </div>
     </section>
 
@@ -756,42 +756,3 @@
     }
 <script>
 
-  <script>
-async function carregarDados() {
-  const dados = {
-    ACV_Base: "R$ 91,2M",
-    ACV_Renovado: "R$ 1,5M",
-    Percentual_Renovacao: "1,65%",
-    Escolas: "81",
-    Alto_Risco: "17",
-    Medio_Risco: "17",
-    Baixo_Risco: "46"
-  };
-
-  preencher("acv-base", dados.ACV_Base);
-  preencher("acv-renovado", dados.ACV_Renovado);
-  preencher("percentual-renovacao", dados.Percentual_Renovacao);
-  preencher("escolas", dados.Escolas);
-  preencher("alto-risco", dados.Alto_Risco);
-  preencher("medio-risco", dados.Medio_Risco);
-  preencher("baixo-risco", dados.Baixo_Risco);
-
-  const atencao = Number(dados.Alto_Risco) + Number(dados.Medio_Risco);
-  preencher("carteira-atencao", atencao);
-
-  preencher("barra-renovacao", dados.Percentual_Renovacao);
-  document.getElementById("barra-renovacao").style.width = "1.65%";
-
-  preencher("barra-risco", "42%");
-  document.getElementById("barra-risco").style.width = "42%";
-}
-
-function preencher(id, valor) {
-  const elemento = document.getElementById(id);
-  if (elemento) {
-    elemento.innerText = valor;
-  }
-}
-
-carregarDados();
-</script>
