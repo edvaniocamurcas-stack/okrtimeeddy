@@ -106,5 +106,15 @@ th {
 
   main {
     padding: 16px;
+    
+.alerta {
+  border-left: 6px solid #dc2626;
+}
+
+.alerta p {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  font-weight: 500;
+}
   }
 }
