@@ -755,54 +755,40 @@
       return result;
     }
 
-    async function carregarDados() {
-      try {
-        const resposta = await fetch(csvUrl);
-        const texto = await resposta.text();
+   <script>
+async function carregarDados() {
+  try {
+    const resposta = await fetch("dados.json");
+    const dados = await resposta.json();
 
-        const linhas = texto.trim().split(/\r?\n/);
-        const dados = {};
+    document.getElementById("acv-base").innerText = dados.ACV_Base;
+    document.getElementById("acv-renovado").innerText = dados.ACV_Renovado;
+    document.getElementById("percentual-renovacao").innerText = dados.Percentual_Renovacao;
+    document.getElementById("escolas").innerText = dados.Escolas;
+    document.getElementById("alto-risco").innerText = dados.Alto_Risco;
+    document.getElementById("medio-risco").innerText = dados.Medio_Risco;
+    document.getElementById("baixo-risco").innerText = dados.Baixo_Risco;
 
-        linhas.slice(1).forEach(linha => {
-          const colunas = parseCSVLine(linha);
-          const metrica = colunas[0];
-          const valor = colunas[1];
+    const alto = Number(dados.Alto_Risco);
+    const medio = Number(dados.Medio_Risco);
+    const escolas = Number(dados.Escolas);
+    const carteiraAtencao = alto + medio;
+    const percentualRisco = Math.round((carteiraAtencao / escolas) * 100);
 
-          if (metrica && valor) {
-            dados[metrica.trim()] = valor.trim();
-          }
-        });
+    document.getElementById("carteira-atencao").innerText = carteiraAtencao;
+    document.getElementById("barra-risco").style.width = percentualRisco + "%";
+    document.getElementById("barra-risco").innerText = percentualRisco + "%";
 
-        document.getElementById("acv-base").innerText = dados["ACV_Base"] || "R$ 91,2M";
-        document.getElementById("acv-renovado").innerText = dados["ACV_Renovado"] || "R$ 1,5M";
-        document.getElementById("percentual-renovacao").innerText = dados["Percentual_Renovacao"] || "1,65%";
-        document.getElementById("escolas").innerText = dados["Escolas"] || "81";
-        document.getElementById("alto-risco").innerText = dados["Alto_Risco"] || "17";
-        document.getElementById("medio-risco").innerText = dados["Medio_Risco"] || "17";
-        document.getElementById("baixo-risco").innerText = dados["Baixo_Risco"] || "46";
+    const renovacao = parseFloat(dados.Percentual_Renovacao.replace("%", "").replace(",", "."));
+    document.getElementById("barra-renovacao").style.width = Math.max(renovacao, 1.5) + "%";
+    document.getElementById("barra-renovacao").innerText = dados.Percentual_Renovacao;
 
-        const alto = Number((dados["Alto_Risco"] || "17").replace(",", "."));
-        const medio = Number((dados["Medio_Risco"] || "17").replace(",", "."));
-        const escolas = Number((dados["Escolas"] || "81").replace(",", "."));
-        const carteiraAtencao = alto + medio;
-        const percentualRisco = escolas > 0 ? Math.round((carteiraAtencao / escolas) * 100) : 0;
+  } catch (erro) {
+    console.error("Erro ao carregar dados:", erro);
+  }
+}
 
-        document.getElementById("carteira-atencao").innerText = carteiraAtencao;
-        document.getElementById("barra-risco").style.width = percentualRisco + "%";
-        document.getElementById("barra-risco").innerText = percentualRisco + "%";
-
-        const percentualRenovacao = dados["Percentual_Renovacao"] || "1,65%";
-        const numeroRenovacao = parseFloat(percentualRenovacao.replace("%", "").replace(",", "."));
-
-        document.getElementById("barra-renovacao").style.width = Math.max(numeroRenovacao, 1.5) + "%";
-        document.getElementById("barra-renovacao").innerText = percentualRenovacao;
-
-      } catch (erro) {
-        console.error("Erro ao carregar dados da planilha:", erro);
-      }
-    }
-
-    carregarDados();
-  </script>
+carregarDados();
+</script>
 </body>
 </html>
