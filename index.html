@@ -770,13 +770,6 @@ async function carregarDados() {
     preencher("medio-risco", dados.Medio_Risco);
     preencher("baixo-risco", dados.Baixo_Risco);
     preencher("carteira-atencao", dados.Carteira_Atencao);
-
-    preencher("barra-renovacao", dados.Percentual_Renovacao);
-    document.getElementById("barra-renovacao").style.width = dados.Percentual_Renovacao;
-
-    preencher("barra-risco", dados.Percentual_Risco);
-    document.getElementById("barra-risco").style.width = dados.Percentual_Risco;
-
   } catch (erro) {
     console.error("Erro ao carregar dados:", erro);
   }
@@ -793,7 +786,5 @@ carregarDados();
 </script>
 
 </main>
-
 </body>
-
 </html>
