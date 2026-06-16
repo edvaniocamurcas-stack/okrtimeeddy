@@ -26,6 +26,11 @@
       <strong id="acv-renovado">--</strong>
       </div>
 
+  <div class="card">
+    <span>Oportunidades Quentes</span>
+    <strong id="oportunidades-quentes">--</strong>
+  </div>
+</section>
       <div class="card">
         <span>% Renovação</span>
         <strong id="percentual-renovacao">--</strong>
@@ -761,6 +766,13 @@ preencher("alto-risco", `${resumo.Alto_Risco_Qtd} escolas | ${moeda(resumo.Alto_
 preencher("medio-risco", `${resumo.Medio_Risco_Qtd} escolas | ${moeda(resumo.Medio_Risco_ACV)}`);
 preencher("baixo-risco", `${resumo.Baixo_Risco_Qtd} escolas | ${moeda(resumo.Baixo_Risco_ACV)}`);
 preencher("carteira-atencao", `${resumo.Carteira_Atencao_Qtd} escolas | ${moeda(resumo.Carteira_Atencao_ACV)}`);
+preencher("gap-renovacao", moeda(resumo.Gap_Renovacao));
+
+const totalOportunidades = dados.painel_executivo.reduce((soma, item) => {
+  return soma + numero(item.oportunidades_quentes_acv);
+}, 0);
+
+preencher("oportunidades-quentes", moeda(totalOportunidades));  
   } catch (erro) {
     console.error("Erro ao carregar dados:", erro);
   }
