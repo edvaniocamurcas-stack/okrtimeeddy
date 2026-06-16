@@ -18,44 +18,44 @@
     <section class="cards">
       <div class="card">
         <span>ACV Base</span>
-        <strong>R$ 91,2M</strong>
+        <strong id="acv-base">Carregando...</strong>
       </div>
 
       <div class="card">
         <span>ACV Renovado</span>
-        <strong>R$ 1,5M</strong>
+        <strong id="acv-renovado">Carregando...</strong>
       </div>
 
       <div class="card">
         <span>% Renovação</span>
-        <strong>1,65%</strong>
+        <strong id="percentual-renovacao">Carregando...</strong>
       </div>
 
       <div class="card">
         <span>Escolas</span>
-        <strong>81</strong>
+        <strong id="escolas">Carregando...</strong>
       </div>
     </section>
 
     <section class="cards">
       <div class="card risco">
         <span>Alto Risco</span>
-        <strong>17</strong>
+        <strong id="alto-risco">Carregando...</strong>
       </div>
 
       <div class="card">
         <span>Médio Risco</span>
-        <strong>17</strong>
+        <strong id="medio-risco">Carregando...</strong>
       </div>
 
       <div class="card">
         <span>Baixo Risco</span>
-        <strong>46</strong>
+        <strong id="baixo-risco">Carregando...</strong>
       </div>
 
       <div class="card">
         <span>Carteira em Atenção</span>
-        <strong>34</strong>
+        <strong id="carteira-atencao">Carregando...</strong>
       </div>
     </section>
 
@@ -65,164 +65,214 @@
       <div class="linha">
         <p>Renovação realizada</p>
         <div class="barra">
-          <div style="width: 1.65%;">1,65%</div>
+          <div id="barra-renovacao" style="width: 1.65%;">1,65%</div>
         </div>
       </div>
 
       <div class="linha">
         <p>Carteira em alto ou médio risco</p>
         <div class="barra">
-          <div style="width: 42%;">42%</div>
+          <div id="barra-risco" style="width: 42%;">42%</div>
         </div>
       </div>
     </section>
 
     <section class="tabela">
-  <h2>🚦 Semáforo Executivo</h2>
+      <h2>🚦 Semáforo Executivo</h2>
 
-  <table>
-    <thead>
-      <tr>
-        <th>Dimensão</th>
-        <th>Status</th>
-        <th>Leitura</th>
-      </tr>
-    </thead>
+      <table>
+        <thead>
+          <tr>
+            <th>Dimensão</th>
+            <th>Status</th>
+            <th>Leitura</th>
+          </tr>
+        </thead>
 
-    <tbody>
-      <tr>
-        <td>Renovação</td>
-        <td>🔴 Crítico</td>
-        <td>1,65% realizado sobre a meta de R$ 91,2M.</td>
-      </tr>
+        <tbody>
+          <tr>
+            <td>Renovação</td>
+            <td>🔴 Crítico</td>
+            <td>1,65% realizado sobre a meta de R$ 91,2M.</td>
+          </tr>
 
-      <tr>
-        <td>Risco</td>
-        <td>🟡 Atenção</td>
-        <td>34 escolas estão em alto ou médio risco.</td>
-      </tr>
+          <tr>
+            <td>Risco</td>
+            <td>🟡 Atenção</td>
+            <td>34 escolas estão em alto ou médio risco.</td>
+          </tr>
 
-      <tr>
-        <td>Funil</td>
-        <td>🟡 Atenção</td>
-        <td>R$ 39,6M ainda estão concentrados em Diagnóstico.</td>
-      </tr>
+          <tr>
+            <td>Funil</td>
+            <td>🟡 Atenção</td>
+            <td>R$ 39,6M ainda estão concentrados em Diagnóstico.</td>
+          </tr>
 
-      <tr>
-        <td>Forecast</td>
-        <td>🔴 Crítico</td>
-        <td>Gap estimado de R$ 50,1M para a meta de renovação.</td>
-      </tr>
+          <tr>
+            <td>Forecast</td>
+            <td>🔴 Crítico</td>
+            <td>Gap estimado de R$ 50,1M para a meta de renovação.</td>
+          </tr>
 
-      <tr>
-        <td>Assinatura</td>
-        <td>🟢 Oportunidade</td>
-        <td>R$ 7,9M estão em Assinatura de Contrato com potencial de conversão rápida.</td>
-      </tr>
-    </tbody>
-  </table>
-</section>
+          <tr>
+            <td>Assinatura</td>
+            <td>🟢 Oportunidade</td>
+            <td>R$ 7,9M estão em Assinatura de Contrato com potencial de conversão rápida.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
 
-<section class="tabela">
-  <h2>💰 Top 10 Escolas por ACV Base</h2>
+    <section class="tabela">
+      <h2>💰 Top 10 Escolas por ACV Base</h2>
 
-  <table>
-    <thead>
-      <tr>
-        <th>Escola</th>
-        <th>CSP</th>
-        <th>ACV Base</th>
-        <th>Risco</th>
-        <th>Etapa</th>
-      </tr>
-    </thead>
+      <table>
+        <thead>
+          <tr>
+            <th>Escola</th>
+            <th>CSP</th>
+            <th>ACV Base</th>
+            <th>Risco</th>
+            <th>Etapa</th>
+          </tr>
+        </thead>
 
-    <tbody>
+        <tbody>
+          <tr>
+            <td>APMC</td>
+            <td>Flávio Silva</td>
+            <td>R$ 11.661.934,80</td>
+            <td>Alto</td>
+            <td>Diagnóstico</td>
+          </tr>
 
-      <tr>
-        <td>APMC</td>
-        <td>Flávio Silva</td>
-        <td>R$ 11.661.934,80</td>
-        <td>Alto</td>
-        <td>Diagnóstico</td>
-      </tr>
+          <tr>
+            <td>Instituto Educacional São José</td>
+            <td>Marcelo Anjos</td>
+            <td>R$ 3.269.978,17</td>
+            <td>Médio</td>
+            <td>Elaboração de Proposta</td>
+          </tr>
 
-      <tr>
-        <td>Instituto Educacional São José</td>
-        <td>Marcelo Anjos</td>
-        <td>R$ 3.269.978,17</td>
-        <td>Médio</td>
-        <td>Elaboração de Proposta</td>
-      </tr>
+          <tr>
+            <td>Colégio Literato</td>
+            <td>Marcelo Anjos</td>
+            <td>R$ 3.038.278,60</td>
+            <td>Médio</td>
+            <td>Diagnóstico</td>
+          </tr>
 
-      <tr>
-        <td>Colégio Literato</td>
-        <td>Marcelo Anjos</td>
-        <td>R$ 3.038.278,60</td>
-        <td>Médio</td>
-        <td>Diagnóstico</td>
-      </tr>
+          <tr>
+            <td>Plenus</td>
+            <td>Flávio Silva</td>
+            <td>R$ 2.766.756,79</td>
+            <td>Baixo</td>
+            <td>Assinatura de Contrato</td>
+          </tr>
 
-      <tr>
-        <td>Plenus</td>
-        <td>Flávio Silva</td>
-        <td>R$ 2.766.756,79</td>
-        <td>Baixo</td>
-        <td>Assinatura de Contrato</td>
-      </tr>
+          <tr>
+            <td>Irmãs Missionárias Capuchinhas</td>
+            <td>Juliana Barbosa</td>
+            <td>R$ 2.726.789,46</td>
+            <td>Baixo</td>
+            <td>Diagnóstico</td>
+          </tr>
 
-      <tr>
-        <td>Irmãs Missionárias Capuchinhas</td>
-        <td>Juliana Barbosa</td>
-        <td>R$ 2.726.789,46</td>
-        <td>Baixo</td>
-        <td>Diagnóstico</td>
-      </tr>
+          <tr>
+            <td>Master Aracaju</td>
+            <td>Yanna Cavalcante</td>
+            <td>R$ 2.293.870,40</td>
+            <td>Médio</td>
+            <td>Negociação</td>
+          </tr>
 
-      <tr>
-        <td>Master Aracaju</td>
-        <td>Yanna Cavalcante</td>
-        <td>R$ 2.293.870,40</td>
-        <td>Médio</td>
-        <td>Negociação</td>
-      </tr>
+          <tr>
+            <td>Santa Luzia Infantil</td>
+            <td>Sabrina Garcia</td>
+            <td>R$ 2.205.528,49</td>
+            <td>Alto</td>
+            <td>Negociação</td>
+          </tr>
 
-      <tr>
-        <td>Santa Luzia Infantil</td>
-        <td>Sabrina Garcia</td>
-        <td>R$ 2.205.528,49</td>
-        <td>Alto</td>
-        <td>Negociação</td>
-      </tr>
+          <tr>
+            <td>Associação de Pais, Mestres e Funcionários</td>
+            <td>Flávio Silva</td>
+            <td>R$ 2.176.711,70</td>
+            <td>Baixo</td>
+            <td>Negociação</td>
+          </tr>
 
-      <tr>
-        <td>Associação de Pais, Mestres e Funcionários</td>
-        <td>Flávio Silva</td>
-        <td>R$ 2.176.711,70</td>
-        <td>Baixo</td>
-        <td>Negociação</td>
-      </tr>
+          <tr>
+            <td>Colégio Batista Brasileiro</td>
+            <td>Juliana Barbosa</td>
+            <td>R$ 2.125.901,87</td>
+            <td>Médio</td>
+            <td>Diagnóstico</td>
+          </tr>
 
-      <tr>
-        <td>Colégio Batista Brasileiro</td>
-        <td>Juliana Barbosa</td>
-        <td>R$ 2.125.901,87</td>
-        <td>Médio</td>
-        <td>Diagnóstico</td>
-      </tr>
+          <tr>
+            <td>Diocesano</td>
+            <td>Gabriella Barreto</td>
+            <td>R$ 2.054.975,18</td>
+            <td>Baixo</td>
+            <td>Diagnóstico</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
 
-      <tr>
-        <td>Diocesano</td>
-        <td>Gabriella Barreto</td>
-        <td>R$ 2.054.975,18</td>
-        <td>Baixo</td>
-        <td>Diagnóstico</td>
-      </tr>
+    <section class="tabela">
+      <h2>🎯 Prioridades da Liderança</h2>
 
-    </tbody>
-  </table>
-</section>    
-    
+      <table>
+        <thead>
+          <tr>
+            <th>Prioridade</th>
+            <th>Escola</th>
+            <th>Motivo</th>
+            <th>Ação Recomendada</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>APMC</td>
+            <td>Maior ACV da carteira, alto risco e ainda em Diagnóstico.</td>
+            <td>Acionar liderança e definir plano de avanço imediato.</td>
+          </tr>
+
+          <tr>
+            <td>2</td>
+            <td>Santa Luzia Infantil</td>
+            <td>Alto risco, ACV relevante e etapa de Negociação.</td>
+            <td>Acompanhar semanalmente com Sabrina e destravar decisão.</td>
+          </tr>
+
+          <tr>
+            <td>3</td>
+            <td>Plenus</td>
+            <td>Alto ACV e etapa de Assinatura de Contrato.</td>
+            <td>Acelerar fechamento e validar pendências contratuais.</td>
+          </tr>
+
+          <tr>
+            <td>4</td>
+            <td>Master Aracaju</td>
+            <td>ACV relevante, risco médio e etapa de Negociação.</td>
+            <td>Construir forecast de fechamento com Yanna.</td>
+          </tr>
+
+          <tr>
+            <td>5</td>
+            <td>Instituto Educacional São José</td>
+            <td>ACV relevante e ainda em Elaboração de Proposta.</td>
+            <td>Garantir envio e validação da proposta com Marcelo.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
     <section class="tabela">
       <h2>Visão por CSP</h2>
 
@@ -678,58 +728,81 @@
       </table>
     </section>
 
-    <section class="tabela">
-  <h2>🎯 Prioridades da Liderança</h2>
-
-  <table>
-    <thead>
-      <tr>
-        <th>Prioridade</th>
-        <th>Escola</th>
-        <th>Motivo</th>
-        <th>Ação Recomendada</th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <tr>
-        <td>1</td>
-        <td>APMC</td>
-        <td>Maior ACV da carteira, alto risco e ainda em Diagnóstico.</td>
-        <td>Acionar liderança e definir plano de avanço imediato.</td>
-      </tr>
-
-      <tr>
-        <td>2</td>
-        <td>Santa Luzia Infantil</td>
-        <td>Alto risco, ACV relevante e etapa de Negociação.</td>
-        <td>Acompanhar semanalmente com Sabrina e destravar decisão.</td>
-      </tr>
-
-      <tr>
-        <td>3</td>
-        <td>Plenus</td>
-        <td>Alto ACV e etapa de Assinatura de Contrato.</td>
-        <td>Acelerar fechamento e validar pendências contratuais.</td>
-      </tr>
-
-      <tr>
-        <td>4</td>
-        <td>Master Aracaju</td>
-        <td>ACV relevante, risco médio e etapa de Negociação.</td>
-        <td>Construir forecast de fechamento com Yanna.</td>
-      </tr>
-
-      <tr>
-        <td>5</td>
-        <td>Instituto Educacional São José</td>
-        <td>ACV relevante e ainda em Elaboração de Proposta.</td>
-        <td>Garantir envio e validação da proposta com Marcelo.</td>
-      </tr>
-    </tbody>
-  </table>
-</section>
-
   </main>
+
+  <script>
+    const csvUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRtgQLEz0zlyT97taWsO4gxzB8l2XZuqMKlgOwi_nTM2le5Qa-1lelTWHo6uGXVT1881z637DI9CaeA/pub?gid=1281491142&single=true&output=csv";
+
+    function parseCSVLine(line) {
+      const result = [];
+      let current = "";
+      let insideQuotes = false;
+
+      for (let i = 0; i < line.length; i++) {
+        const char = line[i];
+
+        if (char === '"') {
+          insideQuotes = !insideQuotes;
+        } else if (char === "," && !insideQuotes) {
+          result.push(current.trim());
+          current = "";
+        } else {
+          current += char;
+        }
+      }
+
+      result.push(current.trim());
+      return result;
+    }
+
+    async function carregarDados() {
+      try {
+        const resposta = await fetch(csvUrl);
+        const texto = await resposta.text();
+
+        const linhas = texto.trim().split(/\r?\n/);
+        const dados = {};
+
+        linhas.slice(1).forEach(linha => {
+          const colunas = parseCSVLine(linha);
+          const metrica = colunas[0];
+          const valor = colunas[1];
+
+          if (metrica && valor) {
+            dados[metrica.trim()] = valor.trim();
+          }
+        });
+
+        document.getElementById("acv-base").innerText = dados["ACV_Base"] || "R$ 91,2M";
+        document.getElementById("acv-renovado").innerText = dados["ACV_Renovado"] || "R$ 1,5M";
+        document.getElementById("percentual-renovacao").innerText = dados["Percentual_Renovacao"] || "1,65%";
+        document.getElementById("escolas").innerText = dados["Escolas"] || "81";
+        document.getElementById("alto-risco").innerText = dados["Alto_Risco"] || "17";
+        document.getElementById("medio-risco").innerText = dados["Medio_Risco"] || "17";
+        document.getElementById("baixo-risco").innerText = dados["Baixo_Risco"] || "46";
+
+        const alto = Number((dados["Alto_Risco"] || "17").replace(",", "."));
+        const medio = Number((dados["Medio_Risco"] || "17").replace(",", "."));
+        const escolas = Number((dados["Escolas"] || "81").replace(",", "."));
+        const carteiraAtencao = alto + medio;
+        const percentualRisco = escolas > 0 ? Math.round((carteiraAtencao / escolas) * 100) : 0;
+
+        document.getElementById("carteira-atencao").innerText = carteiraAtencao;
+        document.getElementById("barra-risco").style.width = percentualRisco + "%";
+        document.getElementById("barra-risco").innerText = percentualRisco + "%";
+
+        const percentualRenovacao = dados["Percentual_Renovacao"] || "1,65%";
+        const numeroRenovacao = parseFloat(percentualRenovacao.replace("%", "").replace(",", "."));
+
+        document.getElementById("barra-renovacao").style.width = Math.max(numeroRenovacao, 1.5) + "%";
+        document.getElementById("barra-renovacao").innerText = percentualRenovacao;
+
+      } catch (erro) {
+        console.error("Erro ao carregar dados da planilha:", erro);
+      }
+    }
+
+    carregarDados();
+  </script>
 </body>
 </html>
