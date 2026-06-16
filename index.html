@@ -759,7 +759,7 @@
 <script>
 async function carregarDados() {
   try {
-    const resposta = await fetch("./dados.json?cache=" + new Date().getTime());
+    const resposta = await fetch("dados.json");
     const dados = await resposta.json();
 
     preencher("acv-base", dados.ACV_Base);
