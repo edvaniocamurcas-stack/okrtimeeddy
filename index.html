@@ -751,14 +751,32 @@ async function carregarDados() {
 
     const dados = await resposta.json();
 
-    preencher("acv-base", dados.ACV_Base);
-    preencher("acv-renovado", dados.ACV_Renovado);
-    preencher("percentual-renovacao", dados.Percentual_Renovacao);
-    preencher("escolas", dados.Escolas);
-    preencher("alto-risco", dados.Alto_Risco);
-    preencher("medio-risco", dados.Medio_Risco);
-    preencher("baixo-risco", dados.Baixo_Risco);
-    preencher("carteira-atencao", dados.Carteira_Atencao);
+   const resumo = dados.resumo;
+
+preencher("acv-base", resumo.ACV_Base);
+preencher("acv-renovado", resumo.ACV_Renovado);
+preencher("percentual-renovacao", resumo.Percentual_Renovacao);
+preencher("escolas", resumo.Escolas);
+
+preencher(
+  "alto-risco",
+  resumo.Alto_Risco_Qtd + " (" + resumo.Alto_Risco_ACV + ")"
+);
+
+preencher(
+  "medio-risco",
+  resumo.Medio_Risco_Qtd + " (" + resumo.Medio_Risco_ACV + ")"
+);
+
+preencher(
+  "baixo-risco",
+  resumo.Baixo_Risco_Qtd + " (" + resumo.Baixo_Risco_ACV + ")"
+);
+
+preencher(
+  "carteira-atencao",
+  resumo.Carteira_Atencao_Qtd + " (" + resumo.Carteira_Atencao_ACV + ")"
+);
 
   } catch (erro) {
     console.error("Erro ao carregar dados:", erro);
