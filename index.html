@@ -18,44 +18,44 @@
     <section class="cards">
       <div class="card">
         <span>ACV Base</span>
-       <strong>R$ 91,2M</strong>
+      <strong id="acv-base">--</strong>
       </div>
 
       <div class="card">
         <span>ACV Renovado</span>
-      <strong>R$ 1,5M</strong>
+      <strong id="acv-renovado">--</strong>
       </div>
 
       <div class="card">
         <span>% Renovação</span>
-       <strong>1,65%</strong>
+        <strong id="percentual-renovacao">--</strong>
       </div>
 
       <div class="card">
         <span>Escolas</span>
-         <strong>81</strong>
+         <strong id="escolas">--</strong>
       </div>
     </section>
 
     <section class="cards">
       <div class="card risco">
         <span>Alto Risco</span>
-         <strong>17</strong>
+         <strong id="alto-risco">--</strong>
       </div>
 
       <div class="card">
         <span>Médio Risco</span>
-        <strong>17</strong>
+        <strong id="medio-risco">--</strong>
       </div>
 
       <div class="card">
         <span>Baixo Risco</span>
-        <strong>46</strong>
+        <strong id="baixo-risco">--</strong>
       </div>
 
       <div class="card">
         <span>Carteira em Atenção</span>
-        <strong>34</strong>
+        <strong id="carteira-atencao">--</strong>
       </div>
     </section>
 
@@ -756,3 +756,44 @@
     }
 <script>
 
+<script>
+async function carregarDados() {
+  try {
+    const resposta = await fetch("./dados.json?cache=" + new Date().getTime());
+    const dados = await resposta.json();
+
+    preencher("acv-base", dados.ACV_Base);
+    preencher("acv-renovado", dados.ACV_Renovado);
+    preencher("percentual-renovacao", dados.Percentual_Renovacao);
+    preencher("escolas", dados.Escolas);
+    preencher("alto-risco", dados.Alto_Risco);
+    preencher("medio-risco", dados.Medio_Risco);
+    preencher("baixo-risco", dados.Baixo_Risco);
+    preencher("carteira-atencao", dados.Carteira_Atencao);
+
+    preencher("barra-renovacao", dados.Percentual_Renovacao);
+    document.getElementById("barra-renovacao").style.width = dados.Percentual_Renovacao;
+
+    preencher("barra-risco", dados.Percentual_Risco);
+    document.getElementById("barra-risco").style.width = dados.Percentual_Risco;
+
+  } catch (erro) {
+    console.error("Erro ao carregar dados:", erro);
+  }
+}
+
+function preencher(id, valor) {
+  const elemento = document.getElementById(id);
+  if (elemento) {
+    elemento.innerText = valor;
+  }
+}
+
+carregarDados();
+</script>
+
+</main>
+
+</body>
+
+</html>
