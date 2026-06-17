@@ -864,11 +864,16 @@ const renovacaoGeral =
 ) * 100;
 
 const fundoFunil =
-(
-  resumo.Oportunidades_Quentes
-  /
-  resumo.ACV_Base
-) * 100;
+  painel.reduce(
+    (s,i)=>
+      s + numero(i.oportunidades_quentes_acv),
+    0
+  );
+
+const fundoFunilPercentual =
+  acvBase > 0
+  ? (fundoFunil / acvBase) * 100
+  : 0;
 
 const saudeOperacaoHTML = `
 <div class="saude-grid">
