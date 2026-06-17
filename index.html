@@ -844,15 +844,17 @@ if (ranking) {
     .sort((a,b) => numero(b.cobertura) - numero(a.cobertura));
 
   ranking.innerHTML = ordenado.map(item => `
-    <tr>
-      <td>${nomeCSP(item.csp)}</td>
-      <td>${item.cobertura}%</td>
-      <td>${item.alto_risco_qtd}</td>
-      <td>${item.oportunidades_quentes_qtd}</td>
-      <td>${item.percentual_renovacao}%</td>
-      <td>${item.prioridade}</td>      
-    </tr>
-  `).join("");
+  <tr>
+    <td>${nomeCSP(item.csp)}</td>
+    <td>${item.cobertura}%</td>
+    <td>${moeda(item.acv_base)}</td>
+    <td>${moeda(item.alto_risco_acv)}</td>
+    <td>${item.alto_risco_qtd}</td>
+    <td>${item.oportunidades_quentes_qtd}</td>
+    <td>${item.percentual_renovacao}%</td>
+    <td>${item.prioridade}</td>
+  </tr>
+`).join("");
 
 }
 const cspAjuda = document.getElementById("csp-ajuda");
@@ -866,16 +868,16 @@ if (cspAjuda) {
     .sort((a,b) => numero(b.alto_risco_acv) - numero(a.alto_risco_acv))
     .slice(0,3)
 
-  cspAjuda.innerHTML = ajuda.map(item => `
-    <div class="ajuda-card">
-     <h3>${item.prioridade} ${nomeCSP(item.csp)}</h3>
-      <p><strong>🎯 Prioridade de acompanhamento semanal</strong></p>
-      <p><strong>ACV Alto Risco:</strong> ${moeda(item.alto_risco_acv)}</p>
-      <p><strong>Escolas em Alto Risco:</strong> ${item.alto_risco_qtd}</p>
-      <p><strong>Oportunidades Quentes:</strong> ${item.oportunidades_quentes_qtd}</p>
-      <p><strong>Cobertura:</strong> ${item.cobertura}%</p>
-    </div>
-  `).join("");
+ cspAjuda.innerHTML = ajuda.map(item => `
+  <div class="ajuda-card">
+    <h3>${item.prioridade} ${nomeCSP(item.csp)}</h3>
+    <p class="destaque">${moeda(item.alto_risco_acv)} em alto risco</p>
+    <p><strong>Escolas em alto risco:</strong> ${item.alto_risco_qtd}</p>
+    <p><strong>Oportunidades quentes:</strong> ${item.oportunidades_quentes_qtd}</p>
+    <p><strong>Cobertura:</strong> ${item.cobertura}%</p>
+    <p><strong>Ação sugerida:</strong> acompanhamento semanal prioritário.</p>
+  </div>
+`).join("");
 }
     
   } catch (erro) {
