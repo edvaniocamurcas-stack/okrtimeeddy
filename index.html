@@ -873,7 +873,13 @@ const resumoLiderancaHTML = `
 </div>
 `;
 
-document.getElementById("resumo-lideranca").innerHTML = resumoLiderancaHTML;
+preencher("lideranca-carteira", moeda(resumo.ACV_Base));
+preencher("lideranca-renovado", moeda(resumo.ACV_Renovado));
+preencher("lideranca-percentual", percentual(resumo.Percentual_Renovacao));
+preencher("lideranca-atencao", `${resumo.Carteira_Atencao_Qtd} escolas | ${moeda(resumo.Carteira_Atencao_ACV)}`);
+preencher("lideranca-risco", nomeCSP(principalRisco.csp));
+preencher("lideranca-risco-acv", moeda(principalRisco.alto_risco_acv));
+preencher("lideranca-oportunidades", moeda(totalOportunidades));
 const ranking = document.getElementById("ranking-csp");
 
 if (ranking) {
