@@ -864,7 +864,7 @@ const renovacaoGeral =
 ) * 100;
 
 const fundoFunil =
-  painel.reduce(
+  dados.painel_executivo.reduce(
     (s,i)=>
       s + numero(i.oportunidades_quentes_acv),
     0
@@ -874,6 +874,14 @@ const fundoFunilPercentual =
   acvBase > 0
   ? (fundoFunil / acvBase) * 100
   : 0;
+    
+const scoreTime =
+(
+  coberturaGap * 0.3 +
+  (100 - riscoGeral) * 0.3 +
+  renovacaoGeral * 0.2 +
+  fundoFunilPercentual * 0.2
+);
 
 const saudeOperacaoHTML = `
 <div class="saude-grid">
@@ -900,7 +908,7 @@ const saudeOperacaoHTML = `
 
   <div class="saude-card">
     <span>Fundo de Funil</span>
-    <strong>${fundoFunil.toFixed(1)}%</strong>
+    <strong>${fundoFunilPercentual.toFixed(1)}%</strong>
   </div>
 
 </div>
