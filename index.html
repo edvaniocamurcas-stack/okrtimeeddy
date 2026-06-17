@@ -902,78 +902,89 @@ document.getElementById("saude-operacao").innerHTML = saudeOperacaoHTML;    cons
         );
 
      ranking.innerHTML = ordenado.map(item => {
-    ranking.innerHTML += `
-    <tr style="
-      background:#f8fafc;
-      font-weight:700;
-      border-top:3px solid #1e293b;
-    ">
-      <td>TIME EDDY</td>
-      <td>${scoreTime}</td>
-      <td>📊 Consolidado</td>
-      <td>${coberturaGap.toFixed(1)}%</td>
-      <td>${moeda(acvBaseTotal)}</td>
-      <td>${moeda(resumo.Alto_Risco_ACV)}</td>
-      <td>${riscoGeral.toFixed(1)}%</td>
-      <td>${resumo.Alto_Risco_Qtd}</td>
-      <td>${moeda(oportunidadesACV)}</td>
-      <td>-</td>
-      <td>${renovacaoGeral.toFixed(2)}%</td>
-      <td>Visão Time</td>
-    </tr>
-`;   
-  const acvBase = numero(item.acv_base);
-  const acvAltoRisco = numero(item.alto_risco_acv);
 
-  const coberturaScore = Number(String(item.cobertura).replace(",", "."));
-  const renovacaoScore = Number(String(item.percentual_renovacao).replace(",", "."));
-  const oportunidadeScore = (Number(item.oportunidades_quentes_qtd || 0) / 7) * 100;
+      const acvBase = numero(item.acv_base);
+      const acvAltoRisco = numero(item.alto_risco_acv);
+    
+      const coberturaScore = Number(
+        String(item.cobertura).replace(",", ".")
+      );
+    
+      const renovacaoScore = Number(
+        String(item.percentual_renovacao).replace(",", ".")
+      );
+    
+      const oportunidadeScore =
+        (Number(item.oportunidades_quentes_qtd || 0) / 7) * 100;
+    
+      const riscoPercentualNumero =
+        acvBase > 0
+          ? (acvAltoRisco / acvBase) * 100
+          : 0;
+    
+      const riscoScore = 100 - riscoPercentualNumero;
+    
+      const score = (
+        coberturaScore * 0.40 +
+        oportunidadeScore * 0.20 +
+        riscoScore * 0.30 +
+        renovacaoScore * 0.10
+      ).toFixed(0);
+    
+      let saude = "🔴 Crítico";
+    
+      if (riscoPercentualNumero > 40) {
+        saude = "🔴 Crítico";
+      } else if (score >= 75) {
+        saude = "🟢 Saudável";
+      } else if (score >= 50) {
+        saude = "🟡 Atenção";
+      } else {
+        saude = "🔴 Crítico";
+      }
+    
+      const riscoPercentual =
+        riscoPercentualNumero.toFixed(1).replace(".", ",") + "%";
+    
+      return `
+        <tr>
+          <td>${nomeCSP(item.csp)}</td>
+          <td><strong>${score}</strong></td>
+          <td>${saude}</td>
+          <td>${item.cobertura}%</td>
+          <td>${moeda(item.acv_base)}</td>
+          <td>${moeda(item.alto_risco_acv)}</td>
+          <td>${riscoPercentual}</td>
+          <td>${item.alto_risco_qtd}</td>
+          <td>${moeda(item.oportunidades_quentes_acv)}</td>
+          <td>${item.oportunidades_quentes_qtd}</td>
+          <td>${item.percentual_renovacao}%</td>
+          <td>${item.prioridade}</td>
+        </tr>
+      `;
+    
+    }).join("");
 
-  const riscoPercentualNumero = acvBase > 0 ? (acvAltoRisco / acvBase) * 100 : 0;
-  const riscoScore = 100 - riscoPercentualNumero;
-
-  const score = (
-    coberturaScore * 0.40 +
-    oportunidadeScore * 0.2 +
-    riscoScore * 0.3 +
-    renovacaoScore * 0.1
-  ).toFixed(0);
-
-  let saude = "🔴 Crítico";
-
-  if (riscoPercentualNumero > 40) {
-   saude = "🔴 Crítico";
-  }
-  else if (score >= 75) {
-   saude = "🟢 Saudável";
-  }
-  else if (score >= 50) {
-   saude = "🟡 Atenção";
-  }
-  else {
-   saude = "🔴 Crítico";
-}
-  const riscoPercentual = riscoPercentualNumero.toFixed(1).replace(".", ",") + "%";
-
-  return `
-    <tr>
-      <td>${nomeCSP(item.csp)}</td>
-      <td><strong>${score}</strong></td>
-      <td>${saude}</td>
-      <td>${item.cobertura}%</td>
-      <td>${moeda(item.acv_base)}</td>
-      <td>${moeda(item.alto_risco_acv)}</td>
-      <td>${riscoPercentual}</td>
-      <td>${item.alto_risco_qtd}</td>
-      <td>${moeda(item.oportunidades_quentes_acv)}</td>
-      <td>${item.oportunidades_quentes_qtd}</td>
-      <td>${item.percentual_renovacao}%</td>
-      <td>${item.prioridade}</td>
-    </tr>
-  `;
-}).join("");
-    }
-
+ranking.innerHTML += `
+<tr style="
+  background:#f8fafc;
+  font-weight:700;
+  border-top:3px solid #1e293b;
+">
+    <td>TIME EDDY</td>
+    <td>${scoreTime}</td>
+    <td>📊 Consolidado</td>
+    <td>${coberturaGap.toFixed(1)}%</td>
+    <td>${moeda(acvBaseTotal)}</td>
+    <td>${moeda(resumo.Alto_Risco_ACV)}</td>
+    <td>${riscoGeral.toFixed(1)}%</td>
+    <td>${resumo.Alto_Risco_Qtd}</td>
+    <td>${moeda(oportunidadesACV)}</td>
+    <td>${resumo.Escolas}</td>
+    <td>${renovacaoGeral.toFixed(2)}%</td>
+    <td>Visão Time</td>
+</tr>
+`;
     const cspAjuda = document.getElementById("csp-ajuda");
 
     if (cspAjuda) {
