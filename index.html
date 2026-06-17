@@ -57,6 +57,8 @@
 
 <section class="painel">
   <h2>📋 Resumo para Liderança</h2>
+  <div id="resumo-lideranca"></div>
+</section>
 
   <div class="lideranca-grid">
 
@@ -90,7 +92,7 @@
   </div>
 </section>
 
-    <section class="tabela">
+<section class="tabela">
   <h2>🏆 Ranking CSP Executivo</h2>
 
   <table>
@@ -100,33 +102,34 @@
         <th>Cobertura</th>
         <th>ACV Base</th>
         <th>ACV Alto Risco</th>
+        <th>Risco (%)</th>
         <th>Alto Risco</th>
         <th>Oportunidades</th>
         <th>% Renovação</th>
         <th>Prioridade</th>
-        <th>Risco (%)</th>
       </tr>
     </thead>
 
     <tbody id="ranking-csp"></tbody>
-    
   </table>
-<section class="tabela">
-  <h2>🎯 CSPs que precisam de ajuda esta semana</h2>
-  <div class="ajuda-grid" id="ajuda-semanal"></div>
 </section>
 
-    <section class="tabela">
-      <h2>🚦 Semáforo Executivo</h2>
+<section class="tabela">
+  <h2>🎯 CSPs que precisam de ajuda esta semana</h2>
+  <div id="csp-ajuda" class="ajuda-grid"></div>
+</section>
 
-      <table>
-        <thead>
-          <tr>
-            <th>Dimensão</th>
-            <th>Status</th>
-            <th>Leitura</th>
-          </tr>
-        </thead>
+<section class="tabela">
+  <h2>🚦 Semáforo Executivo</h2>
+
+    <table>
+    <thead>
+      <tr>
+      <th>Dimensão</th>
+      <th>Status</th>
+      <th>Leitura</th>
+      </tr>
+   </thead>
 
         <tbody>
           <tr>
@@ -878,21 +881,26 @@ if (ranking) {
   const ordenado = [...dados.painel_executivo]
     .sort((a,b) => numero(b.cobertura) - numero(a.cobertura));
 
-  ranking.innerHTML = ordenado.map(item => `
-  <tr>
-    <td>${nomeCSP(item.csp)}</td>
-    <td>${item.cobertura}%</td>
-    <td>${moeda(item.acv_base)}</td>
-    <td>${moeda(item.alto_risco_acv)}</td>
-    <td>${item.alto_risco_qtd}</td>
-    <td>${item.oportunidades_quentes_qtd}</td>
-    <td>${item.percentual_renovacao}%</td>
-    <td>${item.prioridade}</td>
-    <td>((acvAltoRisco/acvBase)*100 (item.risco_%)</td>
-  </tr>
-`).join("");
+ ranking.innerHTML = ordenado.map(item => {
+  const acvBase = numero(item.acv_base);
+  const acvAltoRisco = numero(item.alto_risco_acv);
+  const riscoPercentual = acvBase > 0 ? ((acvAltoRisco / acvBase) * 100).toFixed(1).replace(".", ",") + "%" : "0%";
 
-}
+  return `
+    <tr>
+      <td>${nomeCSP(item.csp)}</td>
+      <td>${item.cobertura}%</td>
+      <td>${moeda(item.acv_base)}</td>
+      <td>${moeda(item.alto_risco_acv)}</td>
+      <td>${riscoPercentual}</td>
+      <td>${item.alto_risco_qtd}</td>
+      <td>${item.oportunidades_quentes_qtd}</td>
+      <td>${item.percentual_renovacao}%</td>
+      <td>${item.prioridade}</td>
+    </tr>
+  `;
+}).join("");
+  
 const cspAjuda = document.getElementById("csp-ajuda");
 if (cspAjuda) {
   const ajuda = [...dados.painel_executivo]
