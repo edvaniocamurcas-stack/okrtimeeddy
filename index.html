@@ -847,10 +847,10 @@ document.getElementById("resumo-lideranca").innerHTML = resumoLiderancaHTML;
   const riscoScore = 100 - riscoPercentualNumero;
 
   const score = (
-    coberturaScore * 0.4 +
-    renovacaoScore * 0.3 +
+    coberturaScore * 0.40 +
     oportunidadeScore * 0.2 +
-    riscoScore * 0.1
+    riscoScore * 0.3
+    renovacaoScore * 0.1
   ).toFixed(0);
 
   let saude = "🔴 Crítico";
