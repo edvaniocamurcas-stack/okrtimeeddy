@@ -60,36 +60,6 @@
   <div id="resumo-lideranca"></div>
 </section>
 
-    <div class="lideranca-card">
-      <span>💰 Carteira Total</span>
-      <strong id="lideranca-carteira"></strong>
-    </div>
-
-    <div class="lideranca-card">
-      <span>✅ Renovado</span>
-      <strong id="lideranca-renovado"></strong>
-      <small id="lideranca-percentual"></small>
-    </div>
-
-    <div class="lideranca-card">
-      <span>⚠️ Em Atenção</span>
-      <strong id="lideranca-atencao"></strong>
-    </div>
-
-    <div class="lideranca-card risco">
-      <span>🔴 Principal Risco</span>
-      <strong id="lideranca-risco"></strong>
-      <small id="lideranca-risco-acv"></small>
-    </div>
-
-    <div class="lideranca-card oportunidade">
-      <span>🟢 Oportunidades</span>
-      <strong id="lideranca-oportunidades"></strong>
-    </div>
-
-  </div>
-</section>
-
 <section class="tabela">
   <h2>🏆 Ranking CSP Executivo</h2>
 
@@ -777,8 +747,8 @@
     </section>
 
   </main>
+
 <script>
-  <script>
 function nomeCSP(email) {
   const nomes = {
     "carlacosta@sas.com.br": "Carla Costa",
@@ -943,19 +913,19 @@ function percentual(valor) {
   const n = numero(valor);
   return n.toFixed(2).replace(".", ",") + "%";
 }
-</script>
-  function moedaCompacta(valor){
 
-  valor = numero(valor);
-  if(valor >= 1000000){
-    return "R$ " + (valor/1000000).toFixed(1).replace(".",",") + "M";
+function moedaCompacta(valor){
+
+valor = numero(valor);
+if(valor >= 1000000){
+return "R$ " + (valor/1000000).toFixed(1).replace(".",",") + "M";
   }
 
-  if(valor >= 1000){
-    return "R$ " + (valor/1000).toFixed(1).replace(".",",") + "K";
+if(valor >= 1000){
+return "R$ " + (valor/1000).toFixed(1).replace(".",",") + "K";
   }
 
-  return moeda(valor);
+return moeda(valor);
 }
 </script>
  
