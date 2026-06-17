@@ -97,6 +97,13 @@
   </table>
 </section>
 
+<section class="tabela">
+  <h2>🎯 CSPs que precisam de ajuda esta semana</h2>
+
+  <div id="csp-ajuda" class="ajuda-grid">
+  </div>
+</section>
+
     <section class="tabela">
       <h2>🚦 Semáforo Executivo</h2>
 
@@ -831,6 +838,23 @@ if (ranking) {
     </tr>
   `).join("");
 
+}
+const cspAjuda = document.getElementById("csp-ajuda");
+
+if (cspAjuda) {
+  const ajuda = [...dados.painel_executivo]
+    .filter(item => item.prioridade.includes("Crítica") || item.prioridade.includes("Média") || numero(item.alto_risco_acv) > 2000000)
+    .sort((a, b) => numero(b.alto_risco_acv) - numero(a.alto_risco_acv));
+
+  cspAjuda.innerHTML = ajuda.map(item => `
+    <div class="ajuda-card">
+      <h3>${item.prioridade} — ${item.csp}</h3>
+      <p><strong>ACV Alto Risco:</strong> ${moeda(item.alto_risco_acv)}</p>
+      <p><strong>Escolas em Alto Risco:</strong> ${item.alto_risco_qtd}</p>
+      <p><strong>Oportunidades Quentes:</strong> ${item.oportunidades_quentes_qtd}</p>
+      <p><strong>Cobertura:</strong> ${item.cobertura}%</p>
+    </div>
+  `).join("");
 }
     
   } catch (erro) {
