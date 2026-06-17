@@ -930,6 +930,37 @@ const saudeOperacaoHTML = `
 </div>
 `;
 
+const saudeOperacaoHTML = `
+<div class="cards-saude">
+
+  <div class="card-saude">
+    <span>Score do Time</span>
+    <strong>${scoreTime}</strong>
+  </div>
+
+  <div class="card-saude">
+    <span>Cobertura do Gap</span>
+    <strong>${coberturaGap.toFixed(1)}%</strong>
+  </div>
+
+  <div class="card-saude">
+    <span>Risco Geral</span>
+    <strong>${riscoGeral.toFixed(1)}%</strong>
+  </div>
+
+  <div class="card-saude">
+    <span>Renovação</span>
+    <strong>${renovacaoGeral.toFixed(1)}%</strong>
+  </div>
+
+  <div class="card-saude">
+    <span>Fundo de Funil</span>
+    <strong>${fundoFunilPercentual.toFixed(1)}%</strong>
+  </div>
+
+</div>
+`;
+
 document.getElementById("saude-operacao").innerHTML =
 saudeOperacaoHTML;
 
