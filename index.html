@@ -60,8 +60,6 @@
   <div id="resumo-lideranca"></div>
 </section>
 
-  <div class="lideranca-grid">
-
     <div class="lideranca-card">
       <span>💰 Carteira Total</span>
       <strong id="lideranca-carteira"></strong>
@@ -780,7 +778,8 @@
 
   </main>
 <script>
-  function nomeCSP(email) {
+  <script>
+function nomeCSP(email) {
   const nomes = {
     "carlacosta@sas.com.br": "Carla Costa",
     "flaviodasilva@sas.com.br": "Flávio Silva",
@@ -791,10 +790,9 @@
     "sabrinagarcia@sas.com.br": "Sabrina Garcia",
     "yannacavalcante@sas.com.br": "Yanna Cavalcante"
   };
-
   return nomes[email] || email;
 }
-  
+
 document.addEventListener("DOMContentLoaded", carregarDados);
 
 async function carregarDados() {
@@ -802,134 +800,120 @@ async function carregarDados() {
     const url = new URL("dados.json?v=" + Date.now(), window.location.href);
     const resposta = await fetch(url);
 
-    if (!resposta.ok) {
-      throw new Error("Erro ao buscar dados.json");
-    }
+    if (!resposta.ok) throw new Error("Erro ao buscar dados.json");
 
     const dados = await resposta.json();
-const resumo = dados.resumo;
+    const resumo = dados.resumo;
 
-preencher("acv-base", moeda(resumo.ACV_Base));
-preencher("acv-renovado", moeda(resumo.ACV_Renovado));
-preencher("percentual-renovacao", percentual(resumo.Percentual_Renovacao));
-preencher("escolas", resumo.Escolas);
+    preencher("acv-base", moeda(resumo.ACV_Base));
+    preencher("acv-renovado", moeda(resumo.ACV_Renovado));
+    preencher("percentual-renovacao", percentual(resumo.Percentual_Renovacao));
+    preencher("escolas", resumo.Escolas);
+    preencher("gap-renovacao", moeda(resumo.Gap_Renovacao));
 
-preencher("alto-risco", `${resumo.Alto_Risco_Qtd} escolas | ${moeda(resumo.Alto_Risco_ACV)}`);
-preencher("medio-risco", `${resumo.Medio_Risco_Qtd} escolas | ${moeda(resumo.Medio_Risco_ACV)}`);
-preencher("baixo-risco", `${resumo.Baixo_Risco_Qtd} escolas | ${moeda(resumo.Baixo_Risco_ACV)}`);
-preencher("carteira-atencao", `${resumo.Carteira_Atencao_Qtd} escolas | ${moeda(resumo.Carteira_Atencao_ACV)}`);
-preencher("gap-renovacao", moeda(resumo.Gap_Renovacao));
+    const totalOportunidades = dados.painel_executivo.reduce((soma, item) => {
+      return soma + numero(item.oportunidades_quentes_acv);
+    }, 0);
 
-const totalOportunidades = dados.painel_executivo.reduce((soma, item) => {
-  return soma + numero(item.oportunidades_quentes_acv);
-}, 0);
+    preencher("oportunidades-quentes", moeda(totalOportunidades));
 
-preencher("oportunidades-quentes", moeda(totalOportunidades));
-const alertasFormatados = dados.alertas_executivos
-  .replace("⚠️", "<br><br>⚠️")
-  .replace("🟡", "<br><br>🟡")
-  .replace("🟢", "<br><br>🟢");
+    const principalRisco = dados.painel_executivo.reduce((maior, item) => {
+      return numero(item.alto_risco_acv) > numero(maior.alto_risco_acv) ? item : maior;
+    }, dados.painel_executivo[0]);
 
-const alertaElemento = document.getElementById("alertas-executivos");
-if (alertaElemento) {
-  alertaElemento.innerHTML = alertasFormatados;
-}  
-    
-const principalRisco = dados.painel_executivo.reduce((maior, item) => {
-  return numero(item.alto_risco_acv) > numero(maior.alto_risco_acv) ? item : maior;
-}, dados.painel_executivo[0]);
+    const alertasFormatados = dados.alertas_executivos
+      .replace("⚠️", "<br><br>⚠️")
+      .replace("🟡", "<br><br>🟡")
+      .replace("🟢", "<br><br>🟢");
 
-const resumoLiderancaHTML = `
-<div class="kpi-grid">
+    const alertaElemento = document.getElementById("alertas-executivos");
+    if (alertaElemento) alertaElemento.innerHTML = alertasFormatados;
 
-  <div class="kpi-card">
-    <span>💰 Carteira Total</span>
-    <strong>${moeda(resumo.ACV_Base)}</strong>
-  </div>
+    const resumoLiderancaHTML = `
+      <div class="kpi-grid">
+        <div class="kpi-card">
+          <span>💰 Carteira Total</span>
+          <strong>${moeda(resumo.ACV_Base)}</strong>
+        </div>
 
-  <div class="kpi-card">
-    <span>✅ Renovado</span>
-    <strong>${moeda(resumo.ACV_Renovado)}</strong>
-    <small>${percentual(resumo.Percentual_Renovacao)}</small>
-  </div>
+        <div class="kpi-card">
+          <span>✅ Renovado</span>
+          <strong>${moeda(resumo.ACV_Renovado)}</strong>
+          <small>${percentual(resumo.Percentual_Renovacao)}</small>
+        </div>
 
-  <div class="kpi-card">
-    <span>⚠️ Carteira em Atenção</span>
-    <strong>${resumo.Carteira_Atencao_Qtd} escolas</strong>
-    <small>${moeda(resumo.Carteira_Atencao_ACV)}</small>
-  </div>
+        <div class="kpi-card">
+          <span>⚠️ Carteira em Atenção</span>
+          <strong>${resumo.Carteira_Atencao_Qtd} escolas</strong>
+          <small>${moeda(resumo.Carteira_Atencao_ACV)}</small>
+        </div>
 
-  <div class="kpi-card risco-card">
-    <span>🔴 Principal Risco</span>
-    <strong>${nomeCSP(principalRisco.csp)}</strong>
-    <small>${moeda(principalRisco.alto_risco_acv)}</small>
-  </div>
+        <div class="kpi-card risco-card">
+          <span>🔴 Principal Risco</span>
+          <strong>${nomeCSP(principalRisco.csp)}</strong>
+          <small>${moeda(principalRisco.alto_risco_acv)}</small>
+        </div>
 
-  <div class="kpi-card">
-    <span>🟢 Oportunidades Quentes</span>
-    <strong>${moeda(totalOportunidades)}</strong>
-  </div>
+        <div class="kpi-card">
+          <span>🟢 Oportunidades Quentes</span>
+          <strong>${moeda(totalOportunidades)}</strong>
+        </div>
+      </div>
+    `;
 
-</div>
-`;
+    document.getElementById("resumo-lideranca").innerHTML = resumoLiderancaHTML;
 
-preencher("lideranca-carteira", moeda(resumo.ACV_Base));
-preencher("lideranca-renovado", moeda(resumo.ACV_Renovado));
-preencher("lideranca-percentual", percentual(resumo.Percentual_Renovacao));
-preencher("lideranca-atencao", `${resumo.Carteira_Atencao_Qtd} escolas | ${moeda(resumo.Carteira_Atencao_ACV)}`);
-preencher("lideranca-risco", nomeCSP(principalRisco.csp));
-preencher("lideranca-risco-acv", moeda(principalRisco.alto_risco_acv));
-preencher("lideranca-oportunidades", moeda(totalOportunidades));
-const ranking = document.getElementById("ranking-csp");
+    const ranking = document.getElementById("ranking-csp");
 
-if (ranking) {
+    if (ranking) {
+      const ordenado = [...dados.painel_executivo]
+        .sort((a,b) => numero(b.cobertura) - numero(a.cobertura));
 
-  const ordenado = [...dados.painel_executivo]
-    .sort((a,b) => numero(b.cobertura) - numero(a.cobertura));
+      ranking.innerHTML = ordenado.map(item => {
+        const acvBase = numero(item.acv_base);
+        const acvAltoRisco = numero(item.alto_risco_acv);
+        const riscoPercentual = acvBase > 0 ? ((acvAltoRisco / acvBase) * 100).toFixed(1).replace(".", ",") + "%" : "0%";
 
- ranking.innerHTML = ordenado.map(item => {
-  const acvBase = numero(item.acv_base);
-  const acvAltoRisco = numero(item.alto_risco_acv);
-  const riscoPercentual = acvBase > 0 ? ((acvAltoRisco / acvBase) * 100).toFixed(1).replace(".", ",") + "%" : "0%";
+        return `
+          <tr>
+            <td>${nomeCSP(item.csp)}</td>
+            <td>${item.cobertura}%</td>
+            <td>${moeda(item.acv_base)}</td>
+            <td>${moeda(item.alto_risco_acv)}</td>
+            <td>${riscoPercentual}</td>
+            <td>${item.alto_risco_qtd}</td>
+            <td>${item.oportunidades_quentes_qtd}</td>
+            <td>${item.percentual_renovacao}%</td>
+            <td>${item.prioridade}</td>
+          </tr>
+        `;
+      }).join("");
+    }
 
-  return `
-    <tr>
-      <td>${nomeCSP(item.csp)}</td>
-      <td>${item.cobertura}%</td>
-      <td>${moeda(item.acv_base)}</td>
-      <td>${moeda(item.alto_risco_acv)}</td>
-      <td>${riscoPercentual}</td>
-      <td>${item.alto_risco_qtd}</td>
-      <td>${item.oportunidades_quentes_qtd}</td>
-      <td>${item.percentual_renovacao}%</td>
-      <td>${item.prioridade}</td>
-    </tr>
-  `;
-}).join("");
-  
-const cspAjuda = document.getElementById("csp-ajuda");
-if (cspAjuda) {
-  const ajuda = [...dados.painel_executivo]
-    .filter(item => 
-      item.prioridade.includes("Crítica") || 
-      item.prioridade.includes("Média") || 
-      numero(item.alto_risco_acv) > 2000000
-      )
-    .sort((a,b) => numero(b.alto_risco_acv) - numero(a.alto_risco_acv))
-    .slice(0,3)
+    const cspAjuda = document.getElementById("csp-ajuda");
 
- cspAjuda.innerHTML = ajuda.map(item => `
-  <div class="ajuda-card">
-    <h3>${item.prioridade} ${nomeCSP(item.csp)}</h3>
-    <p class="destaque">${moeda(item.alto_risco_acv)} em alto risco</p>
-    <p><strong>Escolas em alto risco:</strong> ${item.alto_risco_qtd}</p>
-    <p><strong>Oportunidades quentes:</strong> ${item.oportunidades_quentes_qtd}</p>
-    <p><strong>Cobertura:</strong> ${item.cobertura}%</p>
-    <p><strong>Ação sugerida:</strong> acompanhamento semanal prioritário.</p>
-  </div>
-`).join("");
-}
-    
+    if (cspAjuda) {
+      const ajuda = [...dados.painel_executivo]
+        .filter(item =>
+          item.prioridade.includes("Crítica") ||
+          item.prioridade.includes("Média") ||
+          numero(item.alto_risco_acv) > 2000000
+        )
+        .sort((a,b) => numero(b.alto_risco_acv) - numero(a.alto_risco_acv))
+        .slice(0,3);
+
+      cspAjuda.innerHTML = ajuda.map(item => `
+        <div class="ajuda-card">
+          <h3>${item.prioridade} ${nomeCSP(item.csp)}</h3>
+          <p class="destaque">${moeda(item.alto_risco_acv)} em alto risco</p>
+          <p><strong>Escolas em alto risco:</strong> ${item.alto_risco_qtd}</p>
+          <p><strong>Oportunidades quentes:</strong> ${item.oportunidades_quentes_qtd}</p>
+          <p><strong>Cobertura:</strong> ${item.cobertura}%</p>
+          <p><strong>Ação sugerida:</strong> acompanhamento semanal prioritário.</p>
+        </div>
+      `).join("");
+    }
+
   } catch (erro) {
     console.error("Erro ao carregar dados:", erro);
   }
@@ -937,20 +921,17 @@ if (cspAjuda) {
 
 function preencher(id, valor) {
   const elemento = document.getElementById(id);
-  if (elemento) {
-    elemento.innerText = valor;
-  }
+  if (elemento) elemento.innerText = valor;
 }
-  function numero(valor) {
+
+function numero(valor) {
   if (!valor) return 0;
   return Number(String(valor).replace(/\./g, "").replace(",", ".").replace("%", ""));
 }
 
 function moeda(valor) {
   const n = numero(valor);
-  if (n >= 1000000) {
-    return "R$ " + (n / 1000000).toFixed(1).replace(".", ",") + "M";
-  }
+  if (n >= 1000000) return "R$ " + (n / 1000000).toFixed(1).replace(".", ",") + "M";
   return n.toLocaleString("pt-BR", {
     style: "currency",
     currency: "BRL",
@@ -962,7 +943,7 @@ function percentual(valor) {
   const n = numero(valor);
   return n.toFixed(2).replace(".", ",") + "%";
 }
-
+</script>
   function moedaCompacta(valor){
 
   valor = numero(valor);
