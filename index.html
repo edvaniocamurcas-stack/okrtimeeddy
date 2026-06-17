@@ -62,6 +62,8 @@
     <thead>
       <tr>
         <th>CSP</th>
+        <th>Score</th>
+        <th>Saúde</th>
         <th>Cobertura</th>
         <th>ACV Base</th>
         <th>ACV Alto Risco</th>
@@ -836,6 +838,40 @@ document.getElementById("resumo-lideranca").innerHTML = resumoLiderancaHTML;
       ranking.innerHTML = ordenado.map(item => {
         const acvBase = numero(item.acv_base);
         const acvAltoRisco = numero(item.alto_risco_acv);
+        const coberturaScore = Number(item.cobertura);
+
+const renovacaoScore =
+  Number(String(item.percentual_renovacao).replace(",", "."));
+
+const oportunidadeScore =
+  (Number(item.oportunidades_quentes_qtd || 0) / 7) * 100;
+
+const riscoPercentualNumero =
+  acvBase > 0
+  ? (acvAltoRisco / acvBase) * 100
+  : 0;
+
+const riscoScore = 100 - riscoPercentualNumero;
+
+const score =
+(
+  coberturaScore * 0.4 +
+  renovacaoScore * 0.3 +
+  oportunidadeScore * 0.2 +
+  riscoScore * 0.1
+).toFixed(0);
+
+let saude = "🔴 Crítico";
+
+if(score >= 85){
+  saude = "🟢 Excelente";
+}
+else if(score >= 70){
+  saude = "🟢 Saudável";
+}
+else if(score >= 55){
+  saude = "🟡 Atenção";
+}
         const riscoPercentual = acvBase > 0 ? ((acvAltoRisco / acvBase) * 100).toFixed(1).replace(".", ",") + "%" : "0%";
 
         return `
