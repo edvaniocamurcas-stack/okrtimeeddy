@@ -135,5 +135,22 @@ th {
   border-radius: 12px;
   padding: 16px;
 }
+
+    .ajuda-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+}
+
+.ajuda-card {
+  background: #f8fafc;
+  border-radius: 14px;
+  padding: 18px;
+  border-left: 6px solid #dc2626;
+}
+
+.ajuda-card h3 {
+  margin-bottom: 12px;
+}
   }
 }
