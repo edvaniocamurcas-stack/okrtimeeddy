@@ -857,8 +857,13 @@ if (ranking) {
 const cspAjuda = document.getElementById("csp-ajuda");
 if (cspAjuda) {
   const ajuda = [...dados.painel_executivo]
-    .filter(item => item.prioridade.includes("Crítica") || item.prioridade.includes("Média") || numero(item.alto_risco_acv) > 2000000)
-    .sort((a, b) => numero(b.alto_risco_acv) - numero(a.alto_risco_acv));
+    .filter(item => 
+      item.prioridade.includes("Crítica") || 
+      item.prioridade.includes("Média") || 
+      numero(item.alto_risco_acv) > 2000000
+      )
+    .sort((a,b) => numero(b.alto_risco_acv) - numero(a.alto_risco_acv))
+    .slice(0,3)
 
   cspAjuda.innerHTML = ajuda.map(item => `
     <div class="ajuda-card">
