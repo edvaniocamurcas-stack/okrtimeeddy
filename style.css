@@ -175,4 +175,31 @@ th {
   .cards {
     grid-template-columns: 1fr;
   }
+
+  .saude-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:18px;
+}
+
+.saude-card{
+  background:#f8fafc;
+  border:1px solid #e2e8f0;
+  border-radius:16px;
+  padding:20px;
+}
+
+.saude-card span{
+  display:block;
+  color:#64748b;
+  font-size:14px;
+  margin-bottom:8px;
+}
+
+.saude-card strong{
+  display:block;
+  font-size:28px;
+  font-weight:800;
+  color:#0f172a;
+}  
 }
