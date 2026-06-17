@@ -857,11 +857,10 @@ const riscoGeral =
   );
 
 const renovacaoGeral =
-(
-  resumo.ACV_Renovado
-  /
-  resumo.ACV_Base
-) * 100;
+Number(
+ String(resumo.Percentual_Renovacao)
+   .replace(",",".")
+);
 
 const fundoFunil =
   dados.painel_executivo.reduce(
