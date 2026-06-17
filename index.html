@@ -49,53 +49,25 @@
   </div>
 </section>
 
-    <section class="painel alerta">
+<section class="painel alerta">
   <h2>📢 Alertas Executivos</h2>
   <p id="alertas-executivos">--</p>
 </section>
-const resumoLiderancaHTML = `
-  <div class="kpi-grid">
-    <div class="kpi-card">
-      <span>💰 Carteira Total</span>
-      <strong>${moeda(resumo.ACV_Base)}</strong>
-    </div>
 
-    <div class="kpi-card">
-      <span>✅ Renovado</span>
-      <strong>${moeda(resumo.ACV_Renovado)}</strong>
-      <small>${percentual(resumo.Percentual_Renovacao)}</small>
-    </div>
+<section class="painel">
+  <h2>Resumo para Liderança</h2>
 
-    <div class="kpi-card">
-      <span>⚠️ Carteira em Atenção</span>
-      <strong>${resumo.Carteira_Atencao_Qtd} escolas</strong>
-      <small>${moeda(resumo.Carteira_Atencao_ACV)}</small>
-    </div>
-
-    <div class="kpi-card risco-card">
-      <span>🔴 Principal Risco</span>
-      <strong>${nomeCSP(principalRisco.csp)}</strong>
-      <small>${moeda(principalRisco.alto_risco_acv)}</small>
-    </div>
-
-    <div class="kpi-card">
-      <span>🟢 Oportunidades Quentes</span>
-      <strong>${moeda(totalOportunidades)}</strong>
-    </div>
-  </div>
-`;
-
-document.getElementById("resumo-lideranca").innerHTML = resumoLiderancaHTML;
+  <div id="resumo-lideranca"></div>
 </section>
-    
-    <section class="painel">
-      <h2>Resumo Executivo</h2>
 
-      <div class="linha">
-        <p>Renovação realizada</p>
-        <div class="barra">
-          <div id="barra-renovacao" style="width: 1.65%;">1,65%</div>
-        </div>
+<section class="painel">
+  <h2>Resumo Executivo</h2>
+
+     <div class="linha">
+      <p>Renovação realizada</p>
+     <div class="barra">
+      <div id="barra-renovacao" style="width: 1.65%;">1,65%</div>
+      </div>
       </div>
 
       <div class="linha">
@@ -851,13 +823,37 @@ const principalRisco = dados.painel_executivo.reduce((maior, item) => {
 }, dados.painel_executivo[0]);
 
 const resumoLiderancaHTML = `
-  <div class="resumo-grid">
-    <div><strong>💰 Carteira Total</strong><br>${moeda(resumo.ACV_Base)}</div>
-    <div><strong>✅ Renovado</strong><br>${moeda(resumo.ACV_Renovado)} (${percentual(resumo.Percentual_Renovacao)})</div>
-    <div><strong>⚠️ Carteira em Atenção</strong><br>${resumo.Carteira_Atencao_Qtd} escolas | ${moeda(resumo.Carteira_Atencao_ACV)}</div>
-    <div><strong>🔴 Principal Risco</strong><br>${nomeCSP(principalRisco.csp)}<br>${moeda(principalRisco.alto_risco_acv)}</div>
-    <div><strong>🟢 Oportunidades Quentes</strong><br>${moeda(totalOportunidades)}</div>
+<div class="kpi-grid">
+
+  <div class="kpi-card">
+    <span>💰 Carteira Total</span>
+    <strong>${moeda(resumo.ACV_Base)}</strong>
   </div>
+
+  <div class="kpi-card">
+    <span>✅ Renovado</span>
+    <strong>${moeda(resumo.ACV_Renovado)}</strong>
+    <small>${percentual(resumo.Percentual_Renovacao)}</small>
+  </div>
+
+  <div class="kpi-card">
+    <span>⚠️ Carteira em Atenção</span>
+    <strong>${resumo.Carteira_Atencao_Qtd} escolas</strong>
+    <small>${moeda(resumo.Carteira_Atencao_ACV)}</small>
+  </div>
+
+  <div class="kpi-card risco-card">
+    <span>🔴 Principal Risco</span>
+    <strong>${nomeCSP(principalRisco.csp)}</strong>
+    <small>${moeda(principalRisco.alto_risco_acv)}</small>
+  </div>
+
+  <div class="kpi-card">
+    <span>🟢 Oportunidades Quentes</span>
+    <strong>${moeda(totalOportunidades)}</strong>
+  </div>
+
+</div>
 `;
 
 document.getElementById("resumo-lideranca").innerHTML = resumoLiderancaHTML;
