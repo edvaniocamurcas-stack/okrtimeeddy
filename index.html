@@ -855,12 +855,10 @@ document.getElementById("resumo-lideranca").innerHTML = resumoLiderancaHTML;
 
   let saude = "🔴 Crítico";
 
-  if (score >= 85) {
-    saude = "🟢 Excelente";
-  } else if (score >= 70) {
-    saude = "🟢 Saudável";
-  } else if (score >= 55) {
-    saude = "🟡 Atenção";
+  if (score >= 70) {
+  saude = "🟢 Saudável";
+  } else if (score >= 45) {
+  saude = "🟡 Atenção";
   }
 
   const riscoPercentual = riscoPercentualNumero.toFixed(1).replace(".", ",") + "%";
