@@ -829,7 +829,7 @@ if (ranking) {
 
   ranking.innerHTML = ordenado.map(item => `
     <tr>
-      <td>${item.csp}</td>
+      <td>$${item.csp.split("@")[0]}</td>
       <td>${item.cobertura}%</td>
       <td>${item.alto_risco_qtd}</td>
       <td>${item.oportunidades_quentes_qtd}</td>
@@ -840,7 +840,6 @@ if (ranking) {
 
 }
 const cspAjuda = document.getElementById("csp-ajuda");
-
 if (cspAjuda) {
   const ajuda = [...dados.painel_executivo]
     .filter(item => item.prioridade.includes("Crítica") || item.prioridade.includes("Média") || numero(item.alto_risco_acv) > 2000000)
