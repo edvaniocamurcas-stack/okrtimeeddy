@@ -69,7 +69,7 @@
        <th>ACV Alto Risco</th>
        <th>Risco (%)</th>
        <th>Alto Risco</th>
-       <th>Oportunidades</th>
+       <th>Fundo Funil</th>
        <th>% Renovação</th>
        <th>Prioridade</th>
       </tr>
@@ -833,7 +833,9 @@ document.getElementById("resumo-lideranca").innerHTML = resumoLiderancaHTML;
 
     if (ranking) {
       const ordenado = [...dados.painel_executivo]
-        .sort((a,b) => numero(b.cobertura) - numero(a.cobertura));
+        .sort((a,b) =>
+          numero(b.acv_renovado) - numero(a.acv_renovado)
+        );
 
      ranking.innerHTML = ordenado.map(item => {
   const acvBase = numero(item.acv_base);
@@ -855,12 +857,18 @@ document.getElementById("resumo-lideranca").innerHTML = resumoLiderancaHTML;
 
   let saude = "🔴 Crítico";
 
-  if (score >= 70) {
-  saude = "🟢 Saudável";
-  } else if (score >= 45) {
-  saude = "🟡 Atenção";
+  if (riscoPercentualNumero > 40) {
+   saude = "🔴 Crítico";
   }
-
+  else if (score >= 75) {
+   saude = "🟢 Saudável";
+  }
+  else if (score >= 50) {
+   saude = "🟡 Atenção";
+  }
+  else {
+   saude = "🔴 Crítico";
+}
   const riscoPercentual = riscoPercentualNumero.toFixed(1).replace(".", ",") + "%";
 
   return `
