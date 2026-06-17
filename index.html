@@ -74,7 +74,8 @@
        <th>ACV Alto Risco</th>
        <th>Risco (%)</th>
        <th>Alto Risco</th>
-       <th>Fundo Funil</th>
+       <th>ACV Fundo Funil</th>
+       <th>Qtd</th>
        <th>% Renovação</th>
        <th>Prioridade</th>
       </tr>
@@ -867,11 +868,6 @@ Number(
  String(resumo.Percentual_Renovacao)
    .replace(",",".")
 );
-console.log(resumo);
-console.log("Renovação:", renovacaoGeral);
-console.log("Cobertura:", coberturaGap);
-console.log("Risco:", riscoGeral);
-console.log("Fundo:", fundoFunilPercentual);
 
 const fundoFunil =
   dados.painel_executivo.reduce(
@@ -884,6 +880,12 @@ const fundoFunilPercentual =
   acvBase > 0
   ? (fundoFunil / acvBase) * 100
   : 0;
+  console.log(resumo);
+  console.log("Renovação:", renovacaoGeral);
+  console.log("Cobertura:", coberturaGap);
+  console.log("Risco:", riscoGeral);
+  console.log("Fundo:", fundoFunilPercentual);
+
     
 const scoreTime =
 (
@@ -979,6 +981,7 @@ saudeOperacaoHTML;
       <td>${moeda(item.alto_risco_acv)}</td>
       <td>${riscoPercentual}</td>
       <td>${item.alto_risco_qtd}</td>
+      <td>${moeda(item.oportunidades_quentes_acv)}</td>
       <td>${item.oportunidades_quentes_qtd}</td>
       <td>${item.percentual_renovacao}%</td>
       <td>${item.prioridade}</td>
