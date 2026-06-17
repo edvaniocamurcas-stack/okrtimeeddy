@@ -874,9 +874,11 @@ else if(score >= 55){
 }
         const riscoPercentual = acvBase > 0 ? ((acvAltoRisco / acvBase) * 100).toFixed(1).replace(".", ",") + "%" : "0%";
 
-        return `
-          <tr>
+       return `
+      <tr>
             <td>${nomeCSP(item.csp)}</td>
+            <td><strong>${score}</strong></td>
+            <td>${saude}</td>
             <td>${item.cobertura}%</td>
             <td>${moeda(item.acv_base)}</td>
             <td>${moeda(item.alto_risco_acv)}</td>
