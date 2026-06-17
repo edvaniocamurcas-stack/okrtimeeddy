@@ -833,6 +833,80 @@ async function carregarDados() {
 `;
 
 document.getElementById("resumo-lideranca").innerHTML = resumoLiderancaHTML;
+    // ===== Saúde da Operação =====
+
+const scoreTime = (
+  dados.painel_executivo.reduce(
+    (soma,item)=>
+      soma +
+      (Number(item.score || 0) * numero(item.acv_base)),
+    0
+  )
+  /
+  resumo.ACV_Base
+);
+
+const coberturaGap =
+(
+  resumo.Oportunidades_Quentes
+  /
+  resumo.Gap_Renovacao
+) * 100;
+
+const riscoGeral =
+(
+  resumo.Alto_Risco_ACV
+  /
+  resumo.ACV_Base
+) * 100;
+
+const renovacaoGeral =
+(
+  resumo.ACV_Renovado
+  /
+  resumo.ACV_Base
+) * 100;
+
+const fundoFunil =
+(
+  resumo.Oportunidades_Quentes
+  /
+  resumo.ACV_Base
+) * 100;
+
+const saudeOperacaoHTML = `
+<div class="saude-grid">
+
+  <div class="saude-card">
+    <span>Score do Time</span>
+    <strong>${scoreTime.toFixed(0)}</strong>
+  </div>
+
+  <div class="saude-card">
+    <span>Cobertura do Gap</span>
+    <strong>${coberturaGap.toFixed(1)}%</strong>
+  </div>
+
+  <div class="saude-card">
+    <span>Risco Geral</span>
+    <strong>${riscoGeral.toFixed(1)}%</strong>
+  </div>
+
+  <div class="saude-card">
+    <span>Renovação</span>
+    <strong>${renovacaoGeral.toFixed(2)}%</strong>
+  </div>
+
+  <div class="saude-card">
+    <span>Fundo de Funil</span>
+    <strong>${fundoFunil.toFixed(1)}%</strong>
+  </div>
+
+</div>
+`;
+
+document.getElementById("saude-operacao").innerHTML =
+saudeOperacaoHTML;
 
     const ranking = document.getElementById("ranking-csp");
 
