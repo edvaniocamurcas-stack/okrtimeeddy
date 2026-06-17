@@ -843,12 +843,18 @@ const renovacao =
   acvBase > 0
   ? (acvRenovado / acvBase) * 100
   : 0;
+    
+const oportunidadesACV =
+dados.painel_executivo.reduce(
+ (s,i) =>
+   s + numero(i.oportunidades_quentes_acv),
+ 0
+);
+
 const coberturaGap =
-(
-  resumo.Oportunidades_Quentes
-  /
-  resumo.Gap_Renovacao
-) * 100;
+gap > 0
+? (oportunidadesACV / gap) * 100
+: 0;
 
 const riscoGeral =
   Number(
