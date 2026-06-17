@@ -852,9 +852,7 @@ const riscoGeral = Number(
   String(resumo.Percentual_Risco || 0).replace(",", ".")
 );
 
-const renovacaoGeral = Number(
-  String(resumo.Percentual_Renovacao || 0).replace(",", ".")
-);
+const renovacaoGeral = numero(resumo.Percentual_Renovacao);
 
 const fundoFunilPercentual = acvBaseTotal > 0
   ? (oportunidadesACV / acvBaseTotal) * 100
