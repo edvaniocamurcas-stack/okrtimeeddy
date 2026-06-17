@@ -835,61 +835,52 @@ document.getElementById("resumo-lideranca").innerHTML = resumoLiderancaHTML;
       const ordenado = [...dados.painel_executivo]
         .sort((a,b) => numero(b.cobertura) - numero(a.cobertura));
 
-      ranking.innerHTML = ordenado.map(item => {
-        const acvBase = numero(item.acv_base);
-        const acvAltoRisco = numero(item.alto_risco_acv);
-        const coberturaScore = Number(item.cobertura);
+     ranking.innerHTML = ordenado.map(item => {
+  const acvBase = numero(item.acv_base);
+  const acvAltoRisco = numero(item.alto_risco_acv);
 
-const renovacaoScore =
-  Number(String(item.percentual_renovacao).replace(",", "."));
+  const coberturaScore = Number(String(item.cobertura).replace(",", "."));
+  const renovacaoScore = Number(String(item.percentual_renovacao).replace(",", "."));
+  const oportunidadeScore = (Number(item.oportunidades_quentes_qtd || 0) / 7) * 100;
 
-const oportunidadeScore =
-  (Number(item.oportunidades_quentes_qtd || 0) / 7) * 100;
+  const riscoPercentualNumero = acvBase > 0 ? (acvAltoRisco / acvBase) * 100 : 0;
+  const riscoScore = 100 - riscoPercentualNumero;
 
-const riscoPercentualNumero =
-  acvBase > 0
-  ? (acvAltoRisco / acvBase) * 100
-  : 0;
+  const score = (
+    coberturaScore * 0.4 +
+    renovacaoScore * 0.3 +
+    oportunidadeScore * 0.2 +
+    riscoScore * 0.1
+  ).toFixed(0);
 
-const riscoScore = 100 - riscoPercentualNumero;
+  let saude = "🔴 Crítico";
 
-const score =
-(
-  coberturaScore * 0.4 +
-  renovacaoScore * 0.3 +
-  oportunidadeScore * 0.2 +
-  riscoScore * 0.1
-).toFixed(0);
+  if (score >= 85) {
+    saude = "🟢 Excelente";
+  } else if (score >= 70) {
+    saude = "🟢 Saudável";
+  } else if (score >= 55) {
+    saude = "🟡 Atenção";
+  }
 
-let saude = "🔴 Crítico";
+  const riscoPercentual = riscoPercentualNumero.toFixed(1).replace(".", ",") + "%";
 
-if(score >= 85){
-  saude = "🟢 Excelente";
-}
-else if(score >= 70){
-  saude = "🟢 Saudável";
-}
-else if(score >= 55){
-  saude = "🟡 Atenção";
-}
-        const riscoPercentual = acvBase > 0 ? ((acvAltoRisco / acvBase) * 100).toFixed(1).replace(".", ",") + "%" : "0%";
-
-       return `
-      <tr>
-            <td>${nomeCSP(item.csp)}</td>
-            <td><strong>${score}</strong></td>
-            <td>${saude}</td>
-            <td>${item.cobertura}%</td>
-            <td>${moeda(item.acv_base)}</td>
-            <td>${moeda(item.alto_risco_acv)}</td>
-            <td>${riscoPercentual}</td>
-            <td>${item.alto_risco_qtd}</td>
-            <td>${item.oportunidades_quentes_qtd}</td>
-            <td>${item.percentual_renovacao}%</td>
-            <td>${item.prioridade}</td>
-          </tr>
-        `;
-      }).join("");
+  return `
+    <tr>
+      <td>${nomeCSP(item.csp)}</td>
+      <td><strong>${score}</strong></td>
+      <td>${saude}</td>
+      <td>${item.cobertura}%</td>
+      <td>${moeda(item.acv_base)}</td>
+      <td>${moeda(item.alto_risco_acv)}</td>
+      <td>${riscoPercentual}</td>
+      <td>${item.alto_risco_qtd}</td>
+      <td>${item.oportunidades_quentes_qtd}</td>
+      <td>${item.percentual_renovacao}%</td>
+      <td>${item.prioridade}</td>
+    </tr>
+  `;
+}).join("");
     }
 
     const cspAjuda = document.getElementById("csp-ajuda");
