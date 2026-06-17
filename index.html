@@ -886,15 +886,19 @@ const fundoFunilPercentual =
   console.log("Risco:", riscoGeral);
   console.log("Fundo:", fundoFunilPercentual);
 
-    
-const scoreTime =
-(
+const renovacaoGeral =
+Number(
+  String(resumo.Percentual_Renovacao || 0)
+    .replace(",", ".")
+);
+
+const scoreTime = Math.round(
   coberturaGap * 0.3 +
   (100 - riscoGeral) * 0.3 +
   renovacaoGeral * 0.2 +
   fundoFunilPercentual * 0.2
 );
-
+    
 const saudeOperacaoHTML = `
 <div class="saude-grid">
 
