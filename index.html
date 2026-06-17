@@ -104,10 +104,12 @@
         <th>Oportunidades</th>
         <th>% Renovação</th>
         <th>Prioridade</th>
+        <th>Risco (%)</th>
       </tr>
     </thead>
 
     <tbody id="ranking-csp"></tbody>
+    
   </table>
 <section class="tabela">
   <h2>🎯 CSPs que precisam de ajuda esta semana</h2>
@@ -886,6 +888,7 @@ if (ranking) {
     <td>${item.oportunidades_quentes_qtd}</td>
     <td>${item.percentual_renovacao}%</td>
     <td>${item.prioridade}</td>
+    <td>((acvAltoRisco/acvBase)*100 (item.risco_%)</td>
   </tr>
 `).join("");
 
