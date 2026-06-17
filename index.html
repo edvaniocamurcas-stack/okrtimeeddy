@@ -902,27 +902,26 @@ document.getElementById("saude-operacao").innerHTML = saudeOperacaoHTML;    cons
         );
 
      ranking.innerHTML = ordenado.map(item => {
-     ranking.innerHTML += `
-     <tr style="
-     background:#f8fafc;
-     font-weight:700;
-     border-top:3px solid #1e293b;
-     ">
-     
-  <td>TIME EDDY</td>
-  <td>${scoreTime}</td>
-  <td>-</td>
-  <td>${coberturaGap.toFixed(1)}%</td>
-  <td>${moeda(acvBaseTotal)}</td>
-  <td>${moeda(numero(resumo.Alto_Risco_ACV))}</td>
-  <td>${riscoGeral.toFixed(1)}%</td>
-  <td>${numero(resumo.Alto_Risco_Qtd)}</td>
-  <td>${moeda(oportunidadesACV)}</td>
-  <td>-</td>
-  <td>${renovacaoGeral.toFixed(1)}%</td>
-  <td>📊 Consolidado</td>
-</tr>
-`;  
+    ranking.innerHTML += `
+  <tr style="
+    background:#f8fafc;
+    font-weight:700;
+    border-top:3px solid #1e293b;
+  ">
+    <td>TIME EDDY</td>
+    <td>${scoreTime}</td>
+    <td>-</td>
+    <td>${coberturaGap.toFixed(1)}%</td>
+    <td>${moeda(acvBaseTotal)}</td>
+    <td>${moeda(numero(resumo.Alto_Risco_ACV))}</td>
+    <td>${riscoGeral.toFixed(1)}%</td>
+    <td>${numero(resumo.Alto_Risco_Qtd)}</td>
+    <td>${moeda(oportunidadesACV)}</td>
+    <td>-</td>
+    <td>${renovacaoGeral.toFixed(1)}%</td>
+    <td>📊 Consolidado</td>
+  </tr>
+`;
        
   const acvBase = numero(item.acv_base);
   const acvAltoRisco = numero(item.alto_risco_acv);
