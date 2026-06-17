@@ -834,126 +834,69 @@ async function carregarDados() {
 `;
 
 document.getElementById("resumo-lideranca").innerHTML = resumoLiderancaHTML;
-    // ===== Saúde da Operação =====
+// ===== Saúde da Operação =====
 
-const acvBase = numero(resumo.ACV_Base);
-const acvRenovado = numero(resumo.ACV_Renovado);
-const gap = numero(resumo.Gap_Renovacao);
+const acvBaseTotal = numero(resumo.ACV_Base);
+const gapTotal = numero(resumo.Gap_Renovacao);
 
-const renovacao =
-  acvBase > 0
-  ? (acvRenovado / acvBase) * 100
-  : 0;
-    
-const oportunidadesACV =
-dados.painel_executivo.reduce(
- (s,i) =>
-   s + numero(i.oportunidades_quentes_acv),
- 0
+const oportunidadesACV = dados.painel_executivo.reduce(
+  (soma, item) => soma + numero(item.oportunidades_quentes_acv),
+  0
 );
 
-const coberturaGap =
-gap > 0
-? (oportunidadesACV / gap) * 100
-: 0;
-
-const riscoGeral =
-  Number(
-    String(resumo.Percentual_Risco)
-      .replace(",", ".")
-  );
-
-const renovacaoGeral =
-Number(
- String(resumo.Percentual_Renovacao)
-   .replace(",",".")
-);
-
-const fundoFunil =
-  dados.painel_executivo.reduce(
-    (s,i)=>
-      s + numero(i.oportunidades_quentes_acv),
-    0
-  );
-
-const fundoFunilPercentual =
-  acvBase > 0
-  ? (fundoFunil / acvBase) * 100
+const coberturaGap = gapTotal > 0
+  ? (oportunidadesACV / gapTotal) * 100
   : 0;
 
-const renovacaoGeral =
-Number(
-  String(resumo.Percentual_Renovacao || 0)
-    .replace(",", ".")
+const riscoGeral = Number(
+  String(resumo.Percentual_Risco || 0).replace(",", ".")
 );
 
-    
-const saudeOperacaoHTML = `
-<div class="saude-grid">
+const renovacaoGeral = Number(
+  String(resumo.Percentual_Renovacao || 0).replace(",", ".")
+);
 
-  <div class="saude-card">
-    <span>Score do Time</span>
-    <strong>${scoreTime.toFixed(0)}</strong>
-  </div>
+const fundoFunilPercentual = acvBaseTotal > 0
+  ? (oportunidadesACV / acvBaseTotal) * 100
+  : 0;
 
-  <div class="saude-card">
-    <span>Cobertura do Gap</span>
-    <strong>${coberturaGap.toFixed(1)}%</strong>
-  </div>
-
-  <div class="saude-card">
-    <span>Risco Geral</span>
-    <strong>${riscoGeral.toFixed(1)}%</strong>
-  </div>
-
-  <div class="saude-card">
-    <span>Renovação</span>
-    <strong>${renovacaoGeral.toFixed(2)}%</strong>
-  </div>
-
-  <div class="saude-card">
-    <span>Fundo de Funil</span>
-    <strong>${fundoFunilPercentual.toFixed(1)}%</strong>
-  </div>
-
-</div>
-`;
+const scoreTime = Math.round(
+  coberturaGap * 0.3 +
+  (100 - riscoGeral) * 0.3 +
+  renovacaoGeral * 0.2 +
+  fundoFunilPercentual * 0.2
+);
 
 const saudeOperacaoHTML = `
-<div class="cards-saude">
+  <div class="cards-saude">
+    <div class="card-saude">
+      <span>Score do Time</span>
+      <strong>${scoreTime}</strong>
+    </div>
 
-  <div class="card-saude">
-    <span>Score do Time</span>
-    <strong>${scoreTime}</strong>
+    <div class="card-saude">
+      <span>Cobertura do Gap</span>
+      <strong>${coberturaGap.toFixed(1)}%</strong>
+    </div>
+
+    <div class="card-saude">
+      <span>Risco Geral</span>
+      <strong>${riscoGeral.toFixed(1)}%</strong>
+    </div>
+
+    <div class="card-saude">
+      <span>Renovação</span>
+      <strong>${renovacaoGeral.toFixed(2)}%</strong>
+    </div>
+
+    <div class="card-saude">
+      <span>Fundo de Funil</span>
+      <strong>${fundoFunilPercentual.toFixed(1)}%</strong>
+    </div>
   </div>
-
-  <div class="card-saude">
-    <span>Cobertura do Gap</span>
-    <strong>${coberturaGap.toFixed(1)}%</strong>
-  </div>
-
-  <div class="card-saude">
-    <span>Risco Geral</span>
-    <strong>${riscoGeral.toFixed(1)}%</strong>
-  </div>
-
-  <div class="card-saude">
-    <span>Renovação</span>
-    <strong>${renovacaoGeral.toFixed(1)}%</strong>
-  </div>
-
-  <div class="card-saude">
-    <span>Fundo de Funil</span>
-    <strong>${fundoFunilPercentual.toFixed(1)}%</strong>
-  </div>
-
-</div>
 `;
 
-document.getElementById("saude-operacao").innerHTML =
-saudeOperacaoHTML;
-
-    const ranking = document.getElementById("ranking-csp");
+document.getElementById("saude-operacao").innerHTML = saudeOperacaoHTML;    const ranking = document.getElementById("ranking-csp");
 
     if (ranking) {
       const ordenado = [...dados.painel_executivo]
