@@ -867,7 +867,8 @@ if (cspAjuda) {
 
   cspAjuda.innerHTML = ajuda.map(item => `
     <div class="ajuda-card">
-      <h3>${item.prioridade} — ${item.csp}</h3>
+     <h3>${item.prioridade} ${nomeCSP(item.csp)}</h3>
+      <p><strong>🎯 Prioridade de acompanhamento semanal</strong></p>
       <p><strong>ACV Alto Risco:</strong> ${moeda(item.alto_risco_acv)}</p>
       <p><strong>Escolas em Alto Risco:</strong> ${item.alto_risco_qtd}</p>
       <p><strong>Oportunidades Quentes:</strong> ${item.oportunidades_quentes_qtd}</p>
