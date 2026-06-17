@@ -779,7 +779,7 @@
 
   return nomes[email] || email;
 }
-  ${nomeCSP(item.csp)}
+  
 document.addEventListener("DOMContentLoaded", carregarDados);
 
 async function carregarDados() {
@@ -829,7 +829,7 @@ const resumoLiderancaHTML = `
     <div><strong>💰 Carteira Total</strong><br>${moeda(resumo.ACV_Base)}</div>
     <div><strong>✅ Renovado</strong><br>${moeda(resumo.ACV_Renovado)} (${percentual(resumo.Percentual_Renovacao)})</div>
     <div><strong>⚠️ Carteira em Atenção</strong><br>${resumo.Carteira_Atencao_Qtd} escolas | ${moeda(resumo.Carteira_Atencao_ACV)}</div>
-    <div><strong>🔴 Principal Risco</strong><br>${principalRisco.csp}<br>${moeda(principalRisco.alto_risco_acv)}</div>
+    <div><strong>🔴 Principal Risco</strong><br>${nomeCSP(principalRisco.csp)}<br>${moeda(principalRisco.alto_risco_acv)}</div>
     <div><strong>🟢 Oportunidades Quentes</strong><br>${moeda(totalOportunidades)}</div>
   </div>
 `;
@@ -844,7 +844,7 @@ if (ranking) {
 
   ranking.innerHTML = ordenado.map(item => `
     <tr>
-      <td>$${item.csp.split("@")[0]}</td>
+      <td>${nomeCSP(item.csp)}</td>
       <td>${item.cobertura}%</td>
       <td>${item.alto_risco_qtd}</td>
       <td>${item.oportunidades_quentes_qtd}</td>
@@ -910,9 +910,6 @@ function percentual(valor) {
   return n.toFixed(2).replace(".", ",") + "%";
 }
 </script>
-
-</body>
-</html>
  
 </body>
 </html>
