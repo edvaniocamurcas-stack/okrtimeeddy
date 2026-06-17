@@ -78,6 +78,26 @@
     </section>
 
     <section class="tabela">
+  <h2>🏆 Ranking CSP Executivo</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>CSP</th>
+        <th>Cobertura</th>
+        <th>Alto Risco</th>
+        <th>Oportunidades</th>
+        <th>% Renovação</th>
+        <th>Prioridade</th>
+      </tr>
+    </thead>
+
+    <tbody id="ranking-csp">
+    </tbody>
+  </table>
+</section>
+
+    <section class="tabela">
       <h2>🚦 Semáforo Executivo</h2>
 
       <table>
@@ -793,6 +813,25 @@ const resumoLiderancaHTML = `
 `;
 
 document.getElementById("resumo-lideranca").innerHTML = resumoLiderancaHTML;
+const ranking = document.getElementById("ranking-csp");
+
+if (ranking) {
+
+  const ordenado = [...dados.painel_executivo]
+    .sort((a,b) => numero(b.cobertura) - numero(a.cobertura));
+
+  ranking.innerHTML = ordenado.map(item => `
+    <tr>
+      <td>${item.csp}</td>
+      <td>${item.cobertura}%</td>
+      <td>${item.alto_risco_qtd}</td>
+      <td>${item.oportunidades_quentes_qtd}</td>
+      <td>${item.percentual_renovacao}%</td>
+      <td>${item.prioridade}</td>
+    </tr>
+  `).join("");
+
+}
     
   } catch (erro) {
     console.error("Erro ao carregar dados:", erro);
