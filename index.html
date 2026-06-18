@@ -974,14 +974,14 @@ ranking.innerHTML += `
     <td>TIME EDDY</td>
     <td>${scoreTime}</td>
     <td>📊 Consolidado</td>
-    <td>${coberturaGap.toFixed(1)}%</td>
-    <td>${moeda(acvBaseTotal)}</td>
+    <td>${coberturaGap.toFixed(1).replace(".", ",")}%</td>
+    <td>${moeda(resumo.ACV_Base)}</td>
     <td>${moeda(resumo.Alto_Risco_ACV)}</td>
-    <td>${riscoGeral.toFixed(1)}%</td>
+    <td>${riscoGeral.toFixed(1).replace(".", ",")}%</td>
     <td>${resumo.Alto_Risco_Qtd}</td>
     <td>${moeda(oportunidadesACV)}</td>
     <td>${resumo.Escolas}</td>
-    <td>${renovacaoGeral.toFixed(2)}%</td>
+    <td>${renovacaoGeral.toFixed(2).replace(".", ",")}%</td>
     <td>Visão Time</td>
 </tr>
 `;
