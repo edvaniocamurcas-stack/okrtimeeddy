@@ -236,4 +236,9 @@ th {
 table td {
   white-space: nowrap;
 }
+
+ table td,
+ table th {
+    white-space: nowrap !important;
+}
 }
