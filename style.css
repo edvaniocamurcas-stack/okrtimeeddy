@@ -227,4 +227,13 @@ th {
     font-size:28px;
     color:#0f172a;
 } 
+
+  .tabela {
+  overflow-x: auto;
+}
+
+  table th,
+table td {
+  white-space: nowrap;
+}
 }
