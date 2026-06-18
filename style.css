@@ -241,4 +241,47 @@ table td {
  table th {
     white-space: nowrap !important;
 }
+ /* ===== Correções globais de tabela ===== */
+
+.tabela {
+  overflow-x: auto;
+}
+
+table {
+  min-width: 1200px;
+}
+
+table th,
+table td {
+  white-space: nowrap !important;
+}
+
+/* ===== Cards Saúde da Operação ===== */
+
+.cards-saude {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.card-saude {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 18px;
+}
+
+.card-saude span {
+  display: block;
+  color: #64748b;
+  font-size: 13px;
+  margin-bottom: 8px;
+}
+
+.card-saude strong {
+  display: block;
+  font-size: 28px;
+  color: #0f172a;
+} 
 }
