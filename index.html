@@ -858,6 +858,14 @@ const fundoFunilPercentual = acvBaseTotal > 0
   ? (oportunidadesACV / acvBaseTotal) * 100
   : 0;
 
+const forecastACV = numero(resumo.Forecast_ACV);
+    
+const fundoFunilACV = numero(resumo.Fundo_Funil_ACV);
+    
+const churnACV = numero(resumo.Churn_ACV);
+    
+const gapReal = numero(resumo.Gap_Real);
+
 const scoreTime = Math.round(
   coberturaGap * 0.4 +
   fundoFunilPercentual * 0.3 +
