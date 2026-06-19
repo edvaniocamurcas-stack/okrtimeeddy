@@ -844,6 +844,28 @@ const resumoLiderancaHTML = `
 `;
 
 document.getElementById("resumo-lideranca").innerHTML = resumoLiderancaHTML;
+
+const acvBaseTotal = numero(resumo.ACV_Base);
+
+const riscoGeral = Number(
+  String(resumo.Percentual_Risco || 0).replace(",", ".")
+);
+
+const renovacaoGeral = numero(resumo.Percentual_Renovacao);
+
+const coberturaGap = acvBaseTotal > 0
+  ? ((numero(resumo.ACV_Renovado) + fundoFunilACV) / acvBaseTotal) * 100
+  : 0;
+
+const fundoFunilPercentual = acvBaseTotal > 0
+  ? (fundoFunilACV / acvBaseTotal) * 100
+  : 0;
+
+const scoreTime = Math.round(
+  coberturaGap * 0.4 +
+  fundoFunilPercentual * 0.3 +
+  (100 - riscoGeral) * 0.3
+);
     
 const saudeOperacaoHTML = `
   <div class="cards-saude">
