@@ -781,6 +781,9 @@ async function carregarDados() {
     const fundoFunilACV = numero(resumo.Fundo_Funil_ACV);
     const churnACV = numero(resumo.Churn_ACV);
     const gapReal = numero(resumo.Gap_Real);
+    console.log("Forecast:", resumo.Forecast_ACV, forecastACV);
+    console.log("Fundo:", resumo.Fundo_Funil_ACV, fundoFunilACV);
+    console.log("Gap:", resumo.Gap_Real, gapReal);
 
     preencher("acv-base", moeda(resumo.ACV_Base));
     preencher("acv-renovado", moeda(resumo.ACV_Renovado));
