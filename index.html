@@ -777,6 +777,11 @@ async function carregarDados() {
 
     const dados = await resposta.json();
     const resumo = dados.resumo;
+    console.log("RESUMO:", resumo);
+    console.log("FORECAST:", resumo.Forecast_ACV);
+    console.log("FUNDO:", resumo.Fundo_Funil_ACV);
+    console.log("CHURN:", resumo.Churn_ACV);
+    console.log("GAP:", resumo.Gap_Real);
     const forecastACV = numero(resumo.Forecast_ACV);
     const fundoFunilACV = numero(resumo.Fundo_Funil_ACV);
     const churnACV = numero(resumo.Churn_ACV);
@@ -1029,10 +1034,25 @@ function preencher(id, valor) {
 }
 
 function numero(valor) {
-  if (!valor) return 0;
-  return Number(String(valor).replace(/\./g, "").replace(",", ".").replace("%", ""));
-}
+  if (valor === null || valor === undefined || valor === "") return 0;
 
+  let texto = String(valor)
+    .trim()
+    .replace("R$", "")
+    .replace("%", "")
+    .replace(/\s/g, "");
+
+  const temVirgula = texto.includes(",");
+  const temPonto = texto.includes(".");
+
+  if (temVirgula && temPonto) {
+    texto = texto.replace(/\./g, "").replace(",", ".");
+  } else if (temVirgula) {
+    texto = texto.replace(",", ".");
+  }
+
+  return Number(texto) || 0;
+}
 function moeda(valor) {
   const n = numero(valor);
   if (n >= 1000000) return "R$ " + (n / 1000000).toFixed(1).replace(".", ",") + "M";
