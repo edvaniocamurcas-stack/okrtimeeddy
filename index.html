@@ -1049,10 +1049,18 @@ function numero(valor) {
     texto = texto.replace(/\./g, "").replace(",", ".");
   } else if (temVirgula) {
     texto = texto.replace(",", ".");
+  } else if (temPonto) {
+    const partes = texto.split(".");
+    const ultimoGrupo = partes[partes.length - 1];
+
+    if (ultimoGrupo.length === 3) {
+      texto = texto.replace(/\./g, "");
+    }
   }
 
   return Number(texto) || 0;
 }
+  
 function moeda(valor) {
   const n = numero(valor);
   if (n >= 1000000) return "R$ " + (n / 1000000).toFixed(1).replace(".", ",") + "M";
