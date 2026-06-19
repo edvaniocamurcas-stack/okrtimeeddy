@@ -802,8 +802,14 @@ async function carregarDados() {
     const alertaElemento = document.getElementById("alertas-executivos");
     if (alertaElemento) alertaElemento.innerHTML = alertasFormatados;
 
-    const resumoLiderancaHTML = `
+    const forecastACV = numero(resumo.Forecast_ACV);
+const fundoFunilACV = numero(resumo.Fundo_Funil_ACV);
+const churnACV = numero(resumo.Churn_ACV);
+const gapReal = numero(resumo.Gap_Real);
+
+const resumoLiderancaHTML = `
   <div class="kpi-grid">
+
     <div class="kpi-card">
       <span>💰 Carteira Total</span>
       <strong>${moeda(resumo.ACV_Base)}</strong>
@@ -816,62 +822,30 @@ async function carregarDados() {
     </div>
 
     <div class="kpi-card">
-      <span>📉 Gap</span>
-      <strong>${moeda(resumo.Gap_Renovacao)}</strong>
-    </div>
-
-    <div class="kpi-card risco-card">
-      <span>🔴 Principal Risco</span>
-      <strong>${nomeCSP(principalRisco.csp)}</strong>
-      <small>${moeda(principalRisco.alto_risco_acv)}</small>
+      <span>📊 Forecast</span>
+      <strong>${moeda(forecastACV)}</strong>
     </div>
 
     <div class="kpi-card">
-      <span>🟢 Oportunidades Quentes</span>
-      <strong>${moeda(totalOportunidades)}</strong>
+      <span>📉 Gap Real</span>
+      <strong>${moeda(gapReal)}</strong>
     </div>
+
+    <div class="kpi-card">
+      <span>📈 Fundo de Funil</span>
+      <strong>${moeda(fundoFunilACV)}</strong>
+    </div>
+
+    <div class="kpi-card risco-card">
+      <span>❌ Churn</span>
+      <strong>${moeda(churnACV)}</strong>
+    </div>
+
   </div>
 `;
 
 document.getElementById("resumo-lideranca").innerHTML = resumoLiderancaHTML;
-// ===== Saúde da Operação =====
-
-const acvBaseTotal = numero(resumo.ACV_Base);
-const gapTotal = numero(resumo.Gap_Renovacao);
-
-const oportunidadesACV = dados.painel_executivo.reduce(
-  (soma, item) => soma + numero(item.oportunidades_quentes_acv),
-  0
-);
-
-const coberturaGap = gapTotal > 0
-  ? (oportunidadesACV / gapTotal) * 100
-  : 0;
-
-const riscoGeral = Number(
-  String(resumo.Percentual_Risco || 0).replace(",", ".")
-);
-
-const renovacaoGeral = numero(resumo.Percentual_Renovacao);
-
-const fundoFunilPercentual = acvBaseTotal > 0
-  ? (oportunidadesACV / acvBaseTotal) * 100
-  : 0;
-
-const forecastACV = numero(resumo.Forecast_ACV);
     
-const fundoFunilACV = numero(resumo.Fundo_Funil_ACV);
-    
-const churnACV = numero(resumo.Churn_ACV);
-    
-const gapReal = numero(resumo.Gap_Real);
-
-const scoreTime = Math.round(
-  coberturaGap * 0.4 +
-  fundoFunilPercentual * 0.3 +
-  (100 - riscoGeral) * 0.3
-);
-
 const saudeOperacaoHTML = `
   <div class="cards-saude">
     <div class="card-saude">
