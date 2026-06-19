@@ -777,6 +777,10 @@ async function carregarDados() {
 
     const dados = await resposta.json();
     const resumo = dados.resumo;
+    const forecastACV = numero(resumo.Forecast_ACV);
+    const fundoFunilACV = numero(resumo.Fundo_Funil_ACV);
+    const churnACV = numero(resumo.Churn_ACV);
+    const gapReal = numero(resumo.Gap_Real);
 
     preencher("acv-base", moeda(resumo.ACV_Base));
     preencher("acv-renovado", moeda(resumo.ACV_Renovado));
@@ -801,11 +805,6 @@ async function carregarDados() {
 
     const alertaElemento = document.getElementById("alertas-executivos");
     if (alertaElemento) alertaElemento.innerHTML = alertasFormatados;
-
-    const forecastACV = numero(resumo.Forecast_ACV);
-const fundoFunilACV = numero(resumo.Fundo_Funil_ACV);
-const churnACV = numero(resumo.Churn_ACV);
-const gapReal = numero(resumo.Gap_Real);
 
 const resumoLiderancaHTML = `
   <div class="kpi-grid">
