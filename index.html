@@ -155,6 +155,26 @@
 
 </section>
 
+<section class="tabela">
+  <h2>🎯 Radar da Liderança</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Escola</th>
+        <th>CSP</th>
+        <th>ACV</th>
+        <th>Etapa</th>
+        <th>Risco</th>
+        <th>FUP</th>
+      </tr>
+    </thead>
+
+    <tbody id="radar-lideranca"></tbody>
+
+  </table>
+</section>
+
     <section class="tabela">
       <h2>🎯 Prioridades da Liderança</h2>
 
@@ -831,7 +851,28 @@ if (topPrioritarias && dados.top_prioritarias) {
     </tr>
   `).join("");
 }
-    
+
+    const radarLideranca = document.getElementById("radar-lideranca");
+
+if (radarLideranca && dados.radar_lideranca) {
+
+  const ordenado = [...dados.radar_lideranca]
+    .sort((a,b) =>
+      numero(b.acv) - numero(a.acv)
+    );
+
+  radarLideranca.innerHTML = ordenado.map(item => `
+    <tr>
+      <td>${item.escola || "-"}</td>
+      <td>${nomeCSP(item.csp) || "-"}</td>
+      <td>${item.acv || "-"}</td>
+      <td>${item.etapa || "-"}</td>
+      <td>${item.risco || "-"}</td>
+      <td>${item.fup || "-"}</td>
+    </tr>
+  `).join("");
+
+}
 const ranking = document.getElementById("ranking-csp");
 
     if (ranking) {
