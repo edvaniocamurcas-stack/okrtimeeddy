@@ -784,8 +784,10 @@ const resumoLiderancaHTML = `
   </div>
 `;
 
-document.getElementById("resumo-lideranca").innerHTML = resumoLiderancaHTML;
-
+const resumoLideranca = document.getElementById("resumo-lideranca");
+if (resumoLideranca) {
+  resumoLideranca.innerHTML = resumoLiderancaHTML;
+}
 const acvBaseTotal = numero(resumo.ACV_Base);
 
 const riscoGeral = Number(
