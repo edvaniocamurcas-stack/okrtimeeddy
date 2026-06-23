@@ -137,24 +137,21 @@
     </section>
 
     <section class="tabela">
-      <h2>💰 Top 10 Escolas por ACV Base</h2>
+     <h2>🎯 Top 15 Escolas Prioritárias</h2>
 
-      <table>
-      <thead>
-  <tr>
-    <th>Escola</th>
-    <th>CSP</th>
-    <th>ACV Base</th>
-    <th>Risco</th>
-    <th>Etapa</th>
-    <th>FUP</th>
-    <th>Ação 1</th>
-    <th>Ação 2</th>
-    <th>Ação 3</th>
-  </tr>
-</thead>
+     <table>
+  <thead>
+    <tr>
+      <th>Escola</th>
+      <th>CSP</th>
+      <th>ACV Base</th>
+      <th>Risco</th>
+      <th>Etapa</th>
+    </tr>
+  </thead>
 
-        <tbody>
+  <tbody id="top-prioritarias"></tbody>
+</table>
          <tr>
   <td>APMC</td>
   <td>Flávio Silva</td>
@@ -904,7 +901,22 @@ const saudeOperacaoHTML = `
   </div>
 `;
 
-document.getElementById("saude-operacao").innerHTML = saudeOperacaoHTML;    const ranking = document.getElementById("ranking-csp");
+document.getElementById("saude-operacao").innerHTML = saudeOperacaoHTML;
+const topPrioritarias = document.getElementById("top-prioritarias");
+
+if (topPrioritarias && dados.top_prioritarias) {
+  topPrioritarias.innerHTML = dados.top_prioritarias.map(item => `
+    <tr>
+      <td>${item.escola || "-"}</td>
+      <td>${nomeCSP(item.csp) || "-"}</td>
+      <td>${moeda(item.acv_base)}</td>
+      <td>${item.risco || "-"}</td>
+      <td>${item.etapa || "-"}</td>
+    </tr>
+  `).join("");
+}
+    
+const ranking = document.getElementById("ranking-csp");
 
     if (ranking) {
       const ordenado = [...dados.painel_executivo]
