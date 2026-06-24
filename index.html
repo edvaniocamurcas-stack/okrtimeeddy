@@ -159,24 +159,6 @@
   </table>
 </section>
 
-const maioresRiscos = document.getElementById("maiores-riscos");
-
-if (maioresRiscos && dados.maiores_riscos) {
-  const lista = dados.maiores_riscos
-    .sort((a, b) => numero(b.acv) - numero(a.acv))
-    .slice(0, 10);
-
-  maioresRiscos.innerHTML = lista.map(item => `
-    <tr>
-      <td>${item.escola || "-"}</td>
-      <td>${nomeCSP(item.csp) || "-"}</td>
-      <td>${moeda(item.acv)}</td>
-      <td>${item.risco || "-"}</td>
-      <td>${item.etapa || "-"}</td>
-    </tr>
-  `).join("");
-}
-
 <section class="tabela">
   <h2>🚦 Semáforo Executivo</h2>
 
@@ -1193,7 +1175,7 @@ ranking.innerHTML += `
     
     const cspAjuda = document.getElementById("csp-ajuda");
 
-    if (cspAjuda) {
+       if (cspAjuda) {
       const ajuda = [...dados.painel_executivo]
         .filter(item =>
           item.prioridade.includes("Crítica") ||
@@ -1212,6 +1194,24 @@ ranking.innerHTML += `
           <p><strong>Cobertura:</strong> ${item.cobertura}%</p>
           <p><strong>Ação sugerida:</strong> acompanhamento semanal prioritário.</p>
         </div>
+      `).join("");
+    }
+
+    const maioresRiscos = document.getElementById("maiores-riscos");
+
+    if (maioresRiscos && dados.maiores_riscos) {
+      const lista = [...dados.maiores_riscos]
+        .sort((a,b) => numero(b.acv) - numero(a.acv))
+        .slice(0,10);
+
+      maioresRiscos.innerHTML = lista.map(item => `
+        <tr>
+          <td>${item.escola || "-"}</td>
+          <td>${nomeCSP(item.csp) || "-"}</td>
+          <td>${moeda(item.acv)}</td>
+          <td>${item.risco || "-"}</td>
+          <td>${item.etapa || "-"}</td>
+        </tr>
       `).join("");
     }
 
