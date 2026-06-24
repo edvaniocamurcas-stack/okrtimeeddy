@@ -834,30 +834,35 @@ if(canvas){
     }
   });
 
-  const cockpit = document.getElementById("cockpit-executivo");
+ const cockpit = document.getElementById("cockpit-executivo");
 
 if (cockpit) {
   cockpit.innerHTML = `
-    <h3>⚡ Prioridades da Semana</h3>
-    <ol>
-      <li>Avançar ${funil[0]?.escolas || 0} escolas em Diagnóstico (${moeda(funil[0]?.acv_base || 0)}).</li>
-      <li>Converter ${funil[3]?.escolas || 0} escolas em Assinatura (${moeda(funil[3]?.acv_base || 0)}).</li>
-      <li>Atuar diretamente nas escolas travadas de Alto Risco.</li>
-    </ol>
+    <div class="cards-saude">
 
-    <h3>⚠️ Maiores Riscos</h3>
-    <ul>
-      <li>Gap atual de ${moeda(resumo.Gap_Real)}.</li>
-      <li>${resumo.Alto_Risco_Qtd} escolas classificadas em Alto Risco.</li>
-      <li>Renovação atual de ${resumo.Percentual_Renovacao}%.</li>
-    </ul>
+      <div class="card-saude">
+        <h3>⚡ Prioridades</h3>
+        <p><strong>${funil[0]?.escolas || 0}</strong> escolas em Diagnóstico</p>
+        <p>${moeda(funil[0]?.acv_base || 0)} em estoque inicial</p>
+        <p><strong>${funil[3]?.escolas || 0}</strong> escolas em Assinatura</p>
+        <p>${moeda(funil[3]?.acv_base || 0)} próximas da conversão</p>
+      </div>
 
-    <h3>🚀 Oportunidades</h3>
-    <ul>
-      <li>${moeda(resumo.Fundo_Funil_ACV)} em Fundo de Funil.</li>
-      <li>${moeda(resumo.Forecast_ACV)} projetados para renovação.</li>
-      <li>${funil[3]?.escolas || 0} escolas prontas para assinatura.</li>
-    </ul>
+      <div class="card-saude">
+        <h3>⚠️ Riscos</h3>
+        <p><strong>${moeda(resumo.Gap_Real)}</strong> de gap atual</p>
+        <p><strong>${resumo.Alto_Risco_Qtd}</strong> escolas em alto risco</p>
+        <p><strong>${resumo.Percentual_Renovacao}%</strong> de renovação atual</p>
+      </div>
+
+      <div class="card-saude">
+        <h3>🚀 Oportunidades</h3>
+        <p><strong>${moeda(resumo.Fundo_Funil_ACV)}</strong> em fundo de funil</p>
+        <p><strong>${moeda(resumo.Forecast_ACV)}</strong> de forecast</p>
+        <p><strong>${funil[3]?.escolas || 0}</strong> escolas prontas para assinatura</p>
+      </div>
+
+    </div>
   `;
 }
 
