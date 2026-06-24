@@ -54,6 +54,25 @@
   <h2>📋 Resumo para Liderança</h2>
   <div id="resumo-lideranca"></div>
 </section>
+    
+<section class="card">
+  <h2>🎯 Top Prioridades da Semana</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Escola</th>
+        <th>CSP</th>
+        <th>ACV</th>
+        <th>Risco</th>
+        <th>Etapa</th>
+      </tr>
+    </thead>
+
+    <tbody id="top-prioridades"></tbody>
+
+  </table>
+</section>
 
 <section class="painel">
   <h2>📈 Forecast Executivo</h2>
@@ -177,6 +196,26 @@
 
 </table>
 </section>
+
+const topPrioridades = document.getElementById("top-prioridades");
+
+if (topPrioridades && dados.top_prioridades) {
+
+  const lista = [...dados.top_prioridades]
+      .sort((a,b) => numero(b.acv) - numero(a.acv))
+      .slice(0,5);
+
+  topPrioridades.innerHTML = lista.map(item => `
+    <tr>
+      <td>${item.escola || "-"}</td>
+      <td>${nomeCSP(item.csp) || "-"}</td>
+      <td>${moeda(item.acv)}</td>
+      <td>${item.risco || "-"}</td>
+      <td>${item.etapa || "-"}</td>
+    </tr>
+  `).join("");
+
+}
 
 <section class="tabela">
   <h2>🚦 Semáforo Executivo</h2>
