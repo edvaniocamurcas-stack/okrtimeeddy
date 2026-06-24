@@ -815,40 +815,31 @@ if(canvas){
 
 const qualidadeFunil = document.getElementById("qualidade-funil");
 
-if (qualidadeFunil) {
+if (qualidadeFunil && dados.funil_risco) {
+  qualidadeFunil.innerHTML = dados.funil_risco.map(item => {
+    const alto = Number(item.alto || 0);
+    const medio = Number(item.medio || 0);
+    const baixo = Number(item.baixo || 0);
+    const total = alto + medio + baixo;
 
-    qualidadeFunil.innerHTML = funil.map(item => {
+    const percAlto = total > 0 ? (alto / total) * 100 : 0;
 
-        const alto = Number(item.alto_risco || 0);
-        const medio = Number(item.medio_risco || 0);
-        const baixo = Number(item.baixo_risco || 0);
+    let status = "🟢 Saudável";
+    if (percAlto >= 30) status = "🔴 Crítico";
+    else if (percAlto >= 15) status = "🟡 Atenção";
 
-        const total = alto + medio + baixo;
-
-        const percAlto =
-            total > 0
-            ? (alto / total) * 100
-            : 0;
-
-        let status = "🟢 Saudável";
-
-        if (percAlto >= 30)
-            status = "🔴 Crítico";
-        else if (percAlto >= 15)
-            status = "🟡 Atenção";
-
-        return `
-        <tr>
-            <td>${item.etapa}</td>
-            <td>${item.qtd || 0}</td>
-            <td>${moeda(item.acv_base)}</td>
-            <td>${alto}</td>
-            <td>${medio}</td>
-            <td>${baixo}</td>
-            <td>${status}</td>
-        </tr>
-        `;
-    }).join("");
+    return `
+      <tr>
+        <td>${item.etapa || "-"}</td>
+        <td>${item.escolas || 0}</td>
+        <td>${moeda(item.acv_base || 0)}</td>
+        <td>${alto}</td>
+        <td>${medio}</td>
+        <td>${baixo}</td>
+        <td>${status}</td>
+      </tr>
+    `;
+  }).join("");
 }
  
   const cockpit = document.getElementById("cockpit-executivo");
