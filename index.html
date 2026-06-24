@@ -123,6 +123,24 @@
 </section>
 
 <section class="card">
+  <h2>🚨 Maiores Riscos Financeiros</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Escola</th>
+        <th>CSP</th>
+        <th>ACV</th>
+        <th>Risco</th>
+        <th>Etapa</th>
+      </tr>
+    </thead>
+
+    <tbody id="maiores-riscos"></tbody>
+  </table>
+</section>
+    
+<section class="card">
   <h2>🔥 Próximas Assinaturas</h2>
 
   <table>
@@ -140,6 +158,24 @@
 
   </table>
 </section>
+
+const maioresRiscos = document.getElementById("maiores-riscos");
+
+if (maioresRiscos && dados.maiores_riscos) {
+  const lista = dados.maiores_riscos
+    .sort((a, b) => numero(b.acv) - numero(a.acv))
+    .slice(0, 10);
+
+  maioresRiscos.innerHTML = lista.map(item => `
+    <tr>
+      <td>${item.escola || "-"}</td>
+      <td>${nomeCSP(item.csp) || "-"}</td>
+      <td>${moeda(item.acv)}</td>
+      <td>${item.risco || "-"}</td>
+      <td>${item.etapa || "-"}</td>
+    </tr>
+  `).join("");
+}
 
 <section class="tabela">
   <h2>🚦 Semáforo Executivo</h2>
