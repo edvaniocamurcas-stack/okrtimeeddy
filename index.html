@@ -122,6 +122,25 @@
   <div class="ajuda-grid" id="csp-ajuda"></div>
 </section>
 
+<section class="card">
+  <h2>🔥 Próximas Assinaturas</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Escola</th>
+        <th>CSP</th>
+        <th>ACV</th>
+        <th>Risco</th>
+        <th>Etapa</th>
+      </tr>
+    </thead>
+
+    <tbody id="proximas-assinaturas"></tbody>
+
+  </table>
+</section>
+
 <section class="tabela">
   <h2>🚦 Semáforo Executivo</h2>
 
@@ -949,14 +968,14 @@ const visaoGerente = document.getElementById("visao-gerente");
 
 if (visaoGerente && dados.painel_executivo) {
 
-  const ordenado = [...dados.painel_executivo]
+const ordenado = [...dados.painel_executivo]
     .sort((a,b) =>
       numero(b.gap) - numero(a.gap)
     );
 
   visaoGerente.innerHTML = ordenado.map(item => {
 
-    const cobertura = numero(item.cobertura);
+const cobertura = numero(item.cobertura);
 
     let prioridade = "🟢 Baixa";
 
@@ -994,7 +1013,32 @@ if (topPrioritarias && dados.top_prioritarias) {
   `).join("");
 }
 
-    const radarLideranca = document.getElementById("radar-lideranca");
+const proximasAssinaturas =
+  document.getElementById("proximas-assinaturas");
+
+if (proximasAssinaturas && dados.radar_lideranca) {
+
+  const lista = dados.radar_lideranca
+    .filter(item =>
+      (item.etapa || "").includes("Assinatura")
+    )
+    .sort((a, b) =>
+      numero(b.acv) - numero(a.acv)
+    );
+
+ proximasAssinaturas.innerHTML =
+    lista.map(item => `
+      <tr>
+        <td>${item.escola || "-"}</td>
+        <td>${nomeCSP(item.csp) || "-"}</td>
+        <td>${moeda(item.acv)}</td>
+        <td>${item.risco || "-"}</td>
+        <td>${item.etapa || "-"}</td>
+      </tr>
+    `).join("");
+
+}
+const radarLideranca = document.getElementById("radar-lideranca");
 
 if (radarLideranca && dados.radar_lideranca) {
 
@@ -1015,6 +1059,7 @@ if (radarLideranca && dados.radar_lideranca) {
   `).join("");
 
 }
+    
 const ranking = document.getElementById("ranking-csp");
 
     if (ranking) {
