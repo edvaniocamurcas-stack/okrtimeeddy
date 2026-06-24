@@ -712,8 +712,11 @@ async function carregarDados() {
     const resposta = await fetch(url);
 
     if (!resposta.ok) throw new Error("Erro ao buscar dados.json");
-
+    const response = awaitfetch("dados.json")
     const dados = await resposta.json();
+    
+    console.log("INTERVENCAO:");
+    console.log(dados.intervencao_lideranca);
     const resumo = dados.resumo;
     console.log("RESUMO:", resumo);
     console.log("FORECAST:", resumo.Forecast_ACV);
