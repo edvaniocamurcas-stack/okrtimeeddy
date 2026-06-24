@@ -739,11 +739,12 @@ async function carregarDados() {
       return numero(item.alto_risco_acv) > numero(maior.alto_risco_acv) ? item : maior;
     }, dados.painel_executivo[0]);
 
-    const alertasFormatados = dados.alertas_executivos
-      .replace("⚠️", "<br><br>⚠️")
-      .replace("🟡", "<br><br>🟡")
-      .replace("🟢", "<br><br>🟢");
+    const textoAlertas = dados.alertas_executivos || "";
 
+const alertasFormatados = textoAlertas
+  .replace("⚠️", "<br><br>⚠️")
+  .replace("🟡", "<br><br>🟡")
+  .replace("🟢", "<br><br>🟢");
     const alertaElemento = document.getElementById("alertas-executivos");
     if (alertaElemento) alertaElemento.innerHTML = alertasFormatados;
 
