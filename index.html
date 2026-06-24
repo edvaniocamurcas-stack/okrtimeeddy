@@ -55,6 +55,11 @@
   <div id="resumo-lideranca"></div>
 </section>
 
+    <section class="painel">
+  <h2>📈 Forecast Executivo</h2>
+  <div id="forecast-executivo"></div>
+</section>
+
 <section class="painel">
   <h2>🎯 Saúde da Operação</h2>
   <div id="saude-operacao"></div>
@@ -841,6 +846,38 @@ const saudeOperacaoHTML = `
 `;
 
 document.getElementById("saude-operacao").innerHTML = saudeOperacaoHTML;
+
+    const forecastExecutivo = document.getElementById("forecast-executivo");
+
+if (forecastExecutivo) {
+  const coberturaForecast = acvBaseTotal > 0
+    ? (forecastACV / acvBaseTotal) * 100
+    : 0;
+
+  forecastExecutivo.innerHTML = `
+    <div class="cards-saude">
+      <div class="card-saude">
+        <span>Forecast Atual</span>
+        <strong>${moeda(forecastACV)}</strong>
+      </div>
+
+      <div class="card-saude">
+        <span>Fundo de Funil</span>
+        <strong>${moeda(fundoFunilACV)}</strong>
+      </div>
+
+      <div class="card-saude">
+        <span>Gap Real</span>
+        <strong>${moeda(gapReal)}</strong>
+      </div>
+
+      <div class="card-saude">
+        <span>Cobertura Forecast</span>
+        <strong>${coberturaForecast.toFixed(1)}%</strong>
+      </div>
+    </div>
+  `;
+}
 const topPrioritarias = document.getElementById("top-prioritarias");
 
 if (topPrioritarias && dados.top_prioritarias) {
