@@ -55,9 +55,14 @@
   <div id="resumo-lideranca"></div>
 </section>
 
-    <section class="painel">
+<section class="painel">
   <h2>📈 Forecast Executivo</h2>
   <div id="forecast-executivo"></div>
+</section>
+
+<section class="painel">
+  <h2>🧠 Resumo Automático para Reunião Executiva</h2>
+  <div id="resumo-executivo-auto"></div>
 </section>
 
 <section class="painel">
@@ -882,6 +887,42 @@ if (forecastExecutivo) {
     </div>
   `;
 }
+
+const resumoExecutivoAuto = document.getElementById("resumo-executivo-auto");
+
+if (resumoExecutivoAuto) {
+  const maiorRiscoCSP = [...dados.painel_executivo]
+    .sort((a, b) => numero(b.alto_risco_acv) - numero(a.alto_risco_acv))[0];
+
+  const melhorCoberturaCSP = [...dados.painel_executivo]
+    .sort((a, b) => numero(b.cobertura) - numero(a.cobertura))[0];
+
+  resumoExecutivoAuto.innerHTML = `
+    <p>
+      A carteira apresenta renovação de <strong>${percentual(resumo.Percentual_Renovacao)}</strong>,
+      equivalente a <strong>${moeda(resumo.ACV_Renovado)}</strong> renovados sobre uma base de
+      <strong>${moeda(resumo.ACV_Base)}</strong>.
+    </p>
+
+    <p>
+      O forecast atual é de <strong>${moeda(forecastACV)}</strong>, com fundo de funil de
+      <strong>${moeda(fundoFunilACV)}</strong> e gap real de <strong>${moeda(gapReal)}</strong>.
+    </p>
+
+    <p>
+      O principal ponto de atenção está em <strong>${nomeCSP(maiorRiscoCSP.csp)}</strong>,
+      que concentra <strong>${moeda(maiorRiscoCSP.alto_risco_acv)}</strong> em ACV de alto risco.
+      A melhor cobertura projetada está com <strong>${nomeCSP(melhorCoberturaCSP.csp)}</strong>,
+      com <strong>${melhorCoberturaCSP.cobertura}%</strong> de cobertura.
+    </p>
+
+    <p>
+      Recomendação executiva: priorizar as escolas de maior ACV em risco, acelerar as contas em assinatura
+      e acompanhar semanalmente os CSPs com maior concentração de gap.
+    </p>
+  `;
+}
+
 const topPrioritarias = document.getElementById("top-prioritarias");
 
 if (topPrioritarias && dados.top_prioritarias) {
