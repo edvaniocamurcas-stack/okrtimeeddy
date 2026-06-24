@@ -455,45 +455,26 @@
 
 </section>
 
-    <section class="tabela">
-      <h2>Análise do Funil de Renovação</h2>
+   <section class="card">
+    <h2>📊 Qualidade do Funil</h2>
 
-      <table>
+    <table class="tabela">
         <thead>
-          <tr>
-            <th>Tema</th>
-            <th>Análise</th>
-          </tr>
+            <tr>
+                <th>Etapa</th>
+                <th>Escolas</th>
+                <th>ACV</th>
+                <th>Alto</th>
+                <th>Médio</th>
+                <th>Baixo</th>
+                <th>Status</th>
+            </tr>
         </thead>
 
-        <tbody>
-          <tr>
-            <td>Diagnóstico</td>
-            <td>31 escolas, somando R$ 39,6 milhões, permanecem em Diagnóstico. Este é o maior estoque do funil e a principal oportunidade de avanço operacional.</td>
-          </tr>
-
-          <tr>
-            <td>Negociação</td>
-            <td>30 escolas já estão em Negociação, somando R$ 31,7 milhões de ACV, configurando o principal potencial de renovação para as próximas semanas.</td>
-          </tr>
-
-          <tr>
-            <td>Assinatura</td>
-            <td>6 escolas encontram-se em Assinatura de Contrato, representando R$ 7,9 milhões próximos da conversão.</td>
-          </tr>
-
-          <tr>
-            <td>Conversão Atual</td>
-            <td>Até o momento foram renovados R$ 1,5 milhão, equivalente a 1,65% da meta de renovação do ciclo.</td>
-          </tr>
-
-          <tr>
-            <td>Prioridade Executiva</td>
-            <td>Reduzir o estoque de Diagnóstico e acelerar conversões para Negociação e Assinatura.</td>
-          </tr>
+        <tbody id="qualidade-funil">
         </tbody>
-      </table>
-    </section>
+    </table>
+</section>
 
     <section class="tabela">
       <h2>Recomendações da Semana</h2>
@@ -796,10 +777,9 @@ async function carregarDados() {
   console.log("FUNDO:", resumo.Fundo_Funil_ACV);
   console.log("CHURN:", resumo.Churn_ACV);
   console.log("GAP:", resumo.Gap_Real);
-  const funil = dados.funil || [];
-
+ 
+const funil = dados.funil || [];
 const labels = funil.map(item => item.etapa);
-
 const valores = funil.map(item =>
   numero(item.acv_base)
 );
@@ -834,7 +814,45 @@ if(canvas){
     }
   });
 
- const cockpit = document.getElementById("cockpit-executivo");
+const qualidadeFunil = document.getElementById("qualidade-funil");
+
+if (qualidadeFunil) {
+
+    qualidadeFunil.innerHTML = funil.map(item => {
+
+        const alto = Number(item.alto_risco || 0);
+        const medio = Number(item.medio_risco || 0);
+        const baixo = Number(item.baixo_risco || 0);
+
+        const total = alto + medio + baixo;
+
+        const percAlto =
+            total > 0
+            ? (alto / total) * 100
+            : 0;
+
+        let status = "🟢 Saudável";
+
+        if (percAlto >= 30)
+            status = "🔴 Crítico";
+        else if (percAlto >= 15)
+            status = "🟡 Atenção";
+
+        return `
+        <tr>
+            <td>${item.etapa}</td>
+            <td>${item.qtd || 0}</td>
+            <td>${moeda(item.acv_base)}</td>
+            <td>${alto}</td>
+            <td>${medio}</td>
+            <td>${baixo}</td>
+            <td>${status}</td>
+        </tr>
+        `;
+    }).join("");
+}
+ 
+  const cockpit = document.getElementById("cockpit-executivo");
 
 if (cockpit) {
   cockpit.innerHTML = `
