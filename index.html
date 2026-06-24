@@ -711,25 +711,26 @@ async function carregarDados() {
     const url = new URL("dados.json?v=" + Date.now(), window.location.href);
     const resposta = await fetch(url);
 
-    if (!resposta.ok) throw new Error("Erro ao buscar dados.json");
-    const response = awaitfetch("dados.json")
-    const dados = await resposta.json();
+    if (!resposta.ok) 
+      throw new Error("Erro ao buscar dados.json");
     
-    console.log("INTERVENCAO:");
-    console.log(dados.intervencao_lideranca);
-    const resumo = dados.resumo;
-    console.log("RESUMO:", resumo);
-    console.log("FORECAST:", resumo.Forecast_ACV);
-    console.log("FUNDO:", resumo.Fundo_Funil_ACV);
-    console.log("CHURN:", resumo.Churn_ACV);
-    console.log("GAP:", resumo.Gap_Real);
-    const forecastACV = numero(resumo.Forecast_ACV);
-    const fundoFunilACV = numero(resumo.Fundo_Funil_ACV);
-    const churnACV = numero(resumo.Churn_ACV);
-    const gapReal = numero(resumo.Gap_Real);
-    console.log("Forecast:", resumo.Forecast_ACV, forecastACV);
-    console.log("Fundo:", resumo.Fundo_Funil_ACV, fundoFunilACV);
-    console.log("Gap:", resumo.Gap_Real, gapReal);
+   const dados = await resposta.json(); 
+    
+  console.log("INTERVENCAO:");
+  console.log(dados.intervencao_lideranca);
+  const resumo = dados.resumo;
+  console.log("RESUMO:", resumo);
+  console.log("FORECAST:", resumo.Forecast_ACV);
+  console.log("FUNDO:", resumo.Fundo_Funil_ACV);
+  console.log("CHURN:", resumo.Churn_ACV);
+  console.log("GAP:", resumo.Gap_Real);
+  const forecastACV = numero(resumo.Forecast_ACV);
+  const fundoFunilACV = numero(resumo.Fundo_Funil_ACV);
+  const churnACV = numero(resumo.Churn_ACV);
+  const gapReal = numero(resumo.Gap_Real);
+  console.log("Forecast:", resumo.Forecast_ACV, forecastACV);
+  console.log("Fundo:", resumo.Fundo_Funil_ACV, fundoFunilACV);
+  console.log("Gap:", resumo.Gap_Real, gapReal);
 
     preencher("acv-base", moeda(resumo.ACV_Base));
     preencher("acv-renovado", moeda(resumo.ACV_Renovado));
