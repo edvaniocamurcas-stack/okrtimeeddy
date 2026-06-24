@@ -1151,6 +1151,23 @@ if (radarLideranca && dados.radar_lideranca) {
   `).join("");
 
 }
+
+function diagnostico(item){
+
+  if(numero(item.alto_risco_acv) > 3000000)
+    return "🔴 Alto risco concentrado";
+
+  if(Number(item.cobertura) < 60)
+    return "🟡 Baixa cobertura forecast";
+
+  if(Number(item.percentual_renovacao) === 0)
+    return "🟡 Sem renovação registrada";
+
+  if(Number(item.alto_risco_qtd) >= 3)
+    return "🟠 Múltiplas escolas em alto risco";
+
+  return "🟢 Carteira sob controle";
+}
     
 const ranking = document.getElementById("ranking-csp");
 
