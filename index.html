@@ -65,6 +65,28 @@
   <div id="resumo-executivo-auto"></div>
 </section>
 
+<section class="tabela">
+  <h2>👔 Visão Gerente Executivo</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>CSP</th>
+        <th>Escolas</th>
+        <th>ACV Base</th>
+        <th>Gap</th>
+        <th>Alto Risco</th>
+        <th>Forecast</th>
+        <th>Cobertura</th>
+        <th>Prioridade</th>
+      </tr>
+    </thead>
+
+    <tbody id="visao-gerente"></tbody>
+
+  </table>
+</section>
+
 <section class="painel">
   <h2>🎯 Saúde da Operação</h2>
   <div id="saude-operacao"></div>
@@ -856,7 +878,7 @@ const saudeOperacaoHTML = `
 
 document.getElementById("saude-operacao").innerHTML = saudeOperacaoHTML;
 
-    const forecastExecutivo = document.getElementById("forecast-executivo");
+const forecastExecutivo = document.getElementById("forecast-executivo");
 
 if (forecastExecutivo) {
   const coberturaForecast = acvBaseTotal > 0
@@ -891,10 +913,10 @@ if (forecastExecutivo) {
 const resumoExecutivoAuto = document.getElementById("resumo-executivo-auto");
 
 if (resumoExecutivoAuto) {
-  const maiorRiscoCSP = [...dados.painel_executivo]
+const maiorRiscoCSP = [...dados.painel_executivo]
     .sort((a, b) => numero(b.alto_risco_acv) - numero(a.alto_risco_acv))[0];
 
-  const melhorCoberturaCSP = [...dados.painel_executivo]
+const melhorCoberturaCSP = [...dados.painel_executivo]
     .sort((a, b) => numero(b.cobertura) - numero(a.cobertura))[0];
 
   resumoExecutivoAuto.innerHTML = `
@@ -921,6 +943,41 @@ if (resumoExecutivoAuto) {
       e acompanhar semanalmente os CSPs com maior concentração de gap.
     </p>
   `;
+}
+
+const visaoGerente = document.getElementById("visao-gerente");
+
+if (visaoGerente && dados.painel_executivo) {
+
+  const ordenado = [...dados.painel_executivo]
+    .sort((a,b) =>
+      numero(b.gap) - numero(a.gap)
+    );
+
+  visaoGerente.innerHTML = ordenado.map(item => {
+
+    const cobertura = numero(item.cobertura);
+
+    let prioridade = "🟢 Baixa";
+
+    if (cobertura < 50)
+      prioridade = "🔴 Crítica";
+    else if (cobertura < 75)
+      prioridade = "🟠 Atenção";
+
+    return `
+      <tr>
+        <td>${nomeCSP(item.csp)}</td>
+        <td>${item.escolas}</td>
+        <td>${moeda(item.acv_base)}</td>
+        <td>${moeda(item.gap)}</td>
+        <td>${moeda(item.alto_risco_acv)}</td>
+        <td>${moeda(item.oportunidades_quentes_acv)}</td>
+        <td>${cobertura.toFixed(1)}%</td>
+        <td>${prioridade}</td>
+      </tr>
+    `;
+  }).join("");
 }
 
 const topPrioritarias = document.getElementById("top-prioritarias");
