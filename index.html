@@ -196,26 +196,6 @@
 </table>
 </section>
 
-const topPrioridades = document.getElementById("top-prioridades");
-
-if (topPrioridades && dados.top_prioritarias) {
-
-  const lista = [...dados.top_prioritarias]
-      .sort((a,b) => numero(b.acv) - numero(a.acv))
-      .slice(0,5);
-
-  topPrioridades.innerHTML = lista.map(item => `
-    <tr>
-      <td>${item.escola || "-"}</td>
-      <td>${nomeCSP(item.csp) || "-"}</td>
-      <td>${moeda(item.acv)}</td>
-      <td>${item.risco || "-"}</td>
-      <td>${item.etapa || "-"}</td>
-    </tr>
-  `).join("");
-
-}
-
 <section class="tabela">
   <h2>🚦 Semáforo Executivo</h2>
 
@@ -1294,6 +1274,24 @@ const escolasTravadas = document.getElementById("escolas-travadas");
   `).join("");
 }
 
+const topPrioridades = document.getElementById("top-prioridades");
+
+if (topPrioridades && dados.top_prioritarias) {
+  const lista = [...dados.top_prioritarias]
+    .sort((a,b) => numero(b.acv_base) - numero(a.acv_base))
+    .slice(0,5);
+
+  topPrioridades.innerHTML = lista.map(item => `
+    <tr>
+      <td>${item.escola || "-"}</td>
+      <td>${nomeCSP(item.csp) || "-"}</td>
+      <td>${moeda(item.acv_base)}</td>
+      <td>${item.risco || "-"}</td>
+      <td>${item.etapa || "-"}</td>
+    </tr>
+  `).join("");
+}    
+    
   } catch (erro) {
     console.error("Erro ao carregar dados:", erro);
   }
