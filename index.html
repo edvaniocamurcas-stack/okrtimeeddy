@@ -198,9 +198,9 @@
 
 const topPrioridades = document.getElementById("top-prioridades");
 
-if (topPrioridades && dados.top_prioridades) {
+if (topPrioridades && dados.top_prioritarias) {
 
-  const lista = [...dados.top_prioridades]
+  const lista = [...dados.top_prioritarias]
       .sort((a,b) => numero(b.acv) - numero(a.acv))
       .slice(0,5);
 
