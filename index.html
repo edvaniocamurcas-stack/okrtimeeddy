@@ -968,7 +968,7 @@ if (visaoGerente && dados.painel_executivo) {
     return `
       <tr>
         <td>${nomeCSP(item.csp)}</td>
-        <td>${item.escolas}</td>
+        <td>${item.escolas || item.carteira || item.qtd_escolas || "-"}</td>
         <td>${moeda(item.acv_base)}</td>
         <td>${moeda(item.gap)}</td>
         <td>${moeda(item.alto_risco_acv)}</td>
