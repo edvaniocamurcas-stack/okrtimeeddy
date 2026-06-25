@@ -1262,60 +1262,6 @@ const ranking = document.getElementById("ranking-csp");
     const coberturaScore = Number(String(item.cobertura).replace(",", "."));
     const renovacaoScore = Number(String(item.percentual_renovacao).replace(",", "."));
 
-  const riscoPercentualNumero = acvBase > 0
-    ? (acvAltoRisco / acvBase) * 100
-    : 0;
-
-  const riscoScore = Math.max(0, 100 - riscoPercentualNumero);
-
-  const oportunidadeScore = acvBase > 0
-    ? Math.min((fundoFunil / acvBase) * 100, 100)
-    : 0;
-
-  let saude = "🔴 Crítico";
-
-  if (score >= 75) {
-    saude = "🟢 Saudável";
-  } else if (score >= 55) {
-    saude = "🟡 Atenção";
-  }
-
-  let tendencia = "➡ Estável";
-
-  if (renovacaoScore > 10 || coberturaScore >= 75) {
-    tendencia = "⬆ Evoluindo";
-  } else if (coberturaScore < 50 || riscoPercentualNumero > 25) {
-    tendencia = "⬇ Pressão";
-  }
-
-  let proximaAcao = "Manter ritmo";
-
-  if (acvAltoRisco > 3000000) {
-    proximaAcao = "Comitê de renovação";
-  } else if (coberturaScore < 60) {
-    proximaAcao = "Aumentar cobertura";
-  } else if (fundoFunil > 5000000) {
-    proximaAcao = "Converter fundo de funil";
-  } else if (renovacaoScore === 0) {
-    proximaAcao = "Gerar primeira renovação";
-  }
-
-  let prioridade = "🟢 Baixa";
-
-  if (riscoPercentualNumero >= 40) {
-    prioridade = "🔴 Crítica";
-  } else if (coberturaScore < 50) {
-     prioridade = "🟠 Alta";
-  } else if (renovacaoScore < 10) {
-     prioridade = "🟡 Média";
-  }
-
-  const riscoPercentual =
-    riscoPercentualNumero.toFixed(1).replace(".", ",") + "%";
-
-const resumoExecutivo =
-gerarResumoExecutivo(item, avaliacao.score);
-
   return `
     <tr>
       <td>${nomeCSP(item.csp)}</td>
