@@ -893,10 +893,6 @@ if (cockpit) {
   console.log("Fundo:", resumo.Fundo_Funil_ACV, fundoFunilACV);
   console.log("Gap:", resumo.Gap_Real, gapReal);
 
-    preencher("acv-base", moeda(resumo.ACV_Base));
-    preencher("acv-renovado", moeda(resumo.ACV_Renovado));
-    preencher("percentual-renovacao", percentual(resumo.Percentual_Renovacao));
-    preencher("escolas", resumo.Escolas);
     preencher("gap-renovacao", moeda(resumo.Gap_Renovacao));
 
     const totalOportunidades = dados.painel_executivo.reduce((soma, item) => {
