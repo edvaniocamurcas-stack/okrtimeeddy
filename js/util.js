@@ -183,7 +183,3 @@ function gerarVisaoExecutiva(dados){
     };
 
 }
-</script>
- 
-</body>
-</html>
