@@ -1246,6 +1246,16 @@ const ranking = document.getElementById("ranking-csp");
     proximaAcao = "Gerar primeira renovação";
   }
 
+  let prioridade = "🟢 Baixa";
+
+  if (riscoPercentualNumero >= 40) {
+    prioridade = "🔴 Crítica";
+  } else if (coberturaScore < 50) {
+     prioridade = "🟠 Alta";
+  } else if (renovacaoScore < 10) {
+     prioridade = "🟡 Média";
+  }
+
   const riscoPercentual =
     riscoPercentualNumero.toFixed(1).replace(".", ",") + "%";
 
@@ -1264,7 +1274,7 @@ const ranking = document.getElementById("ranking-csp");
       <td>${moeda(item.oportunidades_quentes_acv)}</td>
       <td>${item.oportunidades_quentes_qtd}</td>
       <td>${item.percentual_renovacao}%</td>
-      <td>${item.prioridade}</td>
+      <td>${prioridade}</td>
     </tr>
   `;
 
