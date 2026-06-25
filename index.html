@@ -1313,7 +1313,7 @@ const ranking = document.getElementById("ranking-csp");
   const riscoPercentual =
     riscoPercentualNumero.toFixed(1).replace(".", ",") + "%";
 
-  const resumoExecutivo = gerarResumoExecutivo(item, score);
+  const resumoExecutivo = gerarResumoExecutivo(item, avaliacao.score);
 
   return `
     <tr>
@@ -1490,7 +1490,7 @@ function percentual(valor) {
   return n.toFixed(2).replace(".", ",") + "%";
 }
 
-function gerarResumoExecutivo(item, score){
+gerarResumoExecutivo(item, avaliacao.score)
 
   if(score >= 80)
     return "Operação saudável.";
@@ -1552,7 +1552,7 @@ function avaliarCSP(item){
   else if(cobertura < 50) prioridade = "🟠 Alta";
   else if(renovacao < 10) prioridade = "🟡 Média";
 
-  const resumoExecutivo = gerarResumoExecutivo(item, score);
+  const resumoExecutivo = gerarResumoExecutivo(item, avaliacao.score)
 
   return {
     score,
