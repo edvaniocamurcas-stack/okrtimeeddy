@@ -1492,6 +1492,96 @@ function percentual(valor) {
   return n.toFixed(2).replace(".", ",") + "%";
 }
 
+function avaliarCSP(item){
+
+    const acvBase = numero(item.acv_base);
+    const acvAltoRisco = numero(item.alto_risco_acv);
+    const fundoFunil = numero(item.oportunidades_quentes_acv);
+
+    const cobertura = Number(String(item.cobertura).replace(",", "."));
+    const renovacao = Number(String(item.percentual_renovacao).replace(",", "."));
+
+    const riscoPercentual =
+        acvBase > 0 ? (acvAltoRisco / acvBase) * 100 : 0;
+
+    const riscoScore = Math.max(0,100-riscoPercentual);
+
+    const oportunidadeScore =
+        acvBase>0
+            ? Math.min((fundoFunil/acvBase)*100,100)
+            :0;
+
+    const score = Math.round(
+
+        riscoScore*0.35+
+
+        cobertura*0.30+
+
+        oportunidadeScore*0.20+
+
+        renovacao*0.15
+
+    );
+
+    let saude="🔴 Crítico";
+
+    if(score>=75)
+        saude="🟢 Saudável";
+
+    else if(score>=55)
+        saude="🟡 Atenção";
+
+    let tendencia="➡ Estável";
+
+    if(renovacao>10 || cobertura>=75)
+        tendencia="⬆ Evoluindo";
+
+    else if(cobertura<50 || riscoPercentual>25)
+        tendencia="⬇ Pressão";
+
+    let proximaAcao="Manter ritmo";
+
+    if(acvAltoRisco>3000000)
+        proximaAcao="Comitê de renovação";
+
+    else if(cobertura<60)
+        proximaAcao="Aumentar cobertura";
+
+    else if(fundoFunil>5000000)
+        proximaAcao="Converter fundo de funil";
+
+    else if(renovacao===0)
+        proximaAcao="Gerar primeira renovação";
+
+    let prioridade="🟢 Baixa";
+
+    if(riscoPercentual>=40 || acvAltoRisco>=3000000)
+        prioridade="🔴 Crítica";
+
+    else if(cobertura<50)
+        prioridade="🟠 Alta";
+
+    else if(renovacao<10)
+        prioridade="🟡 Média";
+
+    return{
+
+        score,
+
+        saude,
+
+        tendencia,
+
+        proximaAcao,
+
+        prioridade,
+
+        riscoPercentual
+
+    };
+
+}
+
 function moedaCompacta(valor){
 
 valor = numero(valor);
