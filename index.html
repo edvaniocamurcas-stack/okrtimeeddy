@@ -1313,7 +1313,8 @@ const ranking = document.getElementById("ranking-csp");
   const riscoPercentual =
     riscoPercentualNumero.toFixed(1).replace(".", ",") + "%";
 
-  const resumoExecutivo = gerarResumoExecutivo(item, avaliacao.score);
+  const resumoExecutivo =
+gerarResumoExecutivo(item, score);
 
   return `
     <tr>
