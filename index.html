@@ -126,6 +126,8 @@
        <th>CSP</th>
        <th>Score</th>
        <th>Saúde</th>
+        <th>Tendência</th>
+        <th>Próxima Ação</th>
        <th>Cobertura do Gap (%)</th>
        <th>ACV Base</th>
        <th>ACV Alto Risco</th>
@@ -1192,67 +1194,81 @@ const ranking = document.getElementById("ranking-csp");
 
      ranking.innerHTML = ordenado.map(item => {
 
-      const acvBase = numero(item.acv_base);
-      const acvAltoRisco = numero(item.alto_risco_acv);
-    
-      const coberturaScore = Number(
-        String(item.cobertura).replace(",", ".")
-      );
-    
-      const renovacaoScore = Number(
-        String(item.percentual_renovacao).replace(",", ".")
-      );
-    
-      const oportunidadeScore =
-        (Number(item.oportunidades_quentes_qtd || 0) / 7) * 100;
-    
-      const riscoPercentualNumero =
-        acvBase > 0
-          ? (acvAltoRisco / acvBase) * 100
-          : 0;
-    
-      const riscoScore = 100 - riscoPercentualNumero;
-    
-      const score = (
-        coberturaScore * 0.40 +
-        oportunidadeScore * 0.20 +
-        riscoScore * 0.30 +
-        renovacaoScore * 0.10
-      ).toFixed(0);
-    
-      let saude = "🔴 Crítico";
-    
-      if (riscoPercentualNumero > 40) {
-        saude = "🔴 Crítico";
-      } else if (score >= 75) {
-        saude = "🟢 Saudável";
-      } else if (score >= 50) {
-        saude = "🟡 Atenção";
-      } else {
-        saude = "🔴 Crítico";
-      }
-    
-      const riscoPercentual =
-        riscoPercentualNumero.toFixed(1).replace(".", ",") + "%";
-    
-      return `
-        <tr>
-          <td>${nomeCSP(item.csp)}</td>
-          <td><strong>${score}</strong></td>
-          <td>${saude}</td>
-          <td>${item.cobertura}%</td>
-          <td>${moeda(item.acv_base)}</td>
-          <td>${moeda(item.alto_risco_acv)}</td>
-          <td>${riscoPercentual}</td>
-          <td>${item.alto_risco_qtd}</td>
-          <td>${moeda(item.oportunidades_quentes_acv)}</td>
-          <td>${item.oportunidades_quentes_qtd}</td>
-          <td>${item.percentual_renovacao}%</td>
-          <td>${item.prioridade}</td>
-        </tr>
-      `;
-    
-    }).join("");
+  const acvBase = numero(item.acv_base);
+  const acvAltoRisco = numero(item.alto_risco_acv);
+  const fundoFunil = numero(item.oportunidades_quentes_acv);
+
+  const coberturaScore = Number(String(item.cobertura).replace(",", "."));
+  const renovacaoScore = Number(String(item.percentual_renovacao).replace(",", "."));
+
+  const riscoPercentualNumero = acvBase > 0
+    ? (acvAltoRisco / acvBase) * 100
+    : 0;
+
+  const riscoScore = Math.max(0, 100 - riscoPercentualNumero);
+
+  const oportunidadeScore = acvBase > 0
+    ? Math.min((fundoFunil / acvBase) * 100, 100)
+    : 0;
+
+  const score = Math.round(
+    riscoScore * 0.35 +
+    coberturaScore * 0.30 +
+    oportunidadeScore * 0.20 +
+    renovacaoScore * 0.15
+  );
+
+  let saude = "🔴 Crítico";
+
+  if (score >= 75) {
+    saude = "🟢 Saudável";
+  } else if (score >= 55) {
+    saude = "🟡 Atenção";
+  }
+
+  let tendencia = "➡ Estável";
+
+  if (renovacaoScore > 10 || coberturaScore >= 75) {
+    tendencia = "⬆ Evoluindo";
+  } else if (coberturaScore < 50 || riscoPercentualNumero > 25) {
+    tendencia = "⬇ Pressão";
+  }
+
+  let proximaAcao = "Manter ritmo";
+
+  if (acvAltoRisco > 3000000) {
+    proximaAcao = "Comitê de renovação";
+  } else if (coberturaScore < 60) {
+    proximaAcao = "Aumentar cobertura";
+  } else if (fundoFunil > 5000000) {
+    proximaAcao = "Converter fundo de funil";
+  } else if (renovacaoScore === 0) {
+    proximaAcao = "Gerar primeira renovação";
+  }
+
+  const riscoPercentual =
+    riscoPercentualNumero.toFixed(1).replace(".", ",") + "%";
+
+  return `
+    <tr>
+      <td>${nomeCSP(item.csp)}</td>
+      <td><strong>${score}</strong></td>
+      <td>${saude}</td>
+      <td>${tendencia}</td>
+      <td>${proximaAcao}</td>
+      <td>${item.cobertura}%</td>
+      <td>${moeda(item.acv_base)}</td>
+      <td>${moeda(item.alto_risco_acv)}</td>
+      <td>${riscoPercentual}</td>
+      <td>${item.alto_risco_qtd}</td>
+      <td>${moeda(item.oportunidades_quentes_acv)}</td>
+      <td>${item.oportunidades_quentes_qtd}</td>
+      <td>${item.percentual_renovacao}%</td>
+      <td>${item.prioridade}</td>
+    </tr>
+  `;
+
+}).join("");
 
 ranking.innerHTML += `
 <tr style="
