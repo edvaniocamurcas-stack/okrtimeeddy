@@ -1224,11 +1224,29 @@ function diagnostico(item){
 const ranking = document.getElementById("ranking-csp");
 
     if (ranking) {
-      const ordenado = [...dados.painel_executivo]
-        .sort((a,b) =>
-          numero(b.acv_renovado) - numero(a.acv_renovado)
-        );
+  const ordenado = [...dados.painel_executivo].sort((a, b) => {
+  const acvBaseA = numero(a.acv_base);
+  const acvBaseB = numero(b.acv_base);
 
+  const riscoA = acvBaseA > 0 ? (numero(a.alto_risco_acv) / acvBaseA) * 100 : 0;
+  const riscoB = acvBaseB > 0 ? (numero(b.alto_risco_acv) / acvBaseB) * 100 : 0;
+
+  const coberturaA = Number(String(a.cobertura).replace(",", "."));
+  const coberturaB = Number(String(b.cobertura).replace(",", "."));
+
+  const renovacaoA = Number(String(a.percentual_renovacao).replace(",", "."));
+  const renovacaoB = Number(String(b.percentual_renovacao).replace(",", "."));
+
+  const prioridadeA = riscoA >= 40 ? 1 : coberturaA < 50 ? 2 : renovacaoA < 10 ? 3 : 4;
+  const prioridadeB = riscoB >= 40 ? 1 : coberturaB < 50 ? 2 : renovacaoB < 10 ? 3 : 4;
+
+  if (prioridadeA !== prioridadeB) return prioridadeA - prioridadeB;
+  if (prioridadeA === 1) return numero(b.alto_risco_acv) - numero(a.alto_risco_acv);
+  if (prioridadeA === 2) return coberturaA - coberturaB;
+  if (prioridadeA === 3) return renovacaoA - renovacaoB;
+
+  return numero(b.acv_renovado) - numero(a.acv_renovado);
+});
      ranking.innerHTML = ordenado.map(item => {
 
   const acvBase = numero(item.acv_base);
