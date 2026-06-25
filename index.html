@@ -1272,12 +1272,31 @@ const ranking = document.getElementById("ranking-csp");
     ? Math.min((fundoFunil / acvBase) * 100, 100)
     : 0;
 
-  const score = Math.round(
-    riscoScore * 0.35 +
-    coberturaScore * 0.30 +
-    oportunidadeScore * 0.20 +
-    renovacaoScore * 0.15
-  );
+const pesoRisco = 35;
+const pesoCobertura = 25;
+const pesoOportunidade = 15;
+const pesoRenovacao = 15;
+const pesoVolume = 10;
+
+const volumeScore =
+    Math.min(
+        (Number(item.alto_risco_qtd || 0) / 5) * 100,
+        100
+    );
+
+const score = Math.round(
+
+    riscoScore * (pesoRisco/100) +
+
+    cobertura * (pesoCobertura/100) +
+
+    oportunidadeScore * (pesoOportunidade/100) +
+
+    renovacao * (pesoRenovacao/100) +
+
+    (100-volumeScore) * (pesoVolume/100)
+
+);
 
   let saude = "🔴 Crítico";
 
@@ -1319,6 +1338,8 @@ const ranking = document.getElementById("ranking-csp");
 
   const riscoPercentual =
     riscoPercentualNumero.toFixed(1).replace(".", ",") + "%";
+
+  const resumoExecutivo = gerarResumoExecutivo(item, score);
 
   return `
     <tr>
@@ -1496,6 +1517,39 @@ function percentual(valor) {
 }
 
 function avaliarCSP(item){
+function gerarResumoExecutivo(item, score){
+
+    if(score>=80)
+        return "Operação saudável.";
+
+    if(numero(item.alto_risco_acv)>3000000)
+        return "Maior prioridade da semana.";
+
+    if(Number(item.cobertura.replace(",", "."))<50)
+        return "Cobertura abaixo do esperado.";
+
+    if(Number(item.percentual_renovacao.replace(",", "."))===0)
+        return "Sem renovações registradas.";
+
+    return{
+
+    score,
+
+    saude,
+
+    tendencia,
+
+    proximaAcao,
+
+    prioridade,
+
+    riscoPercentual,
+
+    resumoExecutivo
+
+};
+
+}  
 
     const acvBase = numero(item.acv_base);
     const acvAltoRisco = numero(item.alto_risco_acv);
