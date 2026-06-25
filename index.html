@@ -1250,14 +1250,17 @@ const ranking = document.getElementById("ranking-csp");
 
   return numero(b.acv_renovado) - numero(a.acv_renovado);
 });
-     ranking.innerHTML = ordenado.map(item => {
+      
+  ranking.innerHTML = ordenado.map(item => {
+    
+    const avaliacao = avaliarCSP(item);     
 
-  const acvBase = numero(item.acv_base);
-  const acvAltoRisco = numero(item.alto_risco_acv);
-  const fundoFunil = numero(item.oportunidades_quentes_acv);
+    const acvBase = numero(item.acv_base);
+    const acvAltoRisco = numero(item.alto_risco_acv);
+    const fundoFunil = numero(item.oportunidades_quentes_acv);
 
-  const coberturaScore = Number(String(item.cobertura).replace(",", "."));
-  const renovacaoScore = Number(String(item.percentual_renovacao).replace(",", "."));
+    const coberturaScore = Number(String(item.cobertura).replace(",", "."));
+    const renovacaoScore = Number(String(item.percentual_renovacao).replace(",", "."));
 
   const riscoPercentualNumero = acvBase > 0
     ? (acvAltoRisco / acvBase) * 100
@@ -1320,19 +1323,19 @@ const ranking = document.getElementById("ranking-csp");
   return `
     <tr>
       <td>${nomeCSP(item.csp)}</td>
-      <td><strong>${score}</strong></td>
-      <td>${saude}</td>
-      <td>${tendencia}</td>
-      <td>${proximaAcao}</td>
+      <td><strong>${avaliacao.score}</strong></td>
+      <td>${avaliacao.saude}</td>
+      <td>${avaliacao.tendencia}</td>
+      <td>${avaliacao.proximaAcao}</td>
       <td>${item.cobertura}%</td>
       <td>${moeda(item.acv_base)}</td>
       <td>${moeda(item.alto_risco_acv)}</td>
-      <td>${riscoPercentual}</td>
+      <td>${avaliacao.riscoPercentual.toFixed(1).replace(".", ",")}%</td>
       <td>${item.alto_risco_qtd}</td>
       <td>${moeda(item.oportunidades_quentes_acv)}</td>
       <td>${item.oportunidades_quentes_qtd}</td>
       <td>${item.percentual_renovacao}%</td>
-      <td>${prioridade}</td>
+      <td>${avaliacao.prioridade}</td>
     </tr>
   `;
 
