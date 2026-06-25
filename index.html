@@ -1531,7 +1531,9 @@ function gerarResumoExecutivo(item, score){
     if(Number(item.percentual_renovacao.replace(",", "."))===0)
         return "Sem renovações registradas.";
 
-    return{
+    return "Operação estável.";
+
+}
 
     score,
 
@@ -1568,17 +1570,31 @@ function gerarResumoExecutivo(item, score){
             ? Math.min((fundoFunil/acvBase)*100,100)
             :0;
 
-    const score = Math.round(
+const pesoRisco = 35;
+const pesoCobertura = 25;
+const pesoOportunidade = 15;
+const pesoRenovacao = 15;
+const pesoVolume = 10;
 
-        riscoScore*0.35+
-
-        cobertura*0.30+
-
-        oportunidadeScore*0.20+
-
-        renovacao*0.15
-
+const volumeScore =
+    Math.min(
+        (Number(item.alto_risco_qtd || 0) / 5) * 100,
+        100
     );
+
+const score = Math.round(
+
+    riscoScore * (pesoRisco/100) +
+
+    cobertura * (pesoCobertura/100) +
+
+    oportunidadeScore * (pesoOportunidade/100) +
+
+    renovacao * (pesoRenovacao/100) +
+
+    (100-volumeScore) * (pesoVolume/100)
+
+);
 
     let saude="🔴 Crítico";
 
