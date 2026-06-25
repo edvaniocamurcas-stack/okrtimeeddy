@@ -1502,6 +1502,41 @@ return "R$ " + (valor/1000).toFixed(1).replace(".",",") + "K";
 
 return moeda(valor);
 }
+
+function gerarVisaoExecutiva(dados){
+
+    const painel = dados.painel_executivo;
+
+    const maiorRisco =
+        [...painel].sort((a,b)=>
+            numero(b.alto_risco_acv)-numero(a.alto_risco_acv)
+        )[0];
+
+    const maiorOportunidade =
+        [...painel].sort((a,b)=>
+            numero(b.oportunidades_quentes_acv)-numero(a.oportunidades_quentes_acv)
+        )[0];
+
+    const menorCobertura =
+        [...painel].sort((a,b)=>
+            Number(a.cobertura.replace(",","."))-
+            Number(b.cobertura.replace(",","."))
+        )[0];
+
+    const destaque =
+        [...painel].sort((a,b)=>
+            Number(b.cobertura.replace(",","."))-
+            Number(a.cobertura.replace(",","."))
+        )[0];
+
+    return {
+        maiorRisco,
+        maiorOportunidade,
+        menorCobertura,
+        destaque
+    };
+
+}
 </script>
  
 </body>
