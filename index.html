@@ -767,9 +767,10 @@ async function carregarDados() {
 const dados = await resposta.json();
 
 const visao = gerarVisaoExecutiva(dados);
-
+console.log("VISÃO EXECUTIVA:", visao);
+    
  console.log("INTERVENCAO:");
-  console.log(dados.intervencao_lideranca);
+ console.log(dados.intervencao_lideranca);
 
   console.log("MAIORES RISCOS:");
   console.log(dados.maiores_riscos);
