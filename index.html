@@ -1272,32 +1272,6 @@ const ranking = document.getElementById("ranking-csp");
     ? Math.min((fundoFunil / acvBase) * 100, 100)
     : 0;
 
-const pesoRisco = 35;
-const pesoCobertura = 25;
-const pesoOportunidade = 15;
-const pesoRenovacao = 15;
-const pesoVolume = 10;
-
-const volumeScore =
-    Math.min(
-        (Number(item.alto_risco_qtd || 0) / 5) * 100,
-        100
-    );
-
-const score = Math.round(
-
-    riscoScore * (pesoRisco/100) +
-
-    cobertura * (pesoCobertura/100) +
-
-    oportunidadeScore * (pesoOportunidade/100) +
-
-    renovacao * (pesoRenovacao/100) +
-
-    (100-volumeScore) * (pesoVolume/100)
-
-);
-
   let saude = "🔴 Crítico";
 
   if (score >= 75) {
