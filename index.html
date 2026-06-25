@@ -764,9 +764,11 @@ async function carregarDados() {
     if (!resposta.ok) 
       throw new Error("Erro ao buscar dados.json");
     
-   const dados = await resposta.json(); 
-    
-  console.log("INTERVENCAO:");
+const dados = await resposta.json();
+
+const visao = gerarVisaoExecutiva(dados);
+
+ console.log("INTERVENCAO:");
   console.log(dados.intervencao_lideranca);
 
   console.log("MAIORES RISCOS:");
