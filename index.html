@@ -1553,7 +1553,8 @@ function avaliarCSP(item){
   else if(cobertura < 50) prioridade = "🟠 Alta";
   else if(renovacao < 10) prioridade = "🟡 Média";
 
-  const resumoExecutivo = gerarResumoExecutivo(item, avaliacao.score)
+  const resumoExecutivo =
+    gerarResumoExecutivo(item, score);
 
   return {
     score,
