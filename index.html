@@ -1490,7 +1490,7 @@ function percentual(valor) {
   return n.toFixed(2).replace(".", ",") + "%";
 }
 
-gerarResumoExecutivo(item, avaliacao.score)
+function gerarResumoExecutivo(item, score){
 
   if(score >= 80)
     return "Operação saudável.";
