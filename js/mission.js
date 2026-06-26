@@ -1,5 +1,25 @@
 function carregarMissionControl(dados){
 
-    console.log("MISSION CONTROL");
+  const alvo = document.getElementById("mission-control");
+  if(!alvo) return;
 
+  const escolas = dados.top_prioritarias || [];
+
+  const lista = [...escolas]
+    .sort((a,b) => numero(b.acv_base) - numero(a.acv_base))
+    .slice(0,5);
+
+  alvo.innerHTML = `
+    <div class="cards-saude">
+      ${lista.map((item, index) => `
+        <div class="card-saude">
+          <h3>${index + 1}º ${item.risco === "Alto" ? "🔥" : "⚡"} Missão</h3>
+          <p><strong>${item.escola}</strong></p>
+          <p>${nomeCSP(item.csp)}</p>
+          <p><strong>${moeda(item.acv_base)}</strong></p>
+          <p>${item.risco} | ${item.etapa}</p>
+        </div>
+      `).join("")}
+    </div>
+  `;
 }
