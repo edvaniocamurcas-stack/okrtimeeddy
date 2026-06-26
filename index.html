@@ -83,10 +83,14 @@
 <section class="card">
 
 <h2>🚨 Radar Executivo</h2>
+
+<section class="card">
+  <div id="executive-copilot"></div>
   
+</section>
 <section class="card">
   
-<h2>🎯 Executive Advisor</h2>
+  <h2>🎯 Executive Advisor</h2>
   <div id="executive-advisor"></div>
   
 </section>
@@ -811,6 +815,7 @@ console.log("GAP:", resumo.Gap_Real);
 const inteligencia = calcularInteligencia(dados);
 console.log("INTELIGÊNCIA:", inteligencia);
 carregarAdvisor(dados, inteligencia);
+gerarExecutiveCopilot(dados);    
     
 carregarDashboard(resumo);
  
