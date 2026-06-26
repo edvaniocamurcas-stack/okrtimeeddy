@@ -790,14 +790,18 @@ console.log("VISÃO EXECUTIVA:", visao);
   console.log("MAIORES RISCOS:");
   console.log(dados.maiores_riscos);
     
-  const resumo = dados.resumo;
+ const resumo = dados.resumo;
+
+console.log("RESUMO:", resumo);
+console.log("FORECAST:", resumo.Forecast_ACV);
+console.log("FUNDO:", resumo.Fundo_Funil_ACV);
+console.log("CHURN:", resumo.Churn_ACV);
+console.log("GAP:", resumo.Gap_Real);
+
+const inteligencia = calcularInteligencia(dados);
+console.log("INTELIGÊNCIA:", inteligencia);
     
-  console.log("RESUMO:", resumo);
-  console.log("FORECAST:", resumo.Forecast_ACV);
-  console.log("FUNDO:", resumo.Fundo_Funil_ACV);
-  console.log("CHURN:", resumo.Churn_ACV);
-  console.log("GAP:", resumo.Gap_Real);
-  carregarDashboard(resumo);
+carregarDashboard(resumo);
  
 const funil = dados.funil || [];
 const labels = funil.map(item => item.etapa);
