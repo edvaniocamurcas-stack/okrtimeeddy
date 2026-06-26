@@ -5,8 +5,12 @@ function carregarMissionControl(dados){
 
   const escolas = dados.top_prioritarias || [];
 
-  const lista = [...escolas]
-    .sort((a,b) => numero(b.acv_base) - numero(a.acv_base))
+  const lista = (dados.top_prioritarias || [])
+    .map(item => ({
+        ...item,
+        mission: calcularMissionScore(item)
+    }))
+    .sort((a,b) => b.mission.score - a.mission.score)
     .slice(0,5);
 
   alvo.innerHTML = `
