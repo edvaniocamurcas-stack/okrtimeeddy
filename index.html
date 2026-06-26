@@ -831,10 +831,11 @@ console.log("INTELIGÊNCIA:", inteligencia);
     
 const health = calcularHealthScore(dados);
 console.log("HEALTH SCORE:", health);
+    
 carregarAdvisor(dados, inteligencia);
 gerarExecutiveCopilot(dados);  
 carregarMissionControl(dados);
-    
+carregarHealthScore(health);    
 carregarDashboard(resumo);
  
 const funil = dados.funil || [];
