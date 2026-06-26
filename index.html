@@ -822,6 +822,9 @@ console.log("GAP:", resumo.Gap_Real);
 
 const inteligencia = calcularInteligencia(dados);
 console.log("INTELIGÊNCIA:", inteligencia);
+    
+const health = calcularHealthScore(dados);
+console.log("HEALTH SCORE:", health);
 carregarAdvisor(dados, inteligencia);
 gerarExecutiveCopilot(dados);  
 carregarMissionControl(dados);
