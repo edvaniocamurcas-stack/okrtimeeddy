@@ -17,11 +17,12 @@ function carregarMissionControl(dados){
     <div class="cards-saude">
       ${lista.map((item, index) => `
         <div class="card-saude">
-          <h3>${index + 1}º ${item.risco === "Alto" ? "🔥" : "⚡"} Missão</h3>
+          <h3>${item.mission.classificacao}</h3>
           <p><strong>${item.escola}</strong></p>
           <p>${nomeCSP(item.csp)}</p>
           <p><strong>${moeda(item.acv_base)}</strong></p>
-          <p>${item.risco} | ${item.etapa}</p>
+          <p><strong>Mission Score:</strong> ${item.mission.score}</p>
+          <p>${item.risco} • ${item.etapa}</p>
         </div>
       `).join("")}
     </div>
