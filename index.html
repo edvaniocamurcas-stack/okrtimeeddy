@@ -760,6 +760,7 @@
 <script src="js/inteligencia.js"></script>
 <script src="js/dashboard.js"></script>
 <script src="js/ranking.js"></script>
+<script src="js/advisor.js"></script>
   
 <script>
 function nomeCSP(email) {
@@ -807,6 +808,7 @@ console.log("GAP:", resumo.Gap_Real);
 
 const inteligencia = calcularInteligencia(dados);
 console.log("INTELIGÊNCIA:", inteligencia);
+carregarAdvisor(dados, inteligencia);
     
 carregarDashboard(resumo);
  
