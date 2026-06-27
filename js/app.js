@@ -1,25 +1,38 @@
-document.addEventListener("DOMContentLoaded", iniciarSistema);
+function carregarMorningBriefing(dados) {
+  const alvo = document.getElementById("morning-briefing");
+  if (!alvo) return;
 
-async function iniciarSistema() {
-  try {
-    console.log("🚀 App.js iniciado.");
+  const resumo = dados.resumo || {};
+  const escolas = dados.top_prioritarias || [];
 
-    const url = new URL("dados.json?v=" + Date.now(), window.location.href);
-    const respostaDados = await fetch(url);
+  const altoRisco = escolas.filter((e) =>
+    String(e.risco || "").toLowerCase().includes("alto")
+  ).length;
 
-    if (!respostaDados.ok) {
-      throw new Error("Erro ao buscar dados.json");
-    }
+  const assinatura = escolas.filter((e) =>
+    String(e.etapa || "").toLowerCase().includes("assinatura")
+  ).length;
 
-    const dados = await respostaDados.json();
-    console.log("✅ Dados carregados pelo app.js:", dados);
+  const renovacao = resumo.Percentual_Renovacao || "--";
+  const gap = resumo.Gap_Renovacao || "--";
 
-    const respostaTeste = await fetch("src/sample-data.json");
-    const dadosTeste = await respostaTeste.json();
+  alvo.innerHTML = `
+    <div class="card-saude">
+      <h2>☀️ Bom dia, Edvânio</h2>
+      <p>Sua carteira foi atualizada com os dados mais recentes.</p>
 
-    const missao = gerarMissaoDaSemana(dadosTeste);
-    console.log("🎯 MISSÃO DA SEMANA:", missao);
-  } catch (erro) {
-    console.error("❌ Erro no app.js:", erro);
-  }
+      <hr>
+
+      <h3>🎯 Situação Atual</h3>
+      <p><strong>Renovação:</strong> ${renovacao}%</p>
+      <p><strong>Gap Renovação:</strong> ${moeda(gap)}</p>
+      <p><strong>Escolas em Assinatura:</strong> ${assinatura}</p>
+      <p><strong>Escolas Alto Risco:</strong> ${altoRisco}</p>
+
+      <hr>
+
+      <h3>🔥 Prioridade de Hoje</h3>
+      <p>Concentre esforços nas escolas em assinatura, alto risco e maior ACV.</p>
+    </div>
+  `;
 }
