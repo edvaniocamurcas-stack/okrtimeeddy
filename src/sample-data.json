@@ -1,0 +1,46 @@
+{
+  "contexto": {
+    "okr_prioritario": "renovacao",
+    "foco_semana": "Proteger renovações críticas"
+  },
+  "escolas": [
+    {
+      "nome": "Colégio Alpha",
+      "csp": "Marcelo",
+      "acv": 5000000,
+      "risco": "alto",
+      "distrato": "nao",
+      "vigencia": "2026",
+      "engajamento": "medio",
+      "etapa": "negociacao",
+      "dias_sem_contato": 12,
+      "referencia_regional": false
+    },
+    {
+      "nome": "Escola Beta",
+      "csp": "Carla",
+      "acv": 500000,
+      "risco": "alto",
+      "distrato": "verbalizado",
+      "vigencia": "2026",
+      "engajamento": "baixo",
+      "etapa": "risco",
+      "dias_sem_contato": 18,
+      "referencia_regional": true
+    }
+  ],
+  "consultores": [
+    {
+      "nome": "Marcelo",
+      "resultado": "bom",
+      "autonomia": "baixa",
+      "risco_meta": "baixo"
+    },
+    {
+      "nome": "Carla",
+      "resultado": "abaixo",
+      "autonomia": "media",
+      "risco_meta": "alto"
+    }
+  ]
+}
