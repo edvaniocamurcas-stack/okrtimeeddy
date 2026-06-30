@@ -4,7 +4,10 @@ async function iniciarSistema() {
   try {
     console.log("🚀 App.js iniciado.");
 
-    const url = new URL("dados.json?v=" + Date.now(), window.location.href);
+    const url = new URL(
+  "database/current/dados.json?v=" + Date.now(),
+  window.location.href
+);
     const resposta = await fetch(url);
 
     if (!resposta.ok) {
@@ -14,6 +17,11 @@ async function iniciarSistema() {
     const dados = await resposta.json();
     console.log("✅ Dados carregados pelo app.js:", dados);
 
+    if (typeof gerarExecutiveEngine === "function") {
+      const executive = gerarExecutiveEngine(dados);
+      console.log("🧠 EXECUTIVE ENGINE:", executive);
+    }
+
     if (typeof carregarDashboard === "function") {
       carregarDashboard(dados.resumo || {});
     }
@@ -22,13 +30,9 @@ async function iniciarSistema() {
       carregarMorningBriefing(dados);
     }
 
-    if (typeof gerarDecisionEngine === "function") {
+    if (typeof carregarDecisionCenter === "function" && typeof gerarDecisionEngine === "function") {
       const decisoes = gerarDecisionEngine(dados);
-      console.log("🧠 DECISION ENGINE:", decisoes);
-
-      if (typeof carregarDecisionCenter === "function") {
-        carregarDecisionCenter(decisoes);
-      }
+      carregarDecisionCenter(decisoes);
     }
 
     if (typeof carregarCockpit === "function") {

@@ -804,6 +804,11 @@
 <script src="js/decisionEngine.js"></script>
 <script src="js/cockpit.js"></script>
 <script src="js/morningBriefing.js"></script>
+<script src="js/intelligence/riskEngine.js"></script>
+<script src="js/intelligence/opportunityEngine.js"></script>
+<script src="js/intelligence/forecastEngine.js"></script>
+<script src="js/intelligence/teamEngine.js"></script>
+<script src="js/intelligence/executiveEngine.js"></script>
 <script src="js/app.js"></script>
   
 <script>
@@ -821,13 +826,10 @@ function nomeCSP(email) {
   return nomes[email] || email;
 }
 
-document.addEventListener("DOMContentLoaded", carregarDados);
-
 async function carregarDados() {
   try {
     const url = new URL("dados.json?v=" + Date.now(), window.location.href);
-    const resposta = await fetch(url);
-
+    const resposta = await fetch("database/current/dados.json?v=" + Date.now());
     if (!resposta.ok) 
       throw new Error("Erro ao buscar dados.json");
     
