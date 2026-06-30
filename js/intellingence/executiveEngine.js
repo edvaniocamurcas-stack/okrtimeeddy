@@ -1,0 +1,9 @@
+{
+    resumoExecutivo,
+    riscos,
+    oportunidades,
+    equipe,
+    forecast,
+    timeline,
+    recomendacoes
+}
