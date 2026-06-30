@@ -35,4 +35,4 @@ function carregarMissionControl(dados) {
       `).join("")}
     </div>
   `;
-} 
+}
