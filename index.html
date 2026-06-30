@@ -812,19 +812,6 @@
 <script src="js/app.js"></script>
   
 <script>
-function nomeCSP(email) {
-  const nomes = {
-    "carlacosta@sas.com.br": "Carla Costa",
-    "flaviodasilva@sas.com.br": "Flávio Silva",
-    "gabriellabarreto@sas.com.br": "Gabriella Barreto",
-    "josedemetrio@sas.com.br": "José Demétrio",
-    "julianabarbosa@sas.com.br": "Juliana Barbosa",
-    "marceloanjos@sas.com.br": "Marcelo Anjos",
-    "sabrinagarcia@sas.com.br": "Sabrina Garcia",
-    "yannacavalcante@sas.com.br": "Yanna Cavalcante"
-  };
-  return nomes[email] || email;
-}
 
 async function carregarDados() {
   try {
@@ -1465,54 +1452,6 @@ if (topPrioridades && dados.top_prioritarias) {
   } catch (erro) {
     console.error("Erro ao carregar dados:", erro);
   }
-}
-
-function preencher(id, valor) {
-  const elemento = document.getElementById(id);
-  if (elemento) elemento.innerText = valor;
-}
-
-function numero(valor) {
-  if (valor === null || valor === undefined || valor === "") return 0;
-
-  let texto = String(valor)
-    .trim()
-    .replace("R$", "")
-    .replace("%", "")
-    .replace(/\s/g, "");
-
-  const temVirgula = texto.includes(",");
-  const temPonto = texto.includes(".");
-
-  if (temVirgula && temPonto) {
-    texto = texto.replace(/\./g, "").replace(",", ".");
-  } else if (temVirgula) {
-    texto = texto.replace(",", ".");
-  } else if (temPonto) {
-    const partes = texto.split(".");
-    const ultimoGrupo = partes[partes.length - 1];
-
-    if (ultimoGrupo.length === 3) {
-      texto = texto.replace(/\./g, "");
-    }
-  }
-
-  return Number(texto) || 0;
-}
-  
-function moeda(valor) {
-  const n = numero(valor);
-  if (n >= 1000000) return "R$ " + (n / 1000000).toFixed(1).replace(".", ",") + "M";
-  return n.toLocaleString("pt-BR", {
-    style: "currency",
-    currency: "BRL",
-    maximumFractionDigits: 0
-  });
-}
-
-function percentual(valor) {
-  const n = numero(valor);
-  return n.toFixed(2).replace(".", ",") + "%";
 }
 
 function gerarResumoExecutivo(item, score){
